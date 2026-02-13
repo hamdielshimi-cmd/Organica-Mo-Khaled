@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organika | Premium Organic Poultry Farm</title>
-    <meta name="description" content="Experience the finest organic poultry from Organika - 100% natural, free-range chickens raised with love and care in Egypt.">
-    <meta name="keywords" content="organic poultry, free-range chicken, natural eggs, healthy meat, farm fresh">
+    <title>Organika | The Gold Standard of Organic Poultry</title>
+    <meta name="description" content="Organika - Premium farm-to-table organic poultry. 100% natural diet, founder-led care, and bio-vitality environment.">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,16 +13,17 @@
     
     <style>
         :root {
-            --primary: #2d5a27;
-            --primary-light: #4a7c59;
-            --accent: #A0522D;
-            --accent-light: #CD853F;
-            --bg: #fdf5e6;
-            --text: #36454F;
-            --text-light: #6c757d;
+            /* Your Rustic Premium Palette */
+            --primary: #7A9A7E;
+            --primary-light: #94b097;
+            --accent: #C84B31;
+            --accent-light: #d66a54;
+            --bg: #F8F4E6;
+            --text: #2D2926;
+            --text-light: #5a5550;
             --white: #ffffff;
-            --shadow: rgba(0,0,0,0.1);
-            --shadow-hover: rgba(0,0,0,0.15);
+            --shadow: rgba(0,0,0,0.08);
+            --shadow-hover: rgba(0,0,0,0.12);
         }
 
         * { 
@@ -47,12 +47,17 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255,255,255,0.95);
+            background: rgba(248, 244, 230, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 1rem 5%;
+            padding: 0.8rem 5%;
             box-shadow: 0 2px 20px var(--shadow);
             transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 5%;
+            box-shadow: 0 4px 30px var(--shadow-hover);
         }
 
         .nav-container {
@@ -67,35 +72,44 @@
             display: flex;
             align-items: center;
             font-weight: 800;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--primary);
             text-decoration: none;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .logo img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            animation: heartbeat 2s infinite;
+            width: 50px;
+            height: 50px;
+            margin-right: 12px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: rotate(360deg);
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
         }
 
         .nav-link {
             text-decoration: none;
             color: var(--text);
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
+            text-transform: uppercase;
             position: relative;
-        }
-
-        .nav-link:hover {
-            color: var(--primary);
         }
 
         .nav-link::after {
@@ -105,7 +119,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--primary);
+            background: var(--accent);
             transition: width 0.3s ease;
         }
 
@@ -113,101 +127,124 @@
             width: 100%;
         }
 
+        .nav-link:hover { color: var(--accent); }
+
         .lang-switcher {
-            background: var(--primary);
+            background: var(--accent);
             color: var(--white);
-            padding: 8px 16px;
+            padding: 6px 15px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
-            border: 2px solid var(--primary);
+            font-size: 0.85rem;
+            border: 2px solid var(--accent);
             transition: all 0.3s ease;
         }
 
-        .lang-switcher:hover {
-            background: var(--white);
-            color: var(--primary);
+        .lang-switcher:hover { 
+            background: transparent; 
+            color: var(--accent);
+            transform: scale(1.05);
         }
 
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%208.55.03%20PM.jpeg');
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+                        url('https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_sunny_free_range.jpeg?updatedAt=1770961441056');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
             position: relative;
+            overflow: hidden;
         }
 
-        .hero-content {
-            max-width: 800px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+        }
+
+        .hero-content { 
+            max-width: 900px; 
             padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
-
-        .hero-content img {
-            width: 200px;
-            animation: heartbeat 2s infinite;
-            margin-bottom: 2rem;
-        }
-
+        
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
         }
 
         .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            font-size: 1.6rem;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            animation: fadeInUp 1s ease 0.2s backwards;
         }
 
         .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .btn {
-            padding: 15px 30px;
-            border-radius: 30px;
+            padding: 16px 35px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: var(--accent);
             color: var(--white);
-            box-shadow: 0 4px 15px rgba(45, 90, 39, 0.3);
+            box-shadow: 0 4px 15px rgba(200, 75, 49, 0.3);
         }
 
         .btn-primary:hover {
-            background: var(--primary-light);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(45, 90, 39, 0.4);
+            transform: translateY(-3px);
+            background: var(--accent-light);
+            box-shadow: 0 6px 20px rgba(200, 75, 49, 0.4);
         }
 
         .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
+            background: var(--white);
+            color: var(--text);
+            margin-left: 10px;
         }
 
         .btn-secondary:hover {
-            background: var(--white);
-            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
 
         /* WhatsApp Float */
@@ -217,36 +254,96 @@
             right: 30px;
             background: #25d366;
             color: white;
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 35px;
+            font-size: 30px;
             z-index: 1000;
             box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
             transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
         }
 
         .whatsapp-float:hover {
             transform: scale(1.1);
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes float { 
+            0%, 100% { transform: translateY(0); } 
+            50% { transform: translateY(-10px); } 
+        }
+
+        /* Image Carousel Belt */
+        .carousel-belt {
+            background: var(--primary);
+            padding: 60px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            animation: scroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        .carousel-item {
+            width: 300px;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-item:hover {
+            transform: scale(1.05);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* Sections */
-        section {
-            padding: 100px 5%;
-            max-width: 1300px;
-            margin: auto;
-        }
-
+        section { padding: 100px 5%; max-width: 1300px; margin: auto; }
+        
         .section-title {
             text-align: center;
             font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 3rem;
-            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
         }
 
         .section-subtitle {
@@ -254,158 +351,118 @@
             font-size: 1.2rem;
             color: var(--text-light);
             margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 700px;
+            margin-inline: auto;
         }
 
-        /* About Section */
         .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
         }
 
-        .about-content h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
             margin-bottom: 1.5rem;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: all 0.3s ease;
         }
 
-        .about-content p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            color: var(--text-light);
+        .feature-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px var(--shadow-hover);
+        }
+
+        .feature-item i { 
+            font-size: 2rem; 
+            color: var(--primary);
+            min-width: 40px;
         }
 
         .video-container {
-            position: relative;
-            border-radius: 20px;
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 20px 60px var(--shadow);
-        }
-
-        .video-container video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Gallery Section */
-        .gallery-section {
-            background: rgba(255,255,255,0.5);
-            border-radius: 50px;
-            margin: 0 5%;
-        }
-
-        .grid-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 2rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px var(--shadow);
-            aspect-ratio: 4/3;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            aspect-ratio: 16/9;
             transition: transform 0.3s ease;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px var(--shadow-hover);
+        .video-container:hover {
+            transform: scale(1.02);
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
+        .video-container video { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
         }
 
-        /* Hero images gallery */
-        .hero-gallery {
+        /* Flip Cards Section */
+        .flip-cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
             margin-top: 3rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        .hero-gallery-item {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            aspect-ratio: 4/3;
-            transition: all 0.3s ease;
+        .flip-card {
+            background-color: transparent;
+            height: 250px;
+            perspective: 1000px;
         }
 
-        .hero-gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-        }
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-        }
-
-        .hero-gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        /* About section images */
-        .about-images-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 2rem;
-        }
-
-        .about-image-item {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px var(--shadow);
-            aspect-ratio: 4/3;
-        }
-
-        .about-image-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        /* Video container improvements */
-        .video-container {
+        .flip-card-inner {
             position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px var(--shadow);
-            aspect-ratio: 16/9;
-            max-width: 100%;
-        }
-
-        .video-container video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
         }
 
-        /* Products Section */
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .flip-card-front {
+            background: var(--white);
+            border: 3px solid var(--primary);
+        }
+
+        .flip-card-front i {
+            font-size: 4rem;
+            color: var(--accent);
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            transform: rotateY(180deg);
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.8;
+        }
+
+        /* Products Grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -415,728 +472,892 @@
         .product-card {
             background: var(--white);
             border-radius: 20px;
-            padding: 2rem;
+            padding: 0;
             text-align: center;
             box-shadow: 0 10px 30px var(--shadow);
-            transition: all 0.3s ease;
-            position: relative;
+            transition: all 0.4s ease;
             overflow: hidden;
+            border-bottom: 5px solid var(--primary);
+            position: relative;
         }
 
         .product-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
         }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px var(--shadow-hover);
+        .product-card:hover::before {
+            left: 100%;
         }
 
-        .product-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
+        .product-card:hover { 
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 15px 40px var(--shadow-hover);
         }
 
-        .product-name {
-            font-size: 1.5rem;
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.1);
+        }
+
+        .product-info { padding: 1.5rem; }
+        .product-name { 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            color: var(--text); 
+            margin-bottom: 0.5rem; 
+        }
+        .product-price { 
+            font-size: 1.6rem; 
+            font-weight: 800; 
+            color: var(--accent); 
+        }
+
+        /* Order Form Section */
+        .order-section {
+            background: linear-gradient(135deg, #f1ede2 0%, var(--bg) 100%);
+            border-radius: 50px;
+            padding: 80px 5% !important;
+            margin: 50px auto;
+        }
+
+        .order-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .order-calculator {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
             font-weight: 600;
             color: var(--text);
-            margin-bottom: 0.5rem;
+            flex: 1;
         }
 
-        .product-price {
-            font-size: 2rem;
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .qty-btn {
+            width: 35px;
+            height: 35px;
+            border: 2px solid var(--primary);
+            background: var(--white);
+            color: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .qty-input {
+            width: 60px;
+            text-align: center;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            padding: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .item-total {
             font-weight: 700;
             color: var(--accent);
-            margin-bottom: 1rem;
+            min-width: 100px;
+            text-align: right;
         }
 
-        .product-description {
-            color: var(--text-light);
+        .total-section {
+            background: var(--primary);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .total-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .order-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .form-group {
             margin-bottom: 1.5rem;
         }
 
-        /* Prices Section */
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(122, 154, 126, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-order-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-order-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(200, 75, 49, 0.4);
+        }
+
+        /* Price List Card */
         .price-card {
             background: var(--white);
             padding: 3rem;
             border-radius: 30px;
             box-shadow: 0 20px 60px var(--shadow);
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
-            border-left: 8px solid var(--accent);
+            border-top: 10px solid var(--accent);
+            transition: transform 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
         }
 
         .price-item {
             display: flex;
             justify-content: space-between;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
-            font-size: 1.2rem;
-            align-items: center;
-        }
-
-        .price-item:last-child {
-            border-bottom: none;
-        }
-
-        .price-val {
-            font-weight: 700;
-            color: var(--accent);
-            font-size: 1.3rem;
-        }
-
-        .price-note {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-top: 2rem;
-            text-align: center;
-            font-style: italic;
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow);
-            text-align: center;
+            padding: 12px 0;
+            border-bottom: 1px dashed #ddd;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
         }
 
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px var(--shadow-hover);
+        .price-item:hover {
+            padding-left: 10px;
+            background: rgba(122, 154, 126, 0.05);
         }
 
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: var(--text-light);
-            font-size: 1.1rem;
-        }
+        .price-val { font-weight: 700; color: var(--accent); }
 
-        .testimonial-author {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        /* Contact Section */
-        .contact-grid {
+        /* Gallery */
+        .grid-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
-            align-items: start;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        .contact-info {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow);
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            box-shadow: 0 10px 25px var(--shadow);
+            position: relative;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
         }
 
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img { 
+            transform: scale(1.15) rotate(2deg); 
         }
 
         /* Footer */
         footer {
             background: var(--primary);
             color: var(--white);
-            padding: 3rem 5%;
+            padding: 4rem 5%;
             text-align: center;
         }
 
-        .footer-content {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
         .social-link {
-            width: 50px;
-            height: 50px;
+            display: inline-flex;
+            width: 45px;
+            height: 45px;
             background: rgba(255,255,255,0.1);
-            color: var(--white);
+            color: white;
             border-radius: 50%;
-            display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
+            margin: 0 10px;
             transition: all 0.3s ease;
         }
 
-        .social-link:hover {
-            background: var(--white);
-            color: var(--primary);
-            transform: translateY(-3px);
+        .social-link:hover { 
+            background: var(--accent); 
+            transform: translateY(-5px) rotate(360deg);
         }
 
-        /* Hidden elements for toggle */
-        [lang="ar"] {
-            display: none;
-            font-family: 'Cairo', sans-serif;
-            text-align: right;
-        }
-
-        .rtl {
-            direction: rtl;
-        }
-
-        /* Animations */
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
+        /* RTL Support */
+        [lang="ar"] { display: none; font-family: 'Cairo', sans-serif; }
+        .rtl { direction: rtl; text-align: right; }
+        .rtl .logo img { margin-right: 0; margin-left: 12px; }
+        .rtl .btn-secondary { margin-left: 0; margin-right: 10px; }
+        .rtl .feature-item:hover { transform: translateX(-10px); }
+        .rtl .nav-link::after { left: auto; right: 0; }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .about-grid,
-            .contact-grid {
+        @media (max-width: 1024px) {
+            .order-container {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .hero p { font-size: 1.2rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .nav-menu { display: none; }
+            .section-title { font-size: 2rem; }
+            .carousel-item { width: 250px; height: 170px; }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.8rem;
+            }
+
+            .btn-secondary {
+                margin-left: 5px;
+                margin-top: 10px;
+            }
+
+            .order-container {
                 gap: 2rem;
             }
 
-            .grid-gallery {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            .flip-card {
+                height: 200px;
             }
         }
 
-        /* Mobile Menu Toggle */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary);
-            cursor: pointer;
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 20px;
+                right: 20px;
+            }
         }
 
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-            }
+        /* Loading Animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
-<body>
-    <!-- Navigation -->
+<body style="opacity: 0; transition: opacity 0.5s;">
+
     <nav class="navbar">
         <div class="nav-container">
             <a href="#home" class="logo">
-                <img src="https://ik.imagekit.io/weo7pcw8v/Org%C3%A1nica%20Logo.png" alt="Organika Logo">
+                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_logo.png?updatedAt=1770961428622" alt="Organika Logo">
                 <span class="en">ORGANIKA</span>
                 <span class="ar">أورجانيكا</span>
             </a>
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-link en">Home</a><a href="#home" class="nav-link ar">الرئيسية</a></li>
-                <li><a href="#about" class="nav-link en">About</a><a href="#about" class="nav-link ar">من نحن</a></li>
+                <li><a href="#about" class="nav-link en">Our Story</a><a href="#about" class="nav-link ar">قصتنا</a></li>
                 <li><a href="#products" class="nav-link en">Products</a><a href="#products" class="nav-link ar">منتجاتنا</a></li>
-                <li><a href="#gallery" class="nav-link en">Gallery</a><a href="#gallery" class="nav-link ar">معرض الصور</a></li>
-                <li><a href="#prices" class="nav-link en">Prices</a><a href="#prices" class="nav-link ar">الأسعار</a></li>
-                <li><a href="#contact" class="nav-link en">Contact</a><a href="#contact" class="nav-link ar">اتصل بنا</a></li>
+                <li><a href="#order" class="nav-link en">Order Now</a><a href="#order" class="nav-link ar">اطلب الآن</a></li>
+                <li><a href="#gallery" class="nav-link en">Farm Life</a><a href="#gallery" class="nav-link ar">حياة المزرعة</a></li>
+                <li><a href="#prices" class="nav-link en">Price List</a><a href="#prices" class="nav-link ar">قائمة الأسعار</a></li>
             </ul>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <div class="lang-switcher" onclick="toggleLang()">EN / عربي</div>
-                <button class="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+            <div class="lang-switcher" onclick="toggleLang()">العربية / EN</div>
         </div>
     </nav>
 
-    <!-- WhatsApp Float -->
-    <a href="https://wa.me/201067776664" class="whatsapp-float" title="Order via WhatsApp">
+    <a href="https://wa.me/201067776664" class="whatsapp-float" target="_blank" rel="noopener">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content" data-aos="zoom-out">
-            <img src="https://ik.imagekit.io/weo7pcw8v/Org%C3%A1nica%20Logo.png" alt="Organika Logo">
             <h1 class="en">ORGANIKA</h1>
             <h1 class="ar">أورجانيكا</h1>
             <p class="en">The Gold Standard of Organic Poultry</p>
-            <p class="ar">المعيار الذهبي للدواجن الأورجانيك</p>
+            <p class="ar">المعيار الذهبي للدواجن العضوية</p>
             <div class="cta-buttons">
                 <a href="#products" class="btn btn-primary">
-                    <i class="fas fa-shopping-cart"></i>
                     <span class="en">View Products</span>
                     <span class="ar">عرض المنتجات</span>
                 </a>
-                <a href="https://wa.me/201067776664" class="btn btn-secondary">
-                    <i class="fab fa-whatsapp"></i>
+                <a href="#order" class="btn btn-secondary">
                     <span class="en">Order Now</span>
                     <span class="ar">اطلب الآن</span>
                 </a>
             </div>
-            <div class="hero-gallery" data-aos="fade-up" data-aos-delay="500">
-                <div class="hero-gallery-item">
-                    <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%209.07.03%20PM%20(1).jpeg" alt="Fresh eggs">
-                </div>
-                <div class="hero-gallery-item">
-                    <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%208.55.02%20PM.jpeg" alt="Organic water">
-                </div>
-                <div class="hero-gallery-item">
-                    <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%208.55.03%20PM%20(1).jpeg" alt="Farm produce">
-                </div>
-                <div class="hero-gallery-item">
-                    <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-06%20at%2011.58.17%20AM%20(2).jpeg" alt="Farm feeding">
-                </div>
-                <div class="hero-gallery-item">
-                    <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%209.07.03%20PM.jpeg" alt="Farm care">
-                </div>
-                <div class="hero-gallery-item">
-                    <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-06%20at%2011.58.17%20AM%20(1).jpeg" alt="Farm animals">
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Image Carousel Belt -->
+    <div class="carousel-belt">
+        <div class="carousel-track">
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_life.jpeg?updatedAt=1770961432314" alt="Farm Life"></div>
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_vegetables.jpeg?updatedAt=1770961442620" alt="Fresh Vegetables"></div>
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs1.jpeg?updatedAt=1770961438707" alt="Fresh Eggs"></div>
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924" alt="Farm Care"></div>
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_facilities_infrared_heating.jpeg?updatedAt=1770961428127" alt="Facilities"></div>
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747" alt="Farm Produce"></div>
+            <!-- Duplicate for seamless loop -->
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_life.jpeg?updatedAt=1770961432314" alt="Farm Life"></div>
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_vegetables.jpeg?updatedAt=1770961442620" alt="Fresh Vegetables"></div>
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs1.jpeg?updatedAt=1770961438707" alt="Fresh Eggs"></div>
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924" alt="Farm Care"></div>
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_facilities_infrared_heating.jpeg?updatedAt=1770961428127" alt="Facilities"></div>
+            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747" alt="Farm Produce"></div>
+        </div>
+    </div>
+
     <section id="about">
-        <h2 class="section-title en" data-aos="fade-up">Our Story</h2>
-        <h2 class="section-title ar" data-aos="fade-up">قصتنا</h2>
-        <p class="section-subtitle en" data-aos="fade-up">From our farm to your table, experience the difference of truly organic poultry</p>
-        <p class="section-subtitle ar" data-aos="fade-up">من مزرعتنا إلى مائدتك، اختبر الفرق في الدواجن الأورجانيك الحقيقية</p>
-        
         <div class="about-grid">
             <div data-aos="fade-right">
-                <h2 class="en" style="color: var(--primary);">Hand-Prepared With Love</h2>
-                <h2 class="ar" style="color: var(--primary);">يُحضر يدوياً بكل حب</h2>
-                <p class="en">Our founder personally mixes the fresh harvest—beets, carrots, and greens—ensuring the highest quality in every bite. Every chicken is raised with care, fed organic vegetables, and given plenty of space to roam freely.</p>
-                <p class="ar">يقوم مؤسس أورجانيكا بنفسه بخلط المحاصيل الطازجة من البنجر والجزر والخضروات لضمان أعلى جودة في كل وجبة. كل دجاجة تُربى بعناية، تُغذى بالخضروات الأورجانيك، وتُمنح مساحة كافية للتجول بحرية.</p>
+                <h2 class="section-title en" style="text-align: left;">You Are What You Eat</h2>
+                <h2 class="section-title ar" style="text-align: right;">أنت ما تأكله</h2>
+                <p class="en" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">Organika is built on a simple philosophy: providing the highest quality poultry through artisanal care. Our founder personally manages the diet, ensuring a chemical-free journey from our farm to your table.</p>
+                <p class="ar" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">تؤمن "أورجانيكا" بأن الصحة أولوية، لذا نبدأ رحلتنا من انتقاء الطيور السليمة التي تتبع نظامًا غذائيًا عضويًا 100%، تحت إشراف شخصي من مالك المزرعة لضمان أعلى معايير الجودة.</p>
+                
                 <div style="margin-top: 2rem;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                        <i class="fas fa-leaf" style="color: var(--primary); font-size: 1.5rem;"></i>
-                        <span class="en" style="font-weight: 500;">100% Organic Feed</span>
-                        <span class="ar" style="font-weight: 500;">عليقه أورجانيك 100%</span>
+                    <div class="feature-item">
+                        <i class="fas fa-seedling"></i>
+                        <div>
+                            <strong class="en" style="display: block; font-size: 1.1rem;">100% Natural Diet</strong>
+                            <strong class="ar" style="display: block; font-size: 1.1rem;">غذاء طبيعي 100%</strong>
+                            <p class="en" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">Beets, carrots, and fresh greens.</p>
+                            <p class="ar" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">بنجر وجزر وخضروات طازجة.</p>
+                        </div>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                        <i class="fas fa-sun" style="color: var(--accent); font-size: 1.5rem;"></i>
-                        <span class="en" style="font-weight: 500;">Free-Range Environment</span>
-                        <span class="ar" style="font-weight: 500;">بيئة تربية حرة</span>
+                    <div class="feature-item">
+                        <i class="fas fa-sun"></i>
+                        <div>
+                            <strong class="en" style="display: block; font-size: 1.1rem;">Bio-Vitality Environment</strong>
+                            <strong class="ar" style="display: block; font-size: 1.1rem;">بيئة حيوية</strong>
+                            <p class="en" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">Infrared heating systems for natural immunity.</p>
+                            <p class="ar" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">أنظمة تدفئة بالأشعة تحت الحمراء لتعزيز المناعة.</p>
+                        </div>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <i class="fas fa-heart" style="color: #e74c3c; font-size: 1.5rem;"></i>
-                        <span class="en" style="font-weight: 500;">No Chemicals or Hormones</span>
-                        <span class="ar" style="font-weight: 500;">بدون مواد كيميائية أو هرمونات</span>
+                    <div class="feature-item">
+                        <i class="fas fa-heart"></i>
+                        <div>
+                            <strong class="en" style="display: block; font-size: 1.1rem;">Founder-Led Care</strong>
+                            <strong class="ar" style="display: block; font-size: 1.1rem;">عناية شخصية</strong>
+                            <p class="en" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">Personal oversight from farm to table.</p>
+                            <p class="ar" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">إشراف شخصي من المزرعة إلى مائدتك.</p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div data-aos="fade-left">
                 <div class="video-container">
-                    <video autoplay muted loop>
-                        <source src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Video%202026-02-10%20at%201.47.33%20PM.mp4" type="video/mp4">
-                        <p class="en">Your browser does not support the video tag.</p>
-                        <p class="ar">متصفحك لا يدعم تشغيل الفيديو.</p>
+                    <video autoplay muted loop playsinline>
+                        <source src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Final.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Flip Cards Section -->
+    <section style="background: #f1ede2; border-radius: 50px; padding: 80px 5% !important; margin-bottom: 50px;">
+        <h2 class="section-title en" data-aos="fade-up">Farm Wisdom</h2>
+        <h2 class="section-title ar" data-aos="fade-up">حكمة المزرعة</h2>
+        <p class="section-subtitle en" data-aos="fade-up">Hover over the cards to discover our farm principles</p>
+        <p class="section-subtitle ar" data-aos="fade-up">مرر فوق البطاقات لاكتشاف مبادئ مزرعتنا</p>
         
-        <div class="about-images-grid" data-aos="fade-up">
-            <div class="about-image-item">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%209.07.02%20PM.jpeg" alt="Fresh vegetables for feed">
+        <div class="flip-cards-container">
+            <div class="flip-card" data-aos="flip-left">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="flip-card-back">
+                        <p class="en">"Nature knows best - we simply follow her lead with organic feed and chemical-free care."</p>
+                        <p class="ar">"الطبيعة تعرف الأفضل - نحن فقط نتبع قيادتها بالغذاء العضوي والرعاية الخالية من الكيماويات."</p>
+                    </div>
+                </div>
             </div>
-            <div class="about-image-item">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/image.png" alt="Organic farming">
+
+            <div class="flip-card" data-aos="flip-left" data-aos-delay="100">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="flip-card-back">
+                        <p class="en">"Sunshine and fresh air - the oldest recipe for healthy, happy poultry."</p>
+                        <p class="ar">"أشعة الشمس والهواء النقي - أقدم وصفة للدواجن الصحية والسعيدة."</p>
+                    </div>
+                </div>
             </div>
-            <div class="about-image-item">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%208.55.03%20PM%20(1).jpeg" alt="Farm fresh eggs">
+
+            <div class="flip-card" data-aos="flip-left" data-aos-delay="200">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <div class="flip-card-back">
+                        <p class="en">"Quality over quantity - every bird receives individual attention and care."</p>
+                        <p class="ar">"الجودة أهم من الكمية - كل طائر يحصل على اهتمام ورعاية فردية."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" data-aos="flip-left" data-aos-delay="300">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="flip-card-back">
+                        <p class="en">"From seed to feed - we control every step to ensure purity and nutrition."</p>
+                        <p class="ar">"من البذرة إلى العلف - نتحكم في كل خطوة لضمان النقاء والتغذية."</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section id="products" style="background: #f8f9fa;">
-        <h2 class="section-title en" data-aos="fade-up">Our Premium Products</h2>
-        <h2 class="section-title ar" data-aos="fade-up">منتجاتنا الفاخرة</h2>
-        <p class="section-subtitle en" data-aos="fade-up">Fresh from our farm to your table</p>
-        <p class="section-subtitle ar" data-aos="fade-up">طازج من مزرعتنا إلى مائدتك</p>
+    <section id="products" style="background: linear-gradient(135deg, #f1ede2 0%, var(--bg) 100%); border-radius: 50px; margin-bottom: 50px;">
+        <h2 class="section-title en" data-aos="fade-up">Premium Selection</h2>
+        <h2 class="section-title ar" data-aos="fade-up">اختياراتنا الفاخرة</h2>
         
         <div class="products-grid">
+            <div class="product-card" data-aos="fade-up">
+                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_product_ducks.jpeg?updatedAt=1770961442948" class="product-img" alt="Duck">
+                <div class="product-info">
+                    <h3 class="product-name en">Duck</h3><h3 class="product-name ar">بط</h3>
+                    <div class="product-price">190 EGP/kg</div>
+                </div>
+            </div>
             <div class="product-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="product-icon">
-                    <i class="fas fa-drumstick-bite"></i>
+                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_product_baladi_chickens.jpeg?updatedAt=1770961440837" class="product-img" alt="Baladi Chicken">
+                <div class="product-info">
+                    <h3 class="product-name en">Baladi Chicken</h3><h3 class="product-name ar">دجاج بلدي</h3>
+                    <div class="product-price">180 EGP/kg</div>
                 </div>
-                <h3 class="product-name en">Duck</h3>
-                <h3 class="product-name ar">بط</h3>
-                <p class="product-description en">Premium duck with rich, distinctive flavor</p>
-                <p class="product-description ar">بط ممتاز بنكهة غنية ومميزة</p>
-                <div class="product-price">190 EGP/kg</div>
             </div>
-            
             <div class="product-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="product-icon">
-                    <i class="fas fa-dove"></i>
+                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs1.jpeg?updatedAt=1770961438707" class="product-img" alt="Baladi Eggs">
+                <div class="product-info">
+                    <h3 class="product-name en">Baladi Eggs</h3><h3 class="product-name ar">بيض بلدي</h3>
+                    <div class="product-price">190 EGP/tray</div>
                 </div>
-                <h3 class="product-name en">Pigeon</h3>
-                <h3 class="product-name ar">حمام</h3>
-                <p class="product-description en">Delicate, tender pigeon meat</p>
-                <p class="product-description ar">لحم حمام رقيق وطري</p>
-                <div class="product-price">275 EGP/kg</div>
             </div>
-            
             <div class="product-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="product-icon">
-                    <i class="fas fa-fire"></i>
+                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20feeding2.jpeg?updatedAt=1770961435955" class="product-img" alt="Pigeon">
+                <div class="product-info">
+                    <h3 class="product-name en">Pigeon</h3><h3 class="product-name ar">حمام</h3>
+                    <div class="product-price">275 EGP/pair</div>
                 </div>
-                <h3 class="product-name en">Shish Taouk</h3>
-                <h3 class="product-name ar">شيش طاووق</h3>
-                <p class="product-description en">Marinated chicken skewers, perfect for grilling</p>
-                <p class="product-description ar">شيش طاووق متبل، مثالي للشوي</p>
-                <div class="product-price">230 EGP/kg</div>
-            </div>
-            
-            <div class="product-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="product-icon">
-                    <i class="fas fa-egg"></i>
-                </div>
-                <h3 class="product-name en">Baladi Eggs</h3>
-                <h3 class="product-name ar">بيض بلدي</h3>
-                <p class="product-description en">Fresh, nutritious eggs from free-range hens</p>
-                <p class="product-description ar">بيض طازج ومغذي من دجاج يتجول بحرية</p>
-                <div class="product-price">190 EGP/tray</div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery-section">
+    <!-- Order Section -->
+    <section id="order" class="order-section">
+        <h2 class="section-title en" data-aos="fade-up">Place Your Order</h2>
+        <h2 class="section-title ar" data-aos="fade-up">اطلب الآن</h2>
+        <p class="section-subtitle en" data-aos="fade-up">Fresh, organic poultry delivered to your door</p>
+        <p class="section-subtitle ar" data-aos="fade-up">دواجن طازجة وعضوية توصل لباب منزلك</p>
+        
+        <div class="order-container">
+            <!-- Order Calculator -->
+            <div class="order-calculator" data-aos="fade-right">
+                <h3 class="en" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent);">Calculate Your Order</h3>
+                <h3 class="ar" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent);">احسب طلبك</h3>
+                
+                <div class="order-item">
+                    <span class="item-name en">Duck (kg)</span>
+                    <span class="item-name ar">بط (كجم)</span>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="decreaseQty('duck')">-</button>
+                        <input type="number" id="duck" class="qty-input" value="0" min="0" onchange="updateTotal()">
+                        <button class="qty-btn" onclick="increaseQty('duck')">+</button>
+                    </div>
+                    <span class="item-total" id="duck-total">0 EGP</span>
+                </div>
+
+                <div class="order-item">
+                    <span class="item-name en">Baladi Chicken (kg)</span>
+                    <span class="item-name ar">دجاج بلدي (كجم)</span>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="decreaseQty('chicken')">-</button>
+                        <input type="number" id="chicken" class="qty-input" value="0" min="0" onchange="updateTotal()">
+                        <button class="qty-btn" onclick="increaseQty('chicken')">+</button>
+                    </div>
+                    <span class="item-total" id="chicken-total">0 EGP</span>
+                </div>
+
+                <div class="order-item">
+                    <span class="item-name en">Baladi Eggs (tray)</span>
+                    <span class="item-name ar">بيض بلدي (كرتونة)</span>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="decreaseQty('eggs')">-</button>
+                        <input type="number" id="eggs" class="qty-input" value="0" min="0" onchange="updateTotal()">
+                        <button class="qty-btn" onclick="increaseQty('eggs')">+</button>
+                    </div>
+                    <span class="item-total" id="eggs-total">0 EGP</span>
+                </div>
+
+                <div class="order-item">
+                    <span class="item-name en">Pigeon (pair)</span>
+                    <span class="item-name ar">حمام (زوج)</span>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="decreaseQty('pigeon')">-</button>
+                        <input type="number" id="pigeon" class="qty-input" value="0" min="0" onchange="updateTotal()">
+                        <button class="qty-btn" onclick="increaseQty('pigeon')">+</button>
+                    </div>
+                    <span class="item-total" id="pigeon-total">0 EGP</span>
+                </div>
+
+                <div class="order-item">
+                    <span class="item-name en">Shish Taouk (kg)</span>
+                    <span class="item-name ar">شيش طاووق (كجم)</span>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="decreaseQty('shish')">-</button>
+                        <input type="number" id="shish" class="qty-input" value="0" min="0" onchange="updateTotal()">
+                        <button class="qty-btn" onclick="increaseQty('shish')">+</button>
+                    </div>
+                    <span class="item-total" id="shish-total">0 EGP</span>
+                </div>
+
+                <div class="order-item">
+                    <span class="item-name en">Chicken Thighs (kg)</span>
+                    <span class="item-name ar">أوراك (كجم)</span>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="decreaseQty('thighs')">-</button>
+                        <input type="number" id="thighs" class="qty-input" value="0" min="0" onchange="updateTotal()">
+                        <button class="qty-btn" onclick="increaseQty('thighs')">+</button>
+                    </div>
+                    <span class="item-total" id="thighs-total">0 EGP</span>
+                </div>
+
+                <div class="total-section">
+                    <div class="en">Total Amount</div>
+                    <div class="ar">المبلغ الإجمالي</div>
+                    <div class="total-amount" id="grand-total">0 EGP</div>
+                </div>
+            </div>
+
+            <!-- Order Form -->
+            <div class="order-form" data-aos="fade-left">
+                <h3 class="en" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent);">Delivery Details</h3>
+                <h3 class="ar" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent);">بيانات التوصيل</h3>
+                
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label class="en" for="customerName">Full Name *</label>
+                        <label class="ar" for="customerName">الاسم الكامل *</label>
+                        <input type="text" id="customerName" required placeholder="Ahmed Mohamed">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="en" for="phoneNumber">Phone Number *</label>
+                        <label class="ar" for="phoneNumber">رقم الهاتف *</label>
+                        <input type="tel" id="phoneNumber" required placeholder="01067776664">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="en" for="address">Detailed Address *</label>
+                        <label class="ar" for="address">العنوان التفصيلي *</label>
+                        <input type="text" id="address" required placeholder="123 Main Street, Apartment 4">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="en" for="landmark">Nearest Landmark</label>
+                        <label class="ar" for="landmark">أقرب علامة مميزة</label>
+                        <input type="text" id="landmark" placeholder="Near City Mall">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="en" for="notes">Special Notes / Comments</label>
+                        <label class="ar" for="notes">ملاحظات خاصة / تعليقات</label>
+                        <textarea id="notes" placeholder="Any special requests or delivery instructions..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-order-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        <span class="en">Send Order via WhatsApp</span>
+                        <span class="ar">إرسال الطلب عبر واتساب</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
         <h2 class="section-title en" data-aos="fade-up">Clean. Sunny. Natural.</h2>
         <h2 class="section-title ar" data-aos="fade-up">نظافة.. شمس.. طبيعة</h2>
-        <p class="section-subtitle en" data-aos="fade-up">See how our poultry lives in harmony with nature</p>
-        <p class="section-subtitle ar" data-aos="fade-up">شاهد كيف تعيش دواجننا في تناغم مع الطبيعة</p>
-        
+        <p class="section-subtitle en" data-aos="fade-up">A glimpse into our organic farm life</p>
+        <p class="section-subtitle ar" data-aos="fade-up">لمحة عن حياة مزرعتنا العضوية</p>
         <div class="grid-gallery" data-aos="fade-up">
-            <div class="gallery-item">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%208.55.04%20PM%20(3).jpeg" alt="Happy chickens in open field">
-            </div>
-            <div class="gallery-item">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%208.55.04%20PM.jpeg" alt="Organic vegetables for feed">
-            </div>
-            <div class="gallery-item">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%209.07.01%20PM%20(1).jpeg" alt="Farm fresh eggs">
-            </div>
-            <div class="gallery-item">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-06%20at%2011.58.17%20AM.jpeg" alt="Sunset at the farm">
-            </div>
-        </div>
-
-        <div class="grid-gallery" data-aos="fade-up" data-aos-delay="200">
-            <div class="gallery-item">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%209.07.02%20PM%20(1).jpeg" alt="Care and health">
-            </div>
-            <div class="gallery-item">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%208.55.04%20PM%20(1).jpeg" alt="Farm care">
-            </div>
-            <div class="gallery-item">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%208.55.03%20PM%20(1).jpeg" alt="Farm fresh produce">
-            </div>
-            <div class="gallery-item">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-06%20at%2011.58.17%20AM%20(1).jpeg" alt="Farm feeding">
-            </div>
+            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_life.jpeg?updatedAt=1770961432314" alt="Farm Life"></div>
+            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_vegetables.jpeg?updatedAt=1770961442620" alt="Farm Vegetables"></div>
+            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924" alt="Farm Care"></div>
+            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_facilities_infrared_heating.jpeg?updatedAt=1770961428127" alt="Infrared Heating"></div>
+            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747" alt="Farm Produce"></div>
+            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20feeding3.jpeg?updatedAt=1770961460170" alt="Farm Feeding"></div>
+            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_gallery_shelter_view.jpeg?updatedAt=1770961446434" alt="Shelter View"></div>
+            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organic%20water.jpeg?updatedAt=1770961420752" alt="Organic Water"></div>
         </div>
     </section>
 
-    <!-- Prices Section -->
     <section id="prices">
-        <h2 class="section-title en" data-aos="fade-up">Premium Produce List</h2>
-        <h2 class="section-title ar" data-aos="fade-up">قائمة المنتجات الفاخرة</h2>
-        <p class="section-subtitle en" data-aos="fade-up">Competitive pricing for premium quality</p>
-        <p class="section-subtitle ar" data-aos="fade-up">أسعار تنافسية لجودة ممتازة</p>
-        
-        <div class="price-card" data-aos="flip-left">
-            <div class="price-item">
-                <span class="en">Duck</span>
-                <span class="ar">بط</span>
-                <span class="price-val">190 EGP/kg</span>
-            </div>
-            <div class="price-item">
-                <span class="en">Pigeon</span>
-                <span class="ar">حمام</span>
-                <span class="price-val">275 EGP/kg</span>
-            </div>
-            <div class="price-item">
-                <span class="en">Shish Taouk</span>
-                <span class="ar">شيش</span>
-                <span class="price-val">230 EGP/kg</span>
-            </div>
-            <div class="price-item">
-                <span class="en">Chicken Thighs</span>
-                <span class="ar">أوراك</span>
-                <span class="price-val">150 EGP/kg</span>
-            </div>
-            <div class="price-item">
-                <span class="en">Chicken Liver</span>
-                <span class="ar">كبدة</span>
-                <span class="price-val">180 EGP/kg</span>
-            </div>
-            <div class="price-item">
-                <span class="en">Chicken</span>
-                <span class="ar">دجاج</span>
-                <span class="price-val">120 EGP/kg</span>
-            </div>
-            <div class="price-item">
-                <span class="en">Baladi Chicken</span>
-                <span class="ar">بلدي</span>
-                <span class="price-val">180 EGP/kg</span>
-            </div>
-            <div class="price-item">
-                <span class="en">Rabbits</span>
-                <span class="ar">أرانب</span>
-                <span class="price-val">190 EGP/kg</span>
-            </div>
-            <div class="price-item">
-                <span class="en">Chicken Drumsticks</span>
-                <span class="ar">دبوس</span>
-                <span class="price-val">160 EGP/kg</span>
-            </div>
-            <div class="price-item">
-                <span class="en">Baladi Eggs (tray)</span>
-                <span class="ar">بيض بلدي</span>
-                <span class="price-val">190 EGP</span>
-            </div>
-            <p class="price-note en">* Prices are variable based on market conditions</p>
-            <p class="price-note ar">* الأسعار متغيرة حسب حالة السوق</p>
+        <div class="price-card" data-aos="flip-up">
+            <h2 class="en" style="text-align: center; color: var(--accent); margin-bottom: 20px;">Price List</h2>
+            <h2 class="ar" style="text-align: center; color: var(--accent); margin-bottom: 20px;">قائمة الأسعار</h2>
+            <div class="price-item"><span class="en">Duck</span><span class="ar">بط</span><span class="price-val">190 EGP/kg</span></div>
+            <div class="price-item"><span class="en">Pigeon</span><span class="ar">حمام</span><span class="price-val">275 EGP/pair</span></div>
+            <div class="price-item"><span class="en">Shish Taouk</span><span class="ar">شيش طاووق</span><span class="price-val">230 EGP/kg</span></div>
+            <div class="price-item"><span class="en">Chicken Thighs</span><span class="ar">أوراك</span><span class="price-val">150 EGP/kg</span></div>
+            <div class="price-item"><span class="en">Baladi Chicken</span><span class="ar">بلدي</span><span class="price-val">180 EGP/kg</span></div>
+            <div class="price-item"><span class="en">Baladi Eggs</span><span class="ar">بيض بلدي</span><span class="price-val">190 EGP/tray</span></div>
+            <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.7; text-align: center;" class="en">* Prices are subject to market change.</p>
+            <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.7; text-align: center;" class="ar">* الأسعار قابلة للتغيير حسب السوق.</p>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section style="background: #f8f9fa;">
-        <h2 class="section-title en" data-aos="fade-up">What Our Customers Say</h2>
-        <h2 class="section-title ar" data-aos="fade-up">ماذا يقول عملاؤنا</h2>
-        
-        <div class="testimonials-grid">
-            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                <p class="testimonial-text en">"The best organic chicken I've ever tasted! The quality is exceptional and you can really taste the difference."</p>
-                <p class="testimonial-text ar">"أفضل دجاج أورجانيك تذوقته على الإطلاق! الجودة استثنائية ويمكنك حقًا تذوق الفرق."</p>
-                <p class="testimonial-author en">- Sarah M.</p>
-                <p class="testimonial-author ar">- سارة م.</p>
-            </div>
-            
-            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                <p class="testimonial-text en">"Fresh eggs delivered right to my door. The taste is incredible and I love supporting local farmers."</p>
-                <p class="testimonial-text ar">"بيض طازج يُوصل إلى باب منزلي. الطعم لا يُصدق وأحب دعم المزارعين المحليين."</p>
-                <p class="testimonial-author en">- Ahmed K.</p>
-                <p class="testimonial-author ar">- أحمد ك.</p>
-            </div>
-            
-            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                <p class="testimonial-text en">"Organika's commitment to quality and organic farming is evident in every bite. Highly recommended!"</p>
-                <p class="testimonial-text ar">"التزام أورجانيكا بالجودة والزراعة الأورجانيك واضح في كل لقمة. أوصي به بشدة!"</p>
-                <p class="testimonial-author en">- Mona H.</p>
-                <p class="testimonial-author ar">- منى هـ.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2 class="section-title en" data-aos="fade-up">Get In Touch</h2>
-        <h2 class="section-title ar" data-aos="fade-up">تواصل معنا</h2>
-        <p class="section-subtitle en" data-aos="fade-up">Ready to order or have questions? We're here to help!</p>
-        <p class="section-subtitle ar" data-aos="fade-up">مستعد للطلب أو لديك أسئلة؟ نحن هنا للمساعدة!</p>
-        
-        <div class="contact-grid">
-            <div class="contact-info" data-aos="fade-right">
-                <h3 class="en" style="color: var(--primary); margin-bottom: 2rem;">Contact Information</h3>
-                <h3 class="ar" style="color: var(--primary); margin-bottom: 2rem;">معلومات التواصل</h3>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <div>
-                        <strong class="en">WhatsApp Order</strong>
-                        <strong class="ar">طلب واتساب</strong>
-                        <p>+20 106 777 6664</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <div>
-                        <strong class="en">Phone</strong>
-                        <strong class="ar">هاتف</strong>
-                        <p>+20 106 777 6664</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div>
-                        <strong class="en">Farm Location</strong>
-                        <strong class="ar">موقع المزرعة</strong>
-                        <p class="en">Egypt - Contact for directions</p>
-                        <p class="ar">مصر - تواصل للحصول على الاتجاهات</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div>
-                        <strong class="en">Delivery Schedule</strong>
-                        <strong class="ar">جدول التوصيل</strong>
-                        <p class="en">Twice weekly delivery</p>
-                        <p class="ar">توصيل مرتين أسبوعياً</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div data-aos="fade-left">
-                <div class="grid-gallery">
-                    <div class="gallery-item">
-                        <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%208.55.03%20PM%20(1).jpeg" alt="Farm contact">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%209.07.02%20PM%20(1).jpeg" alt="Fresh produce">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%208.55.04%20PM%20(1).jpeg" alt="Happy farm animals">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-06%20at%2011.58.17%20AM%20(2).jpeg" alt="Farm feeding time">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-11%20at%209.07.03%20PM.jpeg" alt="Farm care">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://ik.imagekit.io/xtj3m9hth/Organica/Khaled%20Organica/WhatsApp%20Image%202026-02-06%20at%2011.58.17%20AM%20(1).jpeg" alt="Farm animals">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
+            <h2 style="margin-bottom: 20px;">ORGANIKA</h2>
+            <p class="en" style="font-size: 1.1rem; margin-bottom: 20px;">Premium Organic Poultry - Farm to Table Excellence</p>
+            <p class="ar" style="font-size: 1.1rem; margin-bottom: 20px;">دواجن عضوية فاخرة - من المزرعة إلى مائدتك</p>
             <div class="social-links">
-                <a href="https://wa.me/201067776664" class="social-link" title="WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                <a href="#" class="social-link" title="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" class="social-link" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" class="social-link" title="Phone">
-                    <i class="fas fa-phone"></i>
-                </a>
+                <a href="https://wa.me/201067776664" class="social-link" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
             </div>
-            
-            <p class="en" style="margin-bottom: 1rem;">&copy; 2024 Organika. All rights reserved. | Premium Organic Poultry Farm</p>
-            <p class="ar" style="margin-bottom: 1rem;">&copy; 2024 أورجانيكا. جميع الحقوق محفوظة. | مزرعة دواجن أورجانيك فاخرة</p>
-            
-            <p class="en" style="font-size: 0.9rem; opacity: 0.8;">
-                Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> in Egypt | 
-                <span class="en">Farm to Table Excellence</span>
-                <span class="ar">تميز من المزرعة إلى المائدة</span>
-            </p>
+            <p style="margin-top: 30px; opacity: 0.8;">&copy; 2026 Organika. Premium Organic Poultry Farm - Egypt</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS
-        AOS.init({ 
-            duration: 1200,
-            once: true,
-            offset: 100
+        // Initialize AOS after script loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ duration: 1000, once: true, offset: 100 });
+            }
+        });
+        
+        // Fade in body on load
+        window.addEventListener('load', () => { 
+            document.body.style.opacity = '1'; 
         });
 
-        // Language toggle function
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Language toggle
         function toggleLang() {
             const html = document.getElementById('mainHtml');
             const isEn = html.getAttribute('lang') === 'en';
             html.setAttribute('lang', isEn ? 'ar' : 'en');
             html.classList.toggle('rtl');
             
-            // Toggle visibility of language-specific elements
-            document.querySelectorAll('.en').forEach(el => {
-                el.style.display = isEn ? 'none' : 'block';
-            });
-            document.querySelectorAll('.ar').forEach(el => {
-                el.style.display = isEn ? 'block' : 'none';
-            });
-            
-            // Update lang switcher text
-            const switcher = document.querySelector('.lang-switcher');
-            switcher.textContent = isEn ? 'EN / عربي' : 'EN / عربي';
+            document.querySelectorAll('.en').forEach(el => el.style.display = isEn ? 'none' : 'inline-block');
+            document.querySelectorAll('.ar').forEach(el => el.style.display = isEn ? 'inline-block' : 'none');
         }
 
-        // Smooth scrolling for navigation links
+        // Order Calculator
+        const prices = {
+            duck: 190,
+            chicken: 180,
+            eggs: 190,
+            pigeon: 275,
+            shish: 230,
+            thighs: 150
+        };
+
+        function increaseQty(item) {
+            const input = document.getElementById(item);
+            input.value = parseInt(input.value) + 1;
+            updateTotal();
+        }
+
+        function decreaseQty(item) {
+            const input = document.getElementById(item);
+            if (parseInt(input.value) > 0) {
+                input.value = parseInt(input.value) - 1;
+                updateTotal();
+            }
+        }
+
+        function updateTotal() {
+            let grandTotal = 0;
+            
+            for (let item in prices) {
+                const qty = parseInt(document.getElementById(item).value) || 0;
+                const itemTotal = qty * prices[item];
+                document.getElementById(item + '-total').textContent = itemTotal + ' EGP';
+                grandTotal += itemTotal;
+            }
+            
+            document.getElementById('grand-total').textContent = grandTotal + ' EGP';
+        }
+
+        // Order Form Submission
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('phoneNumber').value;
+            const address = document.getElementById('address').value;
+            const landmark = document.getElementById('landmark').value;
+            const notes = document.getElementById('notes').value;
+            
+            let orderDetails = `*New Order from Organika Website*\n\n`;
+            orderDetails += `*Customer:* ${name}\n`;
+            orderDetails += `*Phone:* ${phone}\n`;
+            orderDetails += `*Address:* ${address}\n`;
+            if (landmark) orderDetails += `*Landmark:* ${landmark}\n`;
+            orderDetails += `\n*Order Details:*\n`;
+            
+            let hasItems = false;
+            for (let item in prices) {
+                const qty = parseInt(document.getElementById(item).value) || 0;
+                if (qty > 0) {
+                    hasItems = true;
+                    const itemName = {
+                        duck: 'Duck',
+                        chicken: 'Baladi Chicken',
+                        eggs: 'Baladi Eggs',
+                        pigeon: 'Pigeon',
+                        shish: 'Shish Taouk',
+                        thighs: 'Chicken Thighs'
+                    };
+                    const unit = item === 'eggs' ? 'tray' : (item === 'pigeon' ? 'pair' : 'kg');
+                    orderDetails += `• ${itemName[item]}: ${qty} ${unit} - ${qty * prices[item]} EGP\n`;
+                }
+            }
+            
+            if (!hasItems) {
+                alert('Please select at least one item for your order.');
+                return;
+            }
+            
+            const grandTotal = parseInt(document.getElementById('grand-total').textContent);
+            orderDetails += `\n*Total: ${grandTotal} EGP*\n`;
+            
+            if (notes) orderDetails += `\n*Notes:* ${notes}`;
+            
+            const whatsappUrl = `https://wa.me/201067776664?text=${encodeURIComponent(orderDetails)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // Add smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1149,68 +1370,6 @@
                 }
             });
         });
-
-        // Navbar background change on scroll
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(255,255,255,0.98)';
-                navbar.style.boxShadow = '0 2px 30px rgba(0,0,0,0.15)';
-            } else {
-                navbar.style.background = 'rgba(255,255,255,0.95)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-            }
-        });
-
-        // Add loading animation
-        window.addEventListener('load', function() {
-            document.body.style.opacity = '1';
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.product-card, .testimonial-card, .gallery-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Mobile menu toggle
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const navMenu = document.querySelector('.nav-menu');
-
-        if (mobileMenuToggle) {
-            mobileMenuToggle.addEventListener('click', function() {
-                navMenu.classList.toggle('active');
-                const icon = this.querySelector('i');
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
-            });
-        }
-
-        // Auto-refresh WhatsApp float animation
-        setInterval(function() {
-            const whatsappFloat = document.querySelector('.whatsapp-float');
-            whatsappFloat.style.animation = 'none';
-            setTimeout(function() {
-                whatsappFloat.style.animation = 'float 3s ease-in-out infinite';
-            }, 10);
-        }, 5000);
     </script>
 </body>
 </html>
