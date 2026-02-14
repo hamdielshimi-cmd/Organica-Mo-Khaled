@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organica | The Gold Standard of Organic Poultry</title>
+    <title>Orgánica | The Gold Standard of Organic Poultry</title>
     <meta name="description"
-        content="Organica - Premium farm-to-table organic poultry. 100% natural diet, founder-led care, and bio-vitality environment.">
+        content="Orgánica - Premium farm-to-table organic poultry. 100% natural diet, founder-led care, and bio-vitality environment.">
 
     <!-- Fonts -->
     <link
@@ -252,7 +252,7 @@
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
-                url('https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_hero_sunny_free_range.jpeg?updatedAt=1770961441056');
+                url('https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -527,7 +527,9 @@
             border-radius: 25px;
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            aspect-ratio: 16/9;
+            aspect-ratio: 720 / 1080;
+            max-width: 400px;
+            margin: 0 auto;
             transition: transform 0.3s ease;
         }
 
@@ -539,6 +541,31 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .sound-toggle {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            background: var(--accent);
+            transform: scale(1.1);
         }
 
         /* Flip Cards Section */
@@ -1028,8 +1055,6 @@
                 </li>
                 <li><a href="#gallery" class="nav-link en">Farm Life</a><a href="#gallery" class="nav-link ar">حياة
                         المزرعة</a></li>
-                <li><a href="#prices" class="nav-link en">Price List</a><a href="#prices" class="nav-link ar">قائمة
-                        الأسعار</a></li>
             </ul>
             <div class="lang-switcher" onclick="toggleLang()">
                 <span class="en">عربي</span>
@@ -1044,8 +1069,8 @@
 
     <section id="home" class="hero">
         <div class="hero-content" data-aos="zoom-out">
-            <h1 class="en">Organica</h1>
-            <h1 class="ar">أورجانيكا</h1>
+            <h1 class="en">Orgánica</h1>
+            <h1 class="ar">Orgánica</h1>
             <p class="en">The Gold Standard of Organic Poultry</p>
             <p class="ar">المعيار الذهبي للطيور الأورجانيك</p>
             <div class="cta-buttons">
@@ -1065,64 +1090,108 @@
     <div class="carousel-belt">
         <div class="carousel-track">
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_hero_farm_life.jpeg?updatedAt=1770961432314"
-                    alt="Farm Life"></div>
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20feeding3.jpeg?updatedAt=1770961460170"
+                    alt="Farm Feeding"></div>
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_hero_farm_vegetables.jpeg?updatedAt=1770961442620"
-                    alt="Fresh Vegetables"></div>
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce2.jpeg?updatedAt=1770961430036"
+                    alt="Farm Produce"></div>
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs1.jpeg?updatedAt=1770961438707"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs2.jpeg?updatedAt=1770961420025"
                     alt="Fresh Eggs"></div>
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs3.jpeg?updatedAt=1770961431523"
+                    alt="Fresh Eggs"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20feeding1.jpeg?updatedAt=1770961431133"
+                    alt="Farm Feeding"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care5.jpeg?updatedAt=1770961439883"
                     alt="Farm Care"></div>
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_facilities_infrared_heating.jpeg?updatedAt=1770961428127"
-                    alt="Facilities"></div>
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care5.jpeg?updatedAt=1770961439883"
+                    alt="Farm Care"></div>
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747"
-                    alt="Farm Produce"></div>
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Gemini_Generated_Image_cu0hlecu0hlecu0h.png?updatedAt=1770986148630"
+                    alt="Organica Feature"></div>
             <!-- Duplicate for seamless loop -->
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_hero_farm_life.jpeg?updatedAt=1770961432314"
-                    alt="Farm Life"></div>
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20feeding3.jpeg?updatedAt=1770961460170"
+                    alt="Farm Feeding"></div>
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_hero_farm_vegetables.jpeg?updatedAt=1770961442620"
-                    alt="Fresh Vegetables"></div>
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce2.jpeg?updatedAt=1770961430036"
+                    alt="Farm Produce"></div>
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs1.jpeg?updatedAt=1770961438707"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs2.jpeg?updatedAt=1770961420025"
                     alt="Fresh Eggs"></div>
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs3.jpeg?updatedAt=1770961431523"
+                    alt="Fresh Eggs"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20feeding1.jpeg?updatedAt=1770961431133"
+                    alt="Farm Feeding"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care5.jpeg?updatedAt=1770961439883"
                     alt="Farm Care"></div>
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_facilities_infrared_heating.jpeg?updatedAt=1770961428127"
-                    alt="Facilities"></div>
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care5.jpeg?updatedAt=1770961439883"
+                    alt="Farm Care"></div>
             <div class="carousel-item"><img loading="lazy"
-                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747"
-                    alt="Farm Produce"></div>
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Gemini_Generated_Image_cu0hlecu0hlecu0h.png?updatedAt=1770986148630"
+                    alt="Orgánica Feature"></div>
         </div>
     </div>
 
     <section id="about">
-        <div class="about-grid">
+        <h2 class="section-title en" style="text-align: left;">From Our Farms to Your Table</h2>
+        <h2 class="section-title ar" style="text-align: right;">من مزارعنا إلى المائدة</h2>
+        <div class="about-grid" style="align-items: start; margin-top: 2rem;">
             <div data-aos="fade-right">
-                <h2 class="section-title en" style="text-align: left;">You Are What You Eat</h2>
-                <h2 class="section-title ar" style="text-align: right;">أنت اللي بتاكله</h2>
-                <p class="en" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">Organica is built on a
-                    simple philosophy: highest quality through artisanal care. Our founder personally manages the diet,
-                    ensuring a chemical-free journey from our farm to your table.</p>
-                <p class="ar" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">أورجانيكا قايمة على
-                    فكرة بسيطة: بنقدم أحسن جودة طيور باهتمام خاص. صاحب المزرعة بيشرف بنفسه على الأكل، عشان يضمن إنها
-                    خالية من الكيماويات من مزرعتنا لحد سفرتك.</p>
+                <h3 class="en" style="font-size: 1.5rem; color: var(--accent); margin-bottom: 1rem;">Taste the Flavor of
+                    Nature with “Orgánica”</h3>
+                <h3 class="ar" style="font-size: 1.5rem; color: var(--accent); margin-bottom: 1rem;">تذَّوق طعم الطبيعة
+                    مع "Orgánica"</h3>
+                <p class="en" style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">At Orgánica, we believe
+                    that health must be a priority in our white meat products. That’s why we begin the journey of
+                    providing our customers with healthy white meat by carefully selecting sound birds from a collection
+                    of trusted farms that strictly follow an organic diet.</p>
+                <p class="en" style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">Our farms also uphold the
+                    highest quality standards for the poultry, ensuring that no hormones or chemicals are ever used for
+                    fattening—especially after verifying that they have adverse effects on human health.</p>
+                <p class="en" style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">Based on this, the
+                    responsibility of feeding the birds is solely undertaken by the farm owner himself, who personally
+                    prepares the “Al-‘Aleqa” using a mix of beets, carrots, and vegetables. This results in a
+                    significant improvement in the taste and tenderness of the meat, while preserving its beneficial
+                    nutrients without compromising the consumer’s health.</p>
+                <p class="en" style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">Moreover, our birds enjoy
+                    ample exposure to sunlight and free movement in open environments rather than being confined to
+                    cages all day. This not only enhances their overall well-being but also lowers their fat content.
+                </p>
+                <p class="en" style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">At Orgánica, our
+                    experience is the first step in pursuing a passion for healthy food, as our dream is to offer our
+                    customers the highest quality nutrition at unbeatable prices.</p>
+
+                <p class="ar" style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">تؤمن "Orgánica" بأن الصحة
+                    تعد أولوية لا بد من توفرها في منتجاتنا من اللحوم البيضاء، لذلك فإننا نبدأ رحلة توفير اللحوم البيضاء
+                    الصحية لعملائنا، من نقطة انتقاء الطيور السليمة من مجموعة من المزارع التي نثق كليًا في أنها تتبع
+                    نظامًا غذائيًا عضويًا.</p>
+                <p class="ar" style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">كذلك توفر مزارعنا أعلى
+                    معايير الجودة للطيور فيها، حيث لا يُسمح على الإطلاق بدخول أي هرمونات أو كيماويات لتسمينها، بخاصةٍ
+                    بعد التأكد من أن لها آثارًا جانبية على صحة الإنسان.</p>
+                <p class="ar" style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">على هذا الأساس فإن مهمة
+                    إطعام الطيور لا يتولاها إلا مالك المزرعة بنفسه، حيث يُحضِّر "العليقة" من خليط من البنجر والجزر
+                    والخضروات، بما يؤدي إلى تحسن كبير في مذاق الطيور وطراوة في لحومها، بالإضافة إلى احتفاظها بالعناصر
+                    الغذائية المفيدة، دون أي إضرار بصحة متناوليها.</p>
+                <p class="ar" style="font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;">ليس ذلك فحسب، فالطيور
+                    لدينا تتمتع بفترات مناسبة تتعرض خلالها لأشعة الشمس، والتحرك في بيئة حرة، وليست حبيسة الأقفاص طوال
+                    اليوم، مما يزيد من مستويات سلامتها الصحية، ويخفض نسبة الدهون فيها.</p>
 
                 <div style="margin-top: 2rem;">
                     <div class="feature-item">
                         <i class="fas fa-seedling"></i>
                         <div>
-                            <strong class="en" style="display: block; font-size: 1.1rem;">100% Natural Diet: Beets,
+                            <strong class="en" style="display: block; font-size: 1.1rem;">Natural Diet: Beets,
                                 carrots, and fresh greens.</strong>
-                            <strong class="ar" style="display: block; font-size: 1.1rem;">أكل طبيعي 100%: بنجر وجزر
+                            <strong class="ar" style="display: block; font-size: 1.1rem;">أكل طبيعي: بنجر وجزر
                                 وخضرة طازة.</strong>
                         </div>
                     </div>
@@ -1146,68 +1215,21 @@
                     </div>
                 </div>
             </div>
+
             <div data-aos="fade-left">
-                <div class="video-container">
-                    <video autoplay muted loop playsinline>
-                        <source src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Final.mp4"
-                            type="video/mp4">
+                <div class="video-container" style="position: relative;">
+                    <video id="aboutVideo" autoplay muted loop playsinline>
+                        <source src="https://ik.imagekit.io/xtj3m9hth/Video%20Project%20107%20(1).mp4" type="video/mp4">
                     </video>
+                    <button class="sound-toggle" onclick="toggleAudio()" title="Toggle Sound">
+                        <i id="soundIcon" class="fas fa-volume-mute"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Flip Cards Section -->
-    <section style="background: #f1ede2; border-radius: 50px; padding: 80px 5% !important; margin-bottom: 50px;">
-        <h2 class="section-title en" data-aos="fade-up">Farm Wisdom</h2>
-        <h2 class="section-title ar" data-aos="fade-up">حكمة المزرعة</h2>
-        <p class="section-subtitle en" data-aos="fade-up">Hover over the cards to discover our farm principles</p>
-        <p class="section-subtitle ar" data-aos="fade-up">مرر فوق البطاقات لاكتشاف مبادئ مزرعتنا</p>
 
-        <div class="flip-cards-container">
-            <div class="flip-card" data-aos="flip-left">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front"><i class="fas fa-leaf"></i></div>
-                    <div class="flip-card-back">
-                        <p class="en">"Nature knows best - we simply follow her lead with organic feed and chemical-free
-                            care."</p>
-                        <p class="ar">"الطبيعة تعرف الأفضل - نحن فقط نتبع قيادتها بالغذاء العضوي والرعاية الخالية من
-                            الكيماويات."</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" data-aos="flip-left" data-aos-delay="100">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front"><i class="fas fa-sun"></i></div>
-                    <div class="flip-card-back">
-                        <p class="en">"Sunshine and fresh air - the oldest recipe for healthy, happy poultry."</p>
-                        <p class="ar">"أشعة الشمس والهواء النقي - أقدم وصفة للدواجن الصحية والسعيدة."</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" data-aos="flip-left" data-aos-delay="200">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front"><i class="fas fa-hand-holding-heart"></i></div>
-                    <div class="flip-card-back">
-                        <p class="en">"Quality over quantity - every bird receives individual attention and care."</p>
-                        <p class="ar">"الجودة أهم من الكمية - كل طائر يحصل على اهتمام ورعاية فردية."</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" data-aos="flip-left" data-aos-delay="300">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front"><i class="fas fa-seedling"></i></div>
-                    <div class="flip-card-back">
-                        <p class="en">"From seed to feed - we control every step to ensure purity and nutrition."</p>
-                        <p class="ar">"من البذرة إلى العلف - نتحكم في كل خطوة لضمان النقاء والتغذية."</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section id="products"
         style="background: linear-gradient(135deg, #f1ede2 0%, var(--bg) 100%); border-radius: 50px; margin-bottom: 50px;">
@@ -1284,10 +1306,71 @@
 
     <!-- Order Section -->
     <section id="order" class="order-section">
-        <h2 class="section-title en" data-aos="fade-up">Place Your Order</h2>
+        <h2 class="section-title en" data-aos="fade-up">Place Your Order Now</h2>
         <h2 class="section-title ar" data-aos="fade-up">اطلب الآن</h2>
-        <p class="section-subtitle en" data-aos="fade-up">Fresh, organic poultry delivered to your door</p>
-        <p class="section-subtitle ar" data-aos="fade-up">دواجن طازجة وعضوية توصل لباب منزلك</p>
+        <p class="section-subtitle en" data-aos="fade-up">Everything you need to get organic goodness delivered</p>
+        <p class="section-subtitle ar" data-aos="fade-up">كل اللي محتاجه عشان الطعم الأصلي يوصلك لحد البيت</p>
+
+        <!-- New Row for Prices and Delivery Info -->
+        <div
+            style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; align-items: stretch; max-width: 1200px; margin: 0 auto 3rem auto; padding: 0 5%;">
+            <!-- Price List Card -->
+            <div class="price-card" data-aos="fade-right" style="flex: 1; min-width: 300px; margin: 0;">
+                <h3 class="en"
+                    style="text-align: center; color: var(--accent); margin-bottom: 20px; font-size: 1.8rem;">Price List
+                </h3>
+                <h3 class="ar"
+                    style="text-align: center; color: var(--accent); margin-bottom: 20px; font-size: 1.8rem;">قائمة
+                    الأسعار</h3>
+                <div class="price-item"><span class="en">Duck</span><span class="ar">بط</span><span
+                        class="price-val">190 EGP/kg</span></div>
+                <div class="price-item"><span class="en">Baladi Chicken</span><span class="ar">فراخ بلدي</span><span
+                        class="price-val">180 EGP/kg</span></div>
+                <div class="price-item"><span class="en">Baladi Eggs</span><span class="ar">بيض بلدي</span><span
+                        class="price-val">190 EGP/tray</span></div>
+                <div class="price-item"><span class="en">Pigeon</span><span class="ar">حمّام</span><span
+                        class="price-val">275 EGP/pair</span></div>
+                <div class="price-item"><span class="en">Shish Taouk</span><span class="ar">شيش طاووق</span><span
+                        class="price-val">230 EGP/kg</span></div>
+                <div class="price-item"><span class="en">Chicken Thighs</span><span class="ar">وراك</span><span
+                        class="price-val">150 EGP/kg</span></div>
+                <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.6; text-align: center;" class="en">* Prices
+                    are subject to market change.</p>
+                <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.6; text-align: center;" class="ar">* الأسعار
+                    قابلة للتغيير حسب السوق.</p>
+            </div>
+
+            <!-- Delivery Info Card -->
+            <div class="price-card" data-aos="fade-left"
+                style="flex: 1; min-width: 300px; margin: 0; background: var(--primary); color: white; border-top-color: var(--white);">
+                <h3 class="en" style="text-align: center; margin-bottom: 20px; font-size: 1.8rem;">Delivery Info</h3>
+                <h3 class="ar" style="text-align: center; margin-bottom: 20px; font-size: 1.8rem;">معلومات التوصيل</h3>
+
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <i class="fas fa-truck" style="font-size: 1.2rem;"></i>
+                        <span class="en">9 AM - 9 PM (Tue - Fri)</span>
+                        <span class="ar">٩ صباحاً - ٩ مساءً (ثلاثاء - جمعة)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                        <i class="fas fa-money-bill-wave" style="font-size: 1.2rem;"></i>
+                        <span class="en">50 EGP Delivery Fee</span>
+                        <span class="ar">٥٠ جنيه مصاريف شحن</span>
+                    </div>
+                </div>
+
+                <div
+                    style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; font-size: 0.95rem; margin-bottom: 20px;">
+                    <p class="en">All orders must be confirmed by at least 50% through wallet or InstaPay 24h prior.</p>
+                    <p class="ar">يجب تأكيد جميع الطلبات بنسبة ٥٠٪ على الأقل عبر المحفظة أو إنستا باي قبل ٢٤ ساعة.</p>
+                </div>
+
+                <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;">
+                    <p class="en"><strong>Weekday Orders:</strong><br>Min 2000 EGP + 50 EGP Delivery.</p>
+                    <p class="ar"><strong>طلبات وسط الأسبوع:</strong><br>الحد الأدنى ٢٠٠٠ جنيه + ٥٠ جنيه توصيل.</p>
+                </div>
+            </div>
+        </div>
 
         <div class="order-container">
             <!-- Order Calculator -->
@@ -1457,67 +1540,11 @@
         </div>
     </section>
 
-    <section id="prices">
-        <div
-            style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; align-items: stretch; max-width: 1200px; margin: 0 auto;">
-            <!-- Price List Card -->
-            <div class="price-card" data-aos="fade-right" style="flex: 1; min-width: 300px; margin: 0;">
-                <h2 class="en" style="text-align: center; color: var(--accent); margin-bottom: 20px;">Price List</h2>
-                <h2 class="ar" style="text-align: center; color: var(--accent); margin-bottom: 20px;">قائمة الأسعار</h2>
-                <div class="price-item"><span class="en">Duck</span><span class="ar">بط</span><span
-                        class="price-val">190 EGP/kg</span></div>
-                <div class="price-item"><span class="en">Baladi Chicken</span><span class="ar">فراخ بلدي</span><span
-                        class="price-val">180 EGP/kg</span></div>
-                <div class="price-item"><span class="en">Baladi Eggs</span><span class="ar">بيض بلدي</span><span
-                        class="price-val">190 EGP/tray</span></div>
-                <div class="price-item"><span class="en">Pigeon</span><span class="ar">حمّام</span><span
-                        class="price-val">275 EGP/pair</span></div>
-                <div class="price-item"><span class="en">Shish Taouk</span><span class="ar">شيش طاووق</span><span
-                        class="price-val">230 EGP/kg</span></div>
-                <div class="price-item"><span class="en">Chicken Thighs</span><span class="ar">وراك</span><span
-                        class="price-val">150 EGP/kg</span></div>
-                <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.6; text-align: center;" class="en">* Prices
-                    are subject to market change.</p>
-                <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.6; text-align: center;" class="ar">* الأسعار
-                    قابلة للتغيير حسب السوق.</p>
-            </div>
 
-            <!-- Delivery Info Card -->
-            <div class="price-card" data-aos="fade-left"
-                style="flex: 1; min-width: 300px; margin: 0; background: var(--primary); color: white; border-top-color: var(--white);">
-                <h2 class="en" style="text-align: center; margin-bottom: 20px;">Delivery Info</h2>
-                <h2 class="ar" style="text-align: center; margin-bottom: 20px;">معلومات التوصيل</h2>
-
-                <div style="margin-bottom: 20px;">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <i class="fas fa-truck" style="font-size: 1.2rem;"></i>
-                        <span class="en">9 AM - 9 PM (Tue - Fri)</span>
-                        <span class="ar">٩ صباحاً - ٩ مساءً (ثلاثاء - جمعة)</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                        <i class="fas fa-money-bill-wave" style="font-size: 1.2rem;"></i>
-                        <span class="en">50 EGP Delivery Fee</span>
-                        <span class="ar">٥٠ جنيه مصاريف شحن</span>
-                    </div>
-                </div>
-
-                <div
-                    style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; font-size: 0.95rem; margin-bottom: 20px;">
-                    <p class="en">All orders must be confirmed by at least 50% through wallet or InstaPay 24h prior.</p>
-                    <p class="ar">يجب تأكيد جميع الطلبات بنسبة ٥٠٪ على الأقل عبر المحفظة أو إنستا باي قبل ٢٤ ساعة.</p>
-                </div>
-
-                <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;">
-                    <p class="en"><strong>Weekday Orders:</strong><br>Min 2000 EGP + 50 EGP Delivery.</p>
-                    <p class="ar"><strong>طلبات وسط الأسبوع:</strong><br>الحد الأدنى ٢٠٠٠ جنيه + ٥٠ جنيه توصيل.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <footer>
         <div class="footer-content">
-            <h2 style="margin-bottom: 20px;">Organica</h2>
+            <h2 style="margin-bottom: 20px;">Orgánica</h2>
             <p class="en" style="font-size: 1.1rem; margin-bottom: 20px;">Premium Organic Poultry - Farm to Table
                 Excellence</p>
             <p class="ar" style="font-size: 1.1rem; margin-bottom: 20px;">دواجن عضوية فاخرة - من المزرعة إلى مائدتك</p>
@@ -1527,7 +1554,7 @@
                 <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
             </div>
-            <p style="margin-top: 30px; opacity: 0.8;">&copy; 2026 Organica. Premium Organic Poultry Farm - Egypt</p>
+            <p style="margin-top: 30px; opacity: 0.8;">&copy; 2026 Orgánica. Premium Organic Poultry Farm - Egypt</p>
         </div>
     </footer>
 
@@ -1637,7 +1664,7 @@
             const lang = isArabic ? 'ar' : 'en';
 
             // Construct Message
-            let message = `Hello Organica, I would like to order:\n`;
+            let message = `Hello Orgánica, I would like to order:\n`;
 
             let hasItems = false;
             for (let item in prices) {
@@ -1679,6 +1706,19 @@
                 }
             });
         });
+
+        function toggleAudio() {
+            const video = document.getElementById('aboutVideo');
+            const icon = document.getElementById('soundIcon');
+
+            if (video.muted) {
+                video.muted = false;
+                icon.className = 'fas fa-volume-up';
+            } else {
+                video.muted = true;
+                icon.className = 'fas fa-volume-mute';
+            }
+        }
     </script>
 </body>
 
