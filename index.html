@@ -1,44 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" id="mainHtml">
+<html lang="en" dir="ltr" id="mainHtml" class="lang-en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organika | The Gold Standard of Organic Poultry</title>
-    <meta name="description" content="Organika - Premium farm-to-table organic poultry. 100% natural diet, founder-led care, and bio-vitality environment.">
-    
+    <title>Organica | The Gold Standard of Organic Poultry</title>
+    <meta name="description"
+        content="Organica - Premium farm-to-table organic poultry. 100% natural diet, founder-led care, and bio-vitality environment.">
+
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+
     <style>
         :root {
-            /* Your Rustic Premium Palette */
-            --primary: #7A9A7E;
-            --primary-light: #94b097;
-            --accent: #C84B31;
-            --accent-light: #d66a54;
-            --bg: #F8F4E6;
-            --text: #2D2926;
-            --text-light: #5a5550;
+            /* Refined Premium Palette */
+            --primary: #4A6741;
+            --primary-light: #7A9A7E;
+            --accent: #D47A2C;
+            --accent-light: #E89E5F;
+            --bg: #FCFAEF;
+            --text: #1A1A1A;
+            --text-light: #666666;
             --white: #ffffff;
-            --shadow: rgba(0,0,0,0.08);
-            --shadow-hover: rgba(0,0,0,0.12);
+            --glass: rgba(255, 255, 255, 0.7);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        * { 
-            box-sizing: border-box; 
-            scroll-behavior: smooth; 
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
             margin: 0;
             padding: 0;
         }
 
-        body { 
-            margin: 0; 
-            font-family: 'Montserrat', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            overflow-x: hidden; 
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
             line-height: 1.6;
         }
 
@@ -47,12 +52,13 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(248, 244, 230, 0.95);
-            backdrop-filter: blur(10px);
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             z-index: 1000;
-            padding: 0.8rem 5%;
-            box-shadow: 0 2px 20px var(--shadow);
-            transition: all 0.3s ease;
+            padding: 1rem 5%;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .navbar.scrolled {
@@ -83,9 +89,10 @@
             transform: scale(1.05);
         }
 
+        /* Increased logo size as requested */
         .logo img {
-            width: 50px;
-            height: 50px;
+            width: 65px;
+            height: 65px;
             margin-right: 12px;
             object-fit: contain;
             transition: transform 0.3s ease;
@@ -127,31 +134,125 @@
             width: 100%;
         }
 
-        .nav-link:hover { color: var(--accent); }
+        .nav-link:hover {
+            color: var(--accent);
+        }
 
         .lang-switcher {
             background: var(--accent);
             color: var(--white);
-            padding: 6px 15px;
+            padding: 8px 18px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             border: 2px solid var(--accent);
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .lang-switcher:hover { 
-            background: transparent; 
+        .lang-switcher:hover {
+            background: transparent;
             color: var(--accent);
             transform: scale(1.05);
+        }
+
+        /* Language Visibility Logic */
+        html.lang-en .ar {
+            display: none !important;
+        }
+
+        html.lang-en .en {
+            display: block;
+        }
+
+        /* Default for block elements */
+
+        html.lang-ar .en {
+            display: none !important;
+        }
+
+        html.lang-ar .ar {
+            display: block;
+        }
+
+        html.lang-ar {
+            direction: rtl;
+        }
+
+        html.lang-ar body {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* Specific display overrides for inline elements */
+        span.en,
+        span.ar,
+        a.en,
+        a.ar,
+        li.en,
+        li.ar,
+        button.en,
+        button.ar {
+            display: inline-block !important;
+        }
+
+        p.en,
+        p.ar,
+        div.en,
+        div.ar,
+        h1.en,
+        h1.ar,
+        h2.en,
+        h2.ar,
+        h3.en,
+        h3.ar {
+            display: block !important;
+        }
+
+        /* RTL Adjustments */
+        html.lang-ar .logo img {
+            margin-right: 0;
+            margin-left: 12px;
+        }
+
+        html.lang-ar .btn-secondary {
+            margin-left: 0;
+            margin-right: 10px;
+        }
+
+        html.lang-ar .feature-item:hover {
+            transform: translateX(-10px);
+        }
+
+        html.lang-ar .nav-link::after {
+            left: auto;
+            right: 0;
+        }
+
+        html.lang-ar .order-item {
+            flex-direction: row-reverse;
+        }
+
+        html.lang-ar .item-total {
+            text-align: left;
+        }
+
+        html.lang-ar .total-section {
+            direction: ltr;
+            text-align: right;
+        }
+
+        html.lang-ar .footer-content {
+            direction: ltr;
         }
 
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
-                        url('https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_sunny_free_range.jpeg?updatedAt=1770961441056');
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+                url('https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_hero_sunny_free_range.jpeg?updatedAt=1770961441056');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -171,21 +272,21 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
         }
 
-        .hero-content { 
-            max-width: 900px; 
+        .hero-content {
+            max-width: 900px;
             padding: 0 20px;
             position: relative;
             z-index: 1;
         }
-        
+
         .hero h1 {
             font-size: 5rem;
             font-weight: 900;
             margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
             animation: fadeInUp 1s ease;
         }
 
@@ -205,6 +306,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -244,7 +346,7 @@
 
         .btn-secondary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
 
         /* WhatsApp Float */
@@ -267,14 +369,26 @@
             animation: float 3s ease-in-out infinite;
         }
 
+        html.lang-ar .whatsapp-float {
+            right: auto;
+            left: 30px;
+        }
+
         .whatsapp-float:hover {
             transform: scale(1.1);
             box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6);
         }
 
-        @keyframes float { 
-            0%, 100% { transform: translateY(0); } 
-            50% { transform: translateY(-10px); } 
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         /* Image Carousel Belt */
@@ -301,7 +415,7 @@
             height: 200px;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
         }
 
@@ -316,13 +430,37 @@
         }
 
         @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* RTL Carousel */
+        html.lang-ar .carousel-track {
+            animation-name: scroll-rtl;
+        }
+
+        @keyframes scroll-rtl {
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
         }
 
         /* Sections */
-        section { padding: 100px 5%; max-width: 1300px; margin: auto; }
-        
+        section {
+            padding: 100px 5%;
+            max-width: 1300px;
+            margin: auto;
+        }
+
         .section-title {
             text-align: center;
             font-size: 3rem;
@@ -379,8 +517,8 @@
             box-shadow: 0 8px 25px var(--shadow-hover);
         }
 
-        .feature-item i { 
-            font-size: 2rem; 
+        .feature-item i {
+            font-size: 2rem;
             color: var(--primary);
             min-width: 40px;
         }
@@ -388,7 +526,7 @@
         .video-container {
             border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
             aspect-ratio: 16/9;
             transition: transform 0.3s ease;
         }
@@ -397,10 +535,10 @@
             transform: scale(1.02);
         }
 
-        .video-container video { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Flip Cards Section */
@@ -430,7 +568,8 @@
             transform: rotateY(180deg);
         }
 
-        .flip-card-front, .flip-card-back {
+        .flip-card-front,
+        .flip-card-back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -488,7 +627,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.5s ease;
         }
 
@@ -496,7 +635,7 @@
             left: 100%;
         }
 
-        .product-card:hover { 
+        .product-card:hover {
             transform: translateY(-15px) scale(1.02);
             box-shadow: 0 15px 40px var(--shadow-hover);
         }
@@ -512,17 +651,21 @@
             transform: scale(1.1);
         }
 
-        .product-info { padding: 1.5rem; }
-        .product-name { 
-            font-size: 1.4rem; 
-            font-weight: 700; 
-            color: var(--text); 
-            margin-bottom: 0.5rem; 
+        .product-info {
+            padding: 1.5rem;
         }
-        .product-price { 
-            font-size: 1.6rem; 
-            font-weight: 800; 
-            color: var(--accent); 
+
+        .product-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent);
         }
 
         /* Order Form Section */
@@ -719,7 +862,10 @@
             background: rgba(122, 154, 126, 0.05);
         }
 
-        .price-val { font-weight: 700; color: var(--accent); }
+        .price-val {
+            font-weight: 700;
+            color: var(--accent);
+        }
 
         /* Gallery */
         .grid-gallery {
@@ -743,7 +889,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: 1;
@@ -760,8 +906,8 @@
             transition: transform 0.5s ease;
         }
 
-        .gallery-item:hover img { 
-            transform: scale(1.15) rotate(2deg); 
+        .gallery-item:hover img {
+            transform: scale(1.15) rotate(2deg);
         }
 
         /* Footer */
@@ -776,7 +922,7 @@
             display: inline-flex;
             width: 45px;
             height: 45px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
             border-radius: 50%;
             align-items: center;
@@ -785,18 +931,10 @@
             transition: all 0.3s ease;
         }
 
-        .social-link:hover { 
-            background: var(--accent); 
+        .social-link:hover {
+            background: var(--accent);
             transform: translateY(-5px) rotate(360deg);
         }
-
-        /* RTL Support */
-        [lang="ar"] { display: none; font-family: 'Cairo', sans-serif; }
-        .rtl { direction: rtl; text-align: right; }
-        .rtl .logo img { margin-right: 0; margin-left: 12px; }
-        .rtl .btn-secondary { margin-left: 0; margin-right: 10px; }
-        .rtl .feature-item:hover { transform: translateX(-10px); }
-        .rtl .nav-link::after { left: auto; right: 0; }
 
         /* Responsive Design */
         @media (max-width: 1024px) {
@@ -806,13 +944,31 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .hero p { font-size: 1.2rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            .nav-menu { display: none; }
-            .section-title { font-size: 2rem; }
-            .carousel-item { width: 250px; height: 170px; }
-            
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .carousel-item {
+                width: 250px;
+                height: 170px;
+            }
+
             .btn {
                 padding: 12px 25px;
                 font-size: 0.8rem;
@@ -830,10 +986,17 @@
             .flip-card {
                 height: 200px;
             }
+
+            html.lang-ar .btn-secondary {
+                margin-right: 5px;
+            }
         }
 
         @media (max-width: 480px) {
-            .hero h1 { font-size: 2rem; }
+            .hero h1 {
+                font-size: 2rem;
+            }
+
             .whatsapp-float {
                 width: 50px;
                 height: 50px;
@@ -842,35 +1005,36 @@
                 right: 20px;
             }
         }
-
-        /* Loading Animation */
-        .fade-in {
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
     </style>
 </head>
+
 <body style="opacity: 0; transition: opacity 0.5s;">
 
     <nav class="navbar">
         <div class="nav-container">
             <a href="#home" class="logo">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_logo.png?updatedAt=1770961428622" alt="Organika Logo">
-                <span class="en">ORGANIKA</span>
+                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_New_logo.png"
+                    alt="Organica Logo">
+                <span class="en">Organica</span>
                 <span class="ar">أورجانيكا</span>
             </a>
             <ul class="nav-menu">
-                <li><a href="#about" class="nav-link en">Our Story</a><a href="#about" class="nav-link ar">قصتنا</a></li>
-                <li><a href="#products" class="nav-link en">Products</a><a href="#products" class="nav-link ar">منتجاتنا</a></li>
-                <li><a href="#order" class="nav-link en">Order Now</a><a href="#order" class="nav-link ar">اطلب الآن</a></li>
-                <li><a href="#gallery" class="nav-link en">Farm Life</a><a href="#gallery" class="nav-link ar">حياة المزرعة</a></li>
-                <li><a href="#prices" class="nav-link en">Price List</a><a href="#prices" class="nav-link ar">قائمة الأسعار</a></li>
+                <li><a href="#home" class="nav-link en">Home</a><a href="#home" class="nav-link ar">الرئيسية</a></li>
+                <li><a href="#about" class="nav-link en">Our Story</a><a href="#about" class="nav-link ar">قصتنا</a>
+                </li>
+                <li><a href="#products" class="nav-link en">Products</a><a href="#products"
+                        class="nav-link ar">منتجاتنا</a></li>
+                <li><a href="#order" class="nav-link en">Order Now</a><a href="#order" class="nav-link ar">اطلب الآن</a>
+                </li>
+                <li><a href="#gallery" class="nav-link en">Farm Life</a><a href="#gallery" class="nav-link ar">حياة
+                        المزرعة</a></li>
+                <li><a href="#prices" class="nav-link en">Price List</a><a href="#prices" class="nav-link ar">قائمة
+                        الأسعار</a></li>
             </ul>
-            <div class="lang-switcher" onclick="toggleLang()">العربية / EN</div>
+            <div class="lang-switcher" onclick="toggleLang()">
+                <span class="en">عربي</span>
+                <span class="ar">English</span>
+            </div>
         </div>
     </nav>
 
@@ -880,10 +1044,10 @@
 
     <section id="home" class="hero">
         <div class="hero-content" data-aos="zoom-out">
-            <h1 class="en">ORGANIKA</h1>
+            <h1 class="en">Organica</h1>
             <h1 class="ar">أورجانيكا</h1>
             <p class="en">The Gold Standard of Organic Poultry</p>
-            <p class="ar">المعيار الذهبي للدواجن العضوية</p>
+            <p class="ar">المعيار الذهبي للطيور الأورجانيك</p>
             <div class="cta-buttons">
                 <a href="#products" class="btn btn-primary">
                     <span class="en">View Products</span>
@@ -900,19 +1064,43 @@
     <!-- Image Carousel Belt -->
     <div class="carousel-belt">
         <div class="carousel-track">
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_life.jpeg?updatedAt=1770961432314" alt="Farm Life"></div>
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_vegetables.jpeg?updatedAt=1770961442620" alt="Fresh Vegetables"></div>
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs1.jpeg?updatedAt=1770961438707" alt="Fresh Eggs"></div>
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924" alt="Farm Care"></div>
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_facilities_infrared_heating.jpeg?updatedAt=1770961428127" alt="Facilities"></div>
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747" alt="Farm Produce"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_hero_farm_life.jpeg?updatedAt=1770961432314"
+                    alt="Farm Life"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_hero_farm_vegetables.jpeg?updatedAt=1770961442620"
+                    alt="Fresh Vegetables"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs1.jpeg?updatedAt=1770961438707"
+                    alt="Fresh Eggs"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924"
+                    alt="Farm Care"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_facilities_infrared_heating.jpeg?updatedAt=1770961428127"
+                    alt="Facilities"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747"
+                    alt="Farm Produce"></div>
             <!-- Duplicate for seamless loop -->
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_life.jpeg?updatedAt=1770961432314" alt="Farm Life"></div>
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_vegetables.jpeg?updatedAt=1770961442620" alt="Fresh Vegetables"></div>
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs1.jpeg?updatedAt=1770961438707" alt="Fresh Eggs"></div>
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924" alt="Farm Care"></div>
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_facilities_infrared_heating.jpeg?updatedAt=1770961428127" alt="Facilities"></div>
-            <div class="carousel-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747" alt="Farm Produce"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_hero_farm_life.jpeg?updatedAt=1770961432314"
+                    alt="Farm Life"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_hero_farm_vegetables.jpeg?updatedAt=1770961442620"
+                    alt="Fresh Vegetables"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs1.jpeg?updatedAt=1770961438707"
+                    alt="Fresh Eggs"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924"
+                    alt="Farm Care"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organica_facilities_infrared_heating.jpeg?updatedAt=1770961428127"
+                    alt="Facilities"></div>
+            <div class="carousel-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747"
+                    alt="Farm Produce"></div>
         </div>
     </div>
 
@@ -920,36 +1108,40 @@
         <div class="about-grid">
             <div data-aos="fade-right">
                 <h2 class="section-title en" style="text-align: left;">You Are What You Eat</h2>
-                <h2 class="section-title ar" style="text-align: right;">أنت ما تأكله</h2>
-                <p class="en" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">Organika is built on a simple philosophy: providing the highest quality poultry through artisanal care. Our founder personally manages the diet, ensuring a chemical-free journey from our farm to your table.</p>
-                <p class="ar" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">تؤمن "أورجانيكا" بأن الصحة أولوية، لذا نبدأ رحلتنا من انتقاء الطيور السليمة التي تتبع نظامًا غذائيًا عضويًا 100%، تحت إشراف شخصي من مالك المزرعة لضمان أعلى معايير الجودة.</p>
-                
+                <h2 class="section-title ar" style="text-align: right;">أنت اللي بتاكله</h2>
+                <p class="en" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">Organica is built on a
+                    simple philosophy: highest quality through artisanal care. Our founder personally manages the diet,
+                    ensuring a chemical-free journey from our farm to your table.</p>
+                <p class="ar" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">أورجانيكا قايمة على
+                    فكرة بسيطة: بنقدم أحسن جودة طيور باهتمام خاص. صاحب المزرعة بيشرف بنفسه على الأكل، عشان يضمن إنها
+                    خالية من الكيماويات من مزرعتنا لحد سفرتك.</p>
+
                 <div style="margin-top: 2rem;">
                     <div class="feature-item">
                         <i class="fas fa-seedling"></i>
                         <div>
-                            <strong class="en" style="display: block; font-size: 1.1rem;">100% Natural Diet</strong>
-                            <strong class="ar" style="display: block; font-size: 1.1rem;">غذاء طبيعي 100%</strong>
-                            <p class="en" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">Beets, carrots, and fresh greens.</p>
-                            <p class="ar" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">بنجر وجزر وخضروات طازجة.</p>
+                            <strong class="en" style="display: block; font-size: 1.1rem;">100% Natural Diet: Beets,
+                                carrots, and fresh greens.</strong>
+                            <strong class="ar" style="display: block; font-size: 1.1rem;">أكل طبيعي 100%: بنجر وجزر
+                                وخضرة طازة.</strong>
                         </div>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-sun"></i>
                         <div>
-                            <strong class="en" style="display: block; font-size: 1.1rem;">Bio-Vitality Environment</strong>
-                            <strong class="ar" style="display: block; font-size: 1.1rem;">بيئة حيوية</strong>
-                            <p class="en" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">Infrared heating systems for natural immunity.</p>
-                            <p class="ar" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">أنظمة تدفئة بالأشعة تحت الحمراء لتعزيز المناعة.</p>
+                            <strong class="en" style="display: block; font-size: 1.1rem;">Bio-Vitality Environment:
+                                Infrared heating for natural immunity.</strong>
+                            <strong class="ar" style="display: block; font-size: 1.1rem;">بيئة حيوية: تدفئة بالأشعة تحت
+                                الحمراء عشان نقوي المناعة طبيعي.</strong>
                         </div>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-heart"></i>
                         <div>
-                            <strong class="en" style="display: block; font-size: 1.1rem;">Founder-Led Care</strong>
-                            <strong class="ar" style="display: block; font-size: 1.1rem;">عناية شخصية</strong>
-                            <p class="en" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">Personal oversight from farm to table.</p>
-                            <p class="ar" style="font-size: 0.95rem; margin-top: 5px; color: var(--text-light);">إشراف شخصي من المزرعة إلى مائدتك.</p>
+                            <strong class="en" style="display: block; font-size: 1.1rem;">Founder-Led Care: Personal
+                                oversight from farm to table.</strong>
+                            <strong class="ar" style="display: block; font-size: 1.1rem;">إشراف يدوي: صاحب المزرعة
+                                بيتابع كل خطوة بنفسه.</strong>
                         </div>
                     </div>
                 </div>
@@ -957,7 +1149,8 @@
             <div data-aos="fade-left">
                 <div class="video-container">
                     <video autoplay muted loop playsinline>
-                        <source src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Final.mp4" type="video/mp4">
+                        <source src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Final.mp4"
+                            type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -970,25 +1163,23 @@
         <h2 class="section-title ar" data-aos="fade-up">حكمة المزرعة</h2>
         <p class="section-subtitle en" data-aos="fade-up">Hover over the cards to discover our farm principles</p>
         <p class="section-subtitle ar" data-aos="fade-up">مرر فوق البطاقات لاكتشاف مبادئ مزرعتنا</p>
-        
+
         <div class="flip-cards-container">
             <div class="flip-card" data-aos="flip-left">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <i class="fas fa-leaf"></i>
-                    </div>
+                    <div class="flip-card-front"><i class="fas fa-leaf"></i></div>
                     <div class="flip-card-back">
-                        <p class="en">"Nature knows best - we simply follow her lead with organic feed and chemical-free care."</p>
-                        <p class="ar">"الطبيعة تعرف الأفضل - نحن فقط نتبع قيادتها بالغذاء العضوي والرعاية الخالية من الكيماويات."</p>
+                        <p class="en">"Nature knows best - we simply follow her lead with organic feed and chemical-free
+                            care."</p>
+                        <p class="ar">"الطبيعة تعرف الأفضل - نحن فقط نتبع قيادتها بالغذاء العضوي والرعاية الخالية من
+                            الكيماويات."</p>
                     </div>
                 </div>
             </div>
 
             <div class="flip-card" data-aos="flip-left" data-aos-delay="100">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <i class="fas fa-sun"></i>
-                    </div>
+                    <div class="flip-card-front"><i class="fas fa-sun"></i></div>
                     <div class="flip-card-back">
                         <p class="en">"Sunshine and fresh air - the oldest recipe for healthy, happy poultry."</p>
                         <p class="ar">"أشعة الشمس والهواء النقي - أقدم وصفة للدواجن الصحية والسعيدة."</p>
@@ -998,9 +1189,7 @@
 
             <div class="flip-card" data-aos="flip-left" data-aos-delay="200">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <i class="fas fa-hand-holding-heart"></i>
-                    </div>
+                    <div class="flip-card-front"><i class="fas fa-hand-holding-heart"></i></div>
                     <div class="flip-card-back">
                         <p class="en">"Quality over quantity - every bird receives individual attention and care."</p>
                         <p class="ar">"الجودة أهم من الكمية - كل طائر يحصل على اهتمام ورعاية فردية."</p>
@@ -1010,9 +1199,7 @@
 
             <div class="flip-card" data-aos="flip-left" data-aos-delay="300">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <i class="fas fa-seedling"></i>
-                    </div>
+                    <div class="flip-card-front"><i class="fas fa-seedling"></i></div>
                     <div class="flip-card-back">
                         <p class="en">"From seed to feed - we control every step to ensure purity and nutrition."</p>
                         <p class="ar">"من البذرة إلى العلف - نتحكم في كل خطوة لضمان النقاء والتغذية."</p>
@@ -1022,37 +1209,74 @@
         </div>
     </section>
 
-    <section id="products" style="background: linear-gradient(135deg, #f1ede2 0%, var(--bg) 100%); border-radius: 50px; margin-bottom: 50px;">
+    <section id="products"
+        style="background: linear-gradient(135deg, #f1ede2 0%, var(--bg) 100%); border-radius: 50px; margin-bottom: 50px;">
         <h2 class="section-title en" data-aos="fade-up">Premium Selection</h2>
         <h2 class="section-title ar" data-aos="fade-up">اختياراتنا الفاخرة</h2>
-        
+
         <div class="products-grid">
+            <!-- Duck -->
             <div class="product-card" data-aos="fade-up">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_product_ducks.jpeg?updatedAt=1770961442948" class="product-img" alt="Duck">
+                <img loading="lazy" src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/image.png"
+                    class="product-img" alt="Duck">
                 <div class="product-info">
-                    <h3 class="product-name en">Duck</h3><h3 class="product-name ar">بط</h3>
+                    <h3 class="product-name en">Duck</h3>
+                    <h3 class="product-name ar">بط</h3>
                     <div class="product-price">190 EGP/kg</div>
                 </div>
             </div>
+            <!-- Baladi Chicken -->
             <div class="product-card" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_product_baladi_chickens.jpeg?updatedAt=1770961440837" class="product-img" alt="Baladi Chicken">
+                <img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_product_baladi_chickens.jpeg?updatedAt=1770961440837"
+                    class="product-img" alt="Baladi Chicken">
                 <div class="product-info">
-                    <h3 class="product-name en">Baladi Chicken</h3><h3 class="product-name ar">دجاج بلدي</h3>
+                    <h3 class="product-name en">Baladi Chicken</h3>
+                    <h3 class="product-name ar">فراخ بلدي</h3>
                     <div class="product-price">180 EGP/kg</div>
                 </div>
             </div>
+            <!-- Baladi Eggs -->
             <div class="product-card" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs1.jpeg?updatedAt=1770961438707" class="product-img" alt="Baladi Eggs">
+                <img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Fresh%20eggs1.jpeg?updatedAt=1770961438707"
+                    class="product-img" alt="Baladi Eggs">
                 <div class="product-info">
-                    <h3 class="product-name en">Baladi Eggs</h3><h3 class="product-name ar">بيض بلدي</h3>
+                    <h3 class="product-name en">Baladi Eggs</h3>
+                    <h3 class="product-name ar">بيض بلدي</h3>
                     <div class="product-price">190 EGP/tray</div>
                 </div>
             </div>
+            <!-- Pigeon -->
             <div class="product-card" data-aos="fade-up" data-aos-delay="300">
-                <img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20feeding2.jpeg?updatedAt=1770961435955" class="product-img" alt="Pigeon">
+                <img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Gemini_Generated_Image_cu0hlecu0hlecu0h.png"
+                    class="product-img" alt="Pigeon">
                 <div class="product-info">
-                    <h3 class="product-name en">Pigeon</h3><h3 class="product-name ar">حمام</h3>
+                    <h3 class="product-name en">Pigeon</h3>
+                    <h3 class="product-name ar">حمّام</h3>
                     <div class="product-price">275 EGP/pair</div>
+                </div>
+            </div>
+            <!-- Shish Taouk -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                <img loading="lazy" src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/image.png"
+                    class="product-img" alt="Shish Taouk">
+                <div class="product-info">
+                    <h3 class="product-name en">Shish Taouk</h3>
+                    <h3 class="product-name ar">شيش طاووق</h3>
+                    <div class="product-price">230 EGP/kg</div>
+                </div>
+            </div>
+            <!-- Chicken Thighs -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="500">
+                <img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924"
+                    class="product-img" alt="Chicken Thighs">
+                <div class="product-info">
+                    <h3 class="product-name en">Chicken Thighs</h3>
+                    <h3 class="product-name ar">وراك</h3>
+                    <div class="product-price">150 EGP/kg</div>
                 </div>
             </div>
         </div>
@@ -1064,13 +1288,15 @@
         <h2 class="section-title ar" data-aos="fade-up">اطلب الآن</h2>
         <p class="section-subtitle en" data-aos="fade-up">Fresh, organic poultry delivered to your door</p>
         <p class="section-subtitle ar" data-aos="fade-up">دواجن طازجة وعضوية توصل لباب منزلك</p>
-        
+
         <div class="order-container">
             <!-- Order Calculator -->
             <div class="order-calculator" data-aos="fade-right">
-                <h3 class="en" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent);">Calculate Your Order</h3>
+                <h3 class="en" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent);">Calculate Your
+                    Order</h3>
                 <h3 class="ar" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent);">احسب طلبك</h3>
-                
+
+                <!-- Duck -->
                 <div class="order-item">
                     <span class="item-name en">Duck (kg)</span>
                     <span class="item-name ar">بط (كجم)</span>
@@ -1082,9 +1308,10 @@
                     <span class="item-total" id="duck-total">0 EGP</span>
                 </div>
 
+                <!-- Baladi Chicken -->
                 <div class="order-item">
                     <span class="item-name en">Baladi Chicken (kg)</span>
-                    <span class="item-name ar">دجاج بلدي (كجم)</span>
+                    <span class="item-name ar">فراخ بلدي (كجم)</span>
                     <div class="quantity-control">
                         <button class="qty-btn" onclick="decreaseQty('chicken')">-</button>
                         <input type="number" id="chicken" class="qty-input" value="0" min="0" onchange="updateTotal()">
@@ -1093,6 +1320,7 @@
                     <span class="item-total" id="chicken-total">0 EGP</span>
                 </div>
 
+                <!-- Baladi Eggs -->
                 <div class="order-item">
                     <span class="item-name en">Baladi Eggs (tray)</span>
                     <span class="item-name ar">بيض بلدي (كرتونة)</span>
@@ -1104,9 +1332,10 @@
                     <span class="item-total" id="eggs-total">0 EGP</span>
                 </div>
 
+                <!-- Pigeon -->
                 <div class="order-item">
                     <span class="item-name en">Pigeon (pair)</span>
-                    <span class="item-name ar">حمام (زوج)</span>
+                    <span class="item-name ar">حمّام (زوج)</span>
                     <div class="quantity-control">
                         <button class="qty-btn" onclick="decreaseQty('pigeon')">-</button>
                         <input type="number" id="pigeon" class="qty-input" value="0" min="0" onchange="updateTotal()">
@@ -1115,6 +1344,7 @@
                     <span class="item-total" id="pigeon-total">0 EGP</span>
                 </div>
 
+                <!-- Shish Taouk -->
                 <div class="order-item">
                     <span class="item-name en">Shish Taouk (kg)</span>
                     <span class="item-name ar">شيش طاووق (كجم)</span>
@@ -1126,9 +1356,10 @@
                     <span class="item-total" id="shish-total">0 EGP</span>
                 </div>
 
+                <!-- Chicken Thighs -->
                 <div class="order-item">
                     <span class="item-name en">Chicken Thighs (kg)</span>
-                    <span class="item-name ar">أوراك (كجم)</span>
+                    <span class="item-name ar">وراك (كجم)</span>
                     <div class="quantity-control">
                         <button class="qty-btn" onclick="decreaseQty('thighs')">-</button>
                         <input type="number" id="thighs" class="qty-input" value="0" min="0" onchange="updateTotal()">
@@ -1146,9 +1377,11 @@
 
             <!-- Order Form -->
             <div class="order-form" data-aos="fade-left">
-                <h3 class="en" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent);">Delivery Details</h3>
-                <h3 class="ar" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent);">بيانات التوصيل</h3>
-                
+                <h3 class="en" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent);">Delivery Details
+                </h3>
+                <h3 class="ar" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent);">بيانات التوصيل
+                </h3>
+
                 <form id="orderForm">
                     <div class="form-group">
                         <label class="en" for="customerName">Full Name *</label>
@@ -1192,62 +1425,124 @@
 
     <section id="gallery">
         <h2 class="section-title en" data-aos="fade-up">Clean. Sunny. Natural.</h2>
-        <h2 class="section-title ar" data-aos="fade-up">نظافة.. شمس.. طبيعة</h2>
+        <h2 class="section-title ar" data-aos="fade-up">نظافة. شمس. طبيعة.</h2>
         <p class="section-subtitle en" data-aos="fade-up">A glimpse into our organic farm life</p>
         <p class="section-subtitle ar" data-aos="fade-up">لمحة عن حياة مزرعتنا العضوية</p>
         <div class="grid-gallery" data-aos="fade-up">
-            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_life.jpeg?updatedAt=1770961432314" alt="Farm Life"></div>
-            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_hero_farm_vegetables.jpeg?updatedAt=1770961442620" alt="Farm Vegetables"></div>
-            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924" alt="Farm Care"></div>
-            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_facilities_infrared_heating.jpeg?updatedAt=1770961428127" alt="Infrared Heating"></div>
-            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747" alt="Farm Produce"></div>
-            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20feeding3.jpeg?updatedAt=1770961460170" alt="Farm Feeding"></div>
-            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_gallery_shelter_view.jpeg?updatedAt=1770961446434" alt="Shelter View"></div>
-            <div class="gallery-item"><img src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organic%20water.jpeg?updatedAt=1770961420752" alt="Organic Water"></div>
+            <!-- Fixed URL: Replaced space with underscore to match working file name -->
+            <div class="gallery-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20feeding3.jpeg?updatedAt=1770961460170"
+                    alt="Farm Life"></div>
+            <div class="gallery-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747"
+                    alt="Farm Vegetables"></div>
+            <div class="gallery-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20care3.jpeg?updatedAt=1770961448924"
+                    alt="Farm Care"></div>
+            <div class="gallery-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_facilities_infrared_heating.jpeg?updatedAt=1770961428127"
+                    alt="Infrared Heating"></div>
+            <div class="gallery-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20produce1.jpeg?updatedAt=1770961447747"
+                    alt="Farm Produce"></div>
+            <div class="gallery-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Farm%20feeding3.jpeg?updatedAt=1770961460170"
+                    alt="Farm Feeding"></div>
+            <div class="gallery-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/organika_facilities_indoor_shelter.jpeg?updatedAt=1770961445251"
+                    alt="Shelter View"></div>
+            <div class="gallery-item"><img loading="lazy"
+                    src="https://ik.imagekit.io/xtj3m9hth/Organica/final%20Images/organized/Organic%20water.jpeg?updatedAt=1770961420752"
+                    alt="Organic Water"></div>
         </div>
     </section>
 
     <section id="prices">
-        <div class="price-card" data-aos="flip-up">
-            <h2 class="en" style="text-align: center; color: var(--accent); margin-bottom: 20px;">Price List</h2>
-            <h2 class="ar" style="text-align: center; color: var(--accent); margin-bottom: 20px;">قائمة الأسعار</h2>
-            <div class="price-item"><span class="en">Duck</span><span class="ar">بط</span><span class="price-val">190 EGP/kg</span></div>
-            <div class="price-item"><span class="en">Pigeon</span><span class="ar">حمام</span><span class="price-val">275 EGP/pair</span></div>
-            <div class="price-item"><span class="en">Shish Taouk</span><span class="ar">شيش طاووق</span><span class="price-val">230 EGP/kg</span></div>
-            <div class="price-item"><span class="en">Chicken Thighs</span><span class="ar">أوراك</span><span class="price-val">150 EGP/kg</span></div>
-            <div class="price-item"><span class="en">Baladi Chicken</span><span class="ar">بلدي</span><span class="price-val">180 EGP/kg</span></div>
-            <div class="price-item"><span class="en">Baladi Eggs</span><span class="ar">بيض بلدي</span><span class="price-val">190 EGP/tray</span></div>
-            <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.7; text-align: center;" class="en">* Prices are subject to market change.</p>
-            <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.7; text-align: center;" class="ar">* الأسعار قابلة للتغيير حسب السوق.</p>
+        <div
+            style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; align-items: stretch; max-width: 1200px; margin: 0 auto;">
+            <!-- Price List Card -->
+            <div class="price-card" data-aos="fade-right" style="flex: 1; min-width: 300px; margin: 0;">
+                <h2 class="en" style="text-align: center; color: var(--accent); margin-bottom: 20px;">Price List</h2>
+                <h2 class="ar" style="text-align: center; color: var(--accent); margin-bottom: 20px;">قائمة الأسعار</h2>
+                <div class="price-item"><span class="en">Duck</span><span class="ar">بط</span><span
+                        class="price-val">190 EGP/kg</span></div>
+                <div class="price-item"><span class="en">Baladi Chicken</span><span class="ar">فراخ بلدي</span><span
+                        class="price-val">180 EGP/kg</span></div>
+                <div class="price-item"><span class="en">Baladi Eggs</span><span class="ar">بيض بلدي</span><span
+                        class="price-val">190 EGP/tray</span></div>
+                <div class="price-item"><span class="en">Pigeon</span><span class="ar">حمّام</span><span
+                        class="price-val">275 EGP/pair</span></div>
+                <div class="price-item"><span class="en">Shish Taouk</span><span class="ar">شيش طاووق</span><span
+                        class="price-val">230 EGP/kg</span></div>
+                <div class="price-item"><span class="en">Chicken Thighs</span><span class="ar">وراك</span><span
+                        class="price-val">150 EGP/kg</span></div>
+                <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.6; text-align: center;" class="en">* Prices
+                    are subject to market change.</p>
+                <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.6; text-align: center;" class="ar">* الأسعار
+                    قابلة للتغيير حسب السوق.</p>
+            </div>
+
+            <!-- Delivery Info Card -->
+            <div class="price-card" data-aos="fade-left"
+                style="flex: 1; min-width: 300px; margin: 0; background: var(--primary); color: white; border-top-color: var(--white);">
+                <h2 class="en" style="text-align: center; margin-bottom: 20px;">Delivery Info</h2>
+                <h2 class="ar" style="text-align: center; margin-bottom: 20px;">معلومات التوصيل</h2>
+
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <i class="fas fa-truck" style="font-size: 1.2rem;"></i>
+                        <span class="en">9 AM - 9 PM (Tue - Fri)</span>
+                        <span class="ar">٩ صباحاً - ٩ مساءً (ثلاثاء - جمعة)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                        <i class="fas fa-money-bill-wave" style="font-size: 1.2rem;"></i>
+                        <span class="en">50 EGP Delivery Fee</span>
+                        <span class="ar">٥٠ جنيه مصاريف شحن</span>
+                    </div>
+                </div>
+
+                <div
+                    style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; font-size: 0.95rem; margin-bottom: 20px;">
+                    <p class="en">All orders must be confirmed by at least 50% through wallet or InstaPay 24h prior.</p>
+                    <p class="ar">يجب تأكيد جميع الطلبات بنسبة ٥٠٪ على الأقل عبر المحفظة أو إنستا باي قبل ٢٤ ساعة.</p>
+                </div>
+
+                <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;">
+                    <p class="en"><strong>Weekday Orders:</strong><br>Min 2000 EGP + 50 EGP Delivery.</p>
+                    <p class="ar"><strong>طلبات وسط الأسبوع:</strong><br>الحد الأدنى ٢٠٠٠ جنيه + ٥٠ جنيه توصيل.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
-            <h2 style="margin-bottom: 20px;">ORGANIKA</h2>
-            <p class="en" style="font-size: 1.1rem; margin-bottom: 20px;">Premium Organic Poultry - Farm to Table Excellence</p>
+            <h2 style="margin-bottom: 20px;">Organica</h2>
+            <p class="en" style="font-size: 1.1rem; margin-bottom: 20px;">Premium Organic Poultry - Farm to Table
+                Excellence</p>
             <p class="ar" style="font-size: 1.1rem; margin-bottom: 20px;">دواجن عضوية فاخرة - من المزرعة إلى مائدتك</p>
             <div class="social-links">
-                <a href="https://wa.me/201067776664" class="social-link" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/201067776664" class="social-link" target="_blank" rel="noopener"><i
+                        class="fab fa-whatsapp"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
             </div>
-            <p style="margin-top: 30px; opacity: 0.8;">&copy; 2026 Organika. Premium Organic Poultry Farm - Egypt</p>
+            <p style="margin-top: 30px; opacity: 0.8;">&copy; 2026 Organica. Premium Organic Poultry Farm - Egypt</p>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS after script loads
-        document.addEventListener('DOMContentLoaded', function() {
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function () {
             if (typeof AOS !== 'undefined') {
                 AOS.init({ duration: 1000, once: true, offset: 100 });
             }
         });
-        
+
         // Fade in body on load
-        window.addEventListener('load', () => { 
-            document.body.style.opacity = '1'; 
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
         });
 
         // Navbar scroll effect
@@ -1260,18 +1555,25 @@
             }
         });
 
-        // Language toggle
+        // Language Toggle Logic
         function toggleLang() {
             const html = document.getElementById('mainHtml');
-            const isEn = html.getAttribute('lang') === 'en';
-            html.setAttribute('lang', isEn ? 'ar' : 'en');
-            html.classList.toggle('rtl');
-            
-            document.querySelectorAll('.en').forEach(el => el.style.display = isEn ? 'none' : 'inline-block');
-            document.querySelectorAll('.ar').forEach(el => el.style.display = isEn ? 'inline-block' : 'none');
+            const isEn = html.classList.contains('lang-en');
+
+            if (isEn) {
+                html.classList.remove('lang-en');
+                html.classList.add('lang-ar');
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+            } else {
+                html.classList.remove('lang-ar');
+                html.classList.add('lang-en');
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+            }
         }
 
-        // Order Calculator
+        // Prices Object
         const prices = {
             duck: 190,
             chicken: 180,
@@ -1281,6 +1583,17 @@
             thighs: 150
         };
 
+        // Product Names for WhatsApp Message
+        const productNames = {
+            duck: { en: 'Duck', ar: 'بط' },
+            chicken: { en: 'Baladi Chicken', ar: 'فراخ بلدي' },
+            eggs: { en: 'Baladi Eggs', ar: 'بيض بلدي' },
+            pigeon: { en: 'Pigeon', ar: 'حمّام' },
+            shish: { en: 'Shish Taouk', ar: 'شيش طاووق' },
+            thighs: { en: 'Chicken Thighs', ar: 'وراك' }
+        };
+
+        // Quantity Controls
         function increaseQty(item) {
             const input = document.getElementById(item);
             input.value = parseInt(input.value) + 1;
@@ -1297,67 +1610,63 @@
 
         function updateTotal() {
             let grandTotal = 0;
-            
+
             for (let item in prices) {
                 const qty = parseInt(document.getElementById(item).value) || 0;
                 const itemTotal = qty * prices[item];
                 document.getElementById(item + '-total').textContent = itemTotal + ' EGP';
                 grandTotal += itemTotal;
             }
-            
+
             document.getElementById('grand-total').textContent = grandTotal + ' EGP';
         }
 
         // Order Form Submission
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
+        document.getElementById('orderForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const name = document.getElementById('customerName').value;
             const phone = document.getElementById('phoneNumber').value;
             const address = document.getElementById('address').value;
             const landmark = document.getElementById('landmark').value;
             const notes = document.getElementById('notes').value;
-            
-            let orderDetails = `*New Order from Organika Website*\n\n`;
-            orderDetails += `*Customer:* ${name}\n`;
-            orderDetails += `*Phone:* ${phone}\n`;
-            orderDetails += `*Address:* ${address}\n`;
-            if (landmark) orderDetails += `*Landmark:* ${landmark}\n`;
-            orderDetails += `\n*Order Details:*\n`;
-            
+            const totalAmount = document.getElementById('grand-total').textContent;
+
+            // Determine current language
+            const isArabic = document.getElementById('mainHtml').classList.contains('lang-ar');
+            const lang = isArabic ? 'ar' : 'en';
+
+            // Construct Message
+            let message = `Hello Organica, I would like to order:\n`;
+
             let hasItems = false;
             for (let item in prices) {
                 const qty = parseInt(document.getElementById(item).value) || 0;
                 if (qty > 0) {
                     hasItems = true;
-                    const itemName = {
-                        duck: 'Duck',
-                        chicken: 'Baladi Chicken',
-                        eggs: 'Baladi Eggs',
-                        pigeon: 'Pigeon',
-                        shish: 'Shish Taouk',
-                        thighs: 'Chicken Thighs'
-                    };
                     const unit = item === 'eggs' ? 'tray' : (item === 'pigeon' ? 'pair' : 'kg');
-                    orderDetails += `• ${itemName[item]}: ${qty} ${unit} - ${qty * prices[item]} EGP\n`;
+                    message += `* ${qty} ${unit} ${productNames[item][lang]}\n`;
                 }
             }
-            
+
             if (!hasItems) {
-                alert('Please select at least one item for your order.');
+                const alertMsg = lang === 'ar' ? 'يرجى اختيار عنصر واحد على الأقل.' : 'Please select at least one item.';
+                alert(alertMsg);
                 return;
             }
-            
-            const grandTotal = parseInt(document.getElementById('grand-total').textContent);
-            orderDetails += `\n*Total: ${grandTotal} EGP*\n`;
-            
-            if (notes) orderDetails += `\n*Notes:* ${notes}`;
-            
-            const whatsappUrl = `https://wa.me/201067776664?text=${encodeURIComponent(orderDetails)}`;
+
+            message += `\nTotal: ${totalAmount}\n`;
+            message += `My Address: ${address}`;
+            if (landmark) message += ` (Near: ${landmark})`;
+            message += `\nName: ${name}`;
+
+            if (notes) message += `\nNotes: ${notes}`;
+
+            const whatsappUrl = `https://wa.me/201067776664?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         });
 
-        // Add smooth scrolling
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1372,4 +1681,5 @@
         });
     </script>
 </body>
+
 </html>
