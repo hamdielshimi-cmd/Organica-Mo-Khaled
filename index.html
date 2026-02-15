@@ -400,6 +400,7 @@
         }
 
         .price-val { font-weight: 700; color: var(--accent); }
+        .loading-text { font-size: 0.9rem; color: #999; font-style: italic; }
 
         .order-item {
             display: flex;
@@ -716,12 +717,12 @@
                 <h3 class="en" style="text-align: center; color: var(--accent); margin-bottom: 20px; font-size: 1.8rem;">Price List</h3>
                 <h3 class="ar" style="text-align: center; color: var(--accent); margin-bottom: 20px; font-size: 1.8rem;">قائمة الأسعار</h3>
                 
-                <div class="price-item"><span class="en">Duck</span><span class="ar">بط</span><span class="price-val">190 EGP/kg</span></div>
-                <div class="price-item"><span class="en">Baladi Chicken</span><span class="ar">فراخ بلدي</span><span class="price-val">180 EGP/kg</span></div>
-                <div class="price-item"><span class="en">Baladi Eggs</span><span class="ar">بيض بلدي</span><span class="price-val">190 EGP/tray</span></div>
-                <div class="price-item"><span class="en">Pigeon</span><span class="ar">حمّام</span><span class="price-val">275 EGP/pair</span></div>
-                <div class="price-item"><span class="en">Shish Taouk</span><span class="ar">شيش طاووق</span><span class="price-val">230 EGP/kg</span></div>
-                <div class="price-item"><span class="en">Chicken Thighs</span><span class="ar">وراك</span><span class="price-val">150 EGP/kg</span></div>
+                <div class="price-item"><span class="en">Duck</span><span class="ar">بط</span><span class="price-val" id="price-duck">Loading...</span></div>
+                <div class="price-item"><span class="en">Baladi Chicken</span><span class="ar">فراخ بلدي</span><span class="price-val" id="price-chicken">Loading...</span></div>
+                <div class="price-item"><span class="en">Baladi Eggs</span><span class="ar">بيض بلدي</span><span class="price-val" id="price-eggs">Loading...</span></div>
+                <div class="price-item"><span class="en">Pigeon</span><span class="ar">حمّام</span><span class="price-val" id="price-pigeon">Loading...</span></div>
+                <div class="price-item"><span class="en">Shish Taouk</span><span class="ar">شيش طاووق</span><span class="price-val" id="price-shish">Loading...</span></div>
+                <div class="price-item"><span class="en">Chicken Thighs</span><span class="ar">وراك</span><span class="price-val" id="price-thighs">Loading...</span></div>
                 
                 <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.6; text-align: center;" class="en">* Prices subject to market change.</p>
                 <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.6; text-align: center;" class="ar">* الأسعار قابلة للتغيير حسب السوق.</p>
@@ -952,6 +953,7 @@
         // Init AOS
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof AOS !== 'undefined') AOS.init({ duration: 1000, once: true });
+            fetchPrices(); // Fetch prices on load
         });
         window.addEventListener('load', () => { document.body.style.opacity = '1'; });
 
@@ -972,7 +974,9 @@
         }
 
         // --- Order Logic ---
-        const prices = { duck: 190, chicken: 180, eggs: 190, pigeon: 275, shish: 230, thighs: 150 };
+        // Initial defaults (overwritten by fetch)
+        let prices = { duck: 190, chicken: 180, eggs: 190, pigeon: 275, shish: 230, thighs: 150 };
+        
         const items = { 
             duck: {count:0, en:'Duck', ar:'بط'}, 
             chicken: {count:0, en:'Chicken', ar:'فراخ'}, 
@@ -981,6 +985,49 @@
             shish: {count:0, en:'Shish', ar:'شيش'}, 
             thighs: {count:0, en:'Thighs', ar:'وراك'} 
         };
+
+        // **IMPORTANT** Paste your Google Web App URL here!
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxv8Z7BSjnIFoZebPcfwtUU_anxvnZ_uBm-1cf68y6AToi5n_lcdRqFs59_3tdT7fHR/exec"; 
+
+        async function fetchPrices() {
+            if(SCRIPT_URL.includes("REPLACE")) return; // Don't run if URL not set
+            
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                
+                // Map Sheet Names to ID Keys
+                // Ensure your Sheet Column A matches these exactly
+                const mapping = {
+                    "Duck": "duck",
+                    "Baladi Chicken": "chicken",
+                    "Baladi Eggs": "eggs",
+                    "Pigeon": "pigeon",
+                    "Shish Taouk": "shish",
+                    "Chicken Thighs": "thighs"
+                };
+
+                data.forEach(item => {
+                    const key = mapping[item.name];
+                    if (key) {
+                        // Update Logic
+                        prices[key] = item.price;
+                        // Update UI
+                        const displayEl = document.getElementById(`price-${key}`);
+                        if(displayEl) {
+                            displayEl.textContent = `${item.price} EGP/${item.unit}`;
+                        }
+                    }
+                });
+                
+                // Recalculate calculator in case defaults were different
+                calculateTotal();
+
+            } catch (error) {
+                console.error("Failed to fetch prices:", error);
+                // Fallback: Default prices remain active
+            }
+        }
 
         function updateQty(item, delta) {
             let newVal = items[item].count + delta;
@@ -1050,9 +1097,12 @@
             // 2. Collect Form Data
             const formData = new FormData(this);
 
-            // 3. Send to Google Script (REPLACE WITH YOUR DEPLOYED URL BELOW)
-            // Example: https://script.google.com/macros/s/AKfycbx.../exec
-            const SCRIPT_URL = "REPLACE_THIS_WITH_YOUR_DEPLOYED_GOOGLE_SCRIPT_URL"; 
+            if(SCRIPT_URL.includes("REPLACE")) {
+                alert("Please configure the Google Script URL in the code.");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                return;
+            }
 
             fetch(SCRIPT_URL, { method: 'POST', body: formData })
             .then(response => {
