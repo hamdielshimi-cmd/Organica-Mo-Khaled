@@ -396,10 +396,10 @@
             justify-content: space-between;
             padding: 12px 0;
             border-bottom: 1px dashed #ddd;
-            font-size: 1.1rem;
+            font-size: 1.0rem;
         }
 
-        .price-val { font-weight: 700; color: var(--accent); }
+        .price-val { font-weight: 700; color: var(--accent); white-space: nowrap; margin-left: 10px;}
         .loading-text { font-size: 0.9rem; color: #999; font-style: italic; }
 
         .order-item {
@@ -410,9 +410,14 @@
             border-bottom: 1px solid #eee;
         }
 
+        .item-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
         .qty-btn {
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
             border: 2px solid var(--primary);
             background: var(--white);
             color: var(--primary);
@@ -428,11 +433,11 @@
         .qty-btn:hover { background: var(--primary); color: white; }
 
         .qty-input {
-            width: 50px;
+            width: 40px;
             text-align: center;
             border: none;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .total-section {
@@ -717,12 +722,16 @@
                 <h3 class="en" style="text-align: center; color: var(--accent); margin-bottom: 20px; font-size: 1.8rem;">Price List</h3>
                 <h3 class="ar" style="text-align: center; color: var(--accent); margin-bottom: 20px; font-size: 1.8rem;">قائمة الأسعار</h3>
                 
-                <div class="price-item"><span class="en">Duck</span><span class="ar">بط</span><span class="price-val" id="price-duck">Loading...</span></div>
-                <div class="price-item"><span class="en">Baladi Chicken</span><span class="ar">فراخ بلدي</span><span class="price-val" id="price-chicken">Loading...</span></div>
-                <div class="price-item"><span class="en">Baladi Eggs</span><span class="ar">بيض بلدي</span><span class="price-val" id="price-eggs">Loading...</span></div>
-                <div class="price-item"><span class="en">Pigeon</span><span class="ar">حمّام</span><span class="price-val" id="price-pigeon">Loading...</span></div>
-                <div class="price-item"><span class="en">Shish Taouk</span><span class="ar">شيش طاووق</span><span class="price-val" id="price-shish">Loading...</span></div>
-                <div class="price-item"><span class="en">Chicken Thighs</span><span class="ar">وراك</span><span class="price-val" id="price-thighs">Loading...</span></div>
+                <div class="price-item"><span class="en">Baladi Chicken (Whole)</span><span class="ar">دجاج بلدي (كامل)</span><span class="price-val" id="price-baladi">Loading...</span></div>
+                <div class="price-item"><span class="en">White Chicken (Whole)</span><span class="ar">دجاج أبيض (كامل)</span><span class="price-val" id="price-white">Loading...</span></div>
+                <div class="price-item"><span class="en">Duck (Whole)</span><span class="ar">بط (كامل)</span><span class="price-val" id="price-duck">Loading...</span></div>
+                <div class="price-item"><span class="en">Pigeons (Pair)</span><span class="ar">حمام (جوز)</span><span class="price-val" id="price-pigeon">Loading...</span></div>
+                <div class="price-item"><span class="en">Drumsticks</span><span class="ar">دبوس (أفخاذ)</span><span class="price-val" id="price-drumsticks">Loading...</span></div>
+                <div class="price-item"><span class="en">Thighs (Bone-in)</span><span class="ar">أوراك (بالعظم)</span><span class="price-val" id="price-thighs">Loading...</span></div>
+                <div class="price-item"><span class="en">Thighs (Boneless)</span><span class="ar">أوراك (مخلي)</span><span class="price-val" id="price-boneless_thighs">Loading...</span></div>
+                <div class="price-item"><span class="en">Wings</span><span class="ar">أجنحة</span><span class="price-val" id="price-wings">Loading...</span></div>
+                <div class="price-item"><span class="en">Pane (All Cuts)</span><span class="ar">بانيه (جميع القطعيات)</span><span class="price-val" id="price-pane">Loading...</span></div>
+                <div class="price-item"><span class="en">Pure Liver</span><span class="ar">كبدة صافي</span><span class="price-val" id="price-liver">Loading...</span></div>
                 
                 <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.6; text-align: center;" class="en">* Prices subject to market change.</p>
                 <p style="font-size: 0.85rem; margin-top: 20px; opacity: 0.6; text-align: center;" class="ar">* الأسعار قابلة للتغيير حسب السوق.</p>
@@ -733,24 +742,37 @@
                 <h3 class="en" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent); text-align: center;">Calculate Order</h3>
                 <h3 class="ar" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent); text-align: center;">احسب طلبك</h3>
 
-                <!-- Items -->
+                <!-- Expanded Items List -->
+                <div class="order-item"><span class="item-name en">Baladi Chicken</span><span class="item-name ar">دجاج بلدي</span>
+                    <div class="quantity-control"><button class="qty-btn" onclick="updateQty('baladi', -1)">-</button><input id="baladi" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('baladi', 1)">+</button></div></div>
+
+                <div class="order-item"><span class="item-name en">White Chicken</span><span class="item-name ar">دجاج أبيض</span>
+                    <div class="quantity-control"><button class="qty-btn" onclick="updateQty('white', -1)">-</button><input id="white" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('white', 1)">+</button></div></div>
+                
                 <div class="order-item"><span class="item-name en">Duck</span><span class="item-name ar">بط</span>
                     <div class="quantity-control"><button class="qty-btn" onclick="updateQty('duck', -1)">-</button><input id="duck" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('duck', 1)">+</button></div></div>
-                
-                <div class="order-item"><span class="item-name en">Chicken</span><span class="item-name ar">فراخ</span>
-                    <div class="quantity-control"><button class="qty-btn" onclick="updateQty('chicken', -1)">-</button><input id="chicken" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('chicken', 1)">+</button></div></div>
-                
-                <div class="order-item"><span class="item-name en">Eggs (Tray)</span><span class="item-name ar">بيض (كرتونة)</span>
-                    <div class="quantity-control"><button class="qty-btn" onclick="updateQty('eggs', -1)">-</button><input id="eggs" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('eggs', 1)">+</button></div></div>
-                
-                <div class="order-item"><span class="item-name en">Pigeon (Pair)</span><span class="item-name ar">حمّام (زوج)</span>
+
+                <div class="order-item"><span class="item-name en">Pigeons (Pair)</span><span class="item-name ar">حمام (جوز)</span>
                     <div class="quantity-control"><button class="qty-btn" onclick="updateQty('pigeon', -1)">-</button><input id="pigeon" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('pigeon', 1)">+</button></div></div>
+                
+                <div class="order-item"><span class="item-name en">Drumsticks</span><span class="item-name ar">دبوس</span>
+                    <div class="quantity-control"><button class="qty-btn" onclick="updateQty('drumsticks', -1)">-</button><input id="drumsticks" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('drumsticks', 1)">+</button></div></div>
 
-                <div class="order-item"><span class="item-name en">Shish</span><span class="item-name ar">شيش</span>
-                    <div class="quantity-control"><button class="qty-btn" onclick="updateQty('shish', -1)">-</button><input id="shish" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('shish', 1)">+</button></div></div>
-
-                <div class="order-item"><span class="item-name en">Thighs</span><span class="item-name ar">وراك</span>
+                <div class="order-item"><span class="item-name en">Thighs (Bone-in)</span><span class="item-name ar">أوراك (عظم)</span>
                     <div class="quantity-control"><button class="qty-btn" onclick="updateQty('thighs', -1)">-</button><input id="thighs" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('thighs', 1)">+</button></div></div>
+
+                <div class="order-item"><span class="item-name en">Thighs (Boneless)</span><span class="item-name ar">أوراك (مخلي)</span>
+                    <div class="quantity-control"><button class="qty-btn" onclick="updateQty('boneless_thighs', -1)">-</button><input id="boneless_thighs" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('boneless_thighs', 1)">+</button></div></div>
+
+                <div class="order-item"><span class="item-name en">Wings</span><span class="item-name ar">أجنحة</span>
+                    <div class="quantity-control"><button class="qty-btn" onclick="updateQty('wings', -1)">-</button><input id="wings" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('wings', 1)">+</button></div></div>
+
+                <div class="order-item"><span class="item-name en">Pane (All Cuts)</span><span class="item-name ar">بانيه</span>
+                    <div class="quantity-control"><button class="qty-btn" onclick="updateQty('pane', -1)">-</button><input id="pane" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('pane', 1)">+</button></div></div>
+
+                <div class="order-item"><span class="item-name en">Pure Liver</span><span class="item-name ar">كبدة صافي</span>
+                    <div class="quantity-control"><button class="qty-btn" onclick="updateQty('liver', -1)">-</button><input id="liver" class="qty-input" value="0" readonly><button class="qty-btn" onclick="updateQty('liver', 1)">+</button></div></div>
+
 
                 <div class="total-section">
                     <div class="en">Total Amount</div><div class="ar">المبلغ الإجمالي</div>
@@ -953,7 +975,11 @@
         // Init AOS
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof AOS !== 'undefined') AOS.init({ duration: 1000, once: true });
-            fetchPrices(); // Fetch prices on load
+            
+            // Render defaults immediately so user doesn't see "Loading..." if API fails/is slow
+            renderPrices(prices); 
+            
+            fetchPrices(); // Try to fetch updates
         });
         window.addEventListener('load', () => { document.body.style.opacity = '1'; });
 
@@ -974,58 +1000,97 @@
         }
 
         // --- Order Logic ---
-        // Initial defaults (overwritten by fetch)
-        let prices = { duck: 190, chicken: 180, eggs: 190, pigeon: 275, shish: 230, thighs: 150 };
+        // Defaults based on your sheet
+        let prices = { 
+            baladi: 190, 
+            white: 140, 
+            duck: 210, 
+            pigeon: 275, 
+            drumsticks: 180, 
+            thighs: 160, 
+            boneless_thighs: 260, 
+            wings: 80, 
+            pane: 275, 
+            liver: 190 
+        };
         
+        // Items Map with English & Arabic Names
         const items = { 
+            baladi: {count:0, en:'Baladi Chicken', ar:'دجاج بلدي'}, 
+            white: {count:0, en:'White Chicken', ar:'دجاج أبيض'}, 
             duck: {count:0, en:'Duck', ar:'بط'}, 
-            chicken: {count:0, en:'Chicken', ar:'فراخ'}, 
-            eggs: {count:0, en:'Eggs', ar:'بيض'}, 
             pigeon: {count:0, en:'Pigeon', ar:'حمّام'}, 
-            shish: {count:0, en:'Shish', ar:'شيش'}, 
-            thighs: {count:0, en:'Thighs', ar:'وراك'} 
+            drumsticks: {count:0, en:'Drumsticks', ar:'دبوس'}, 
+            thighs: {count:0, en:'Thighs (Bone-in)', ar:'أوراك (عظم)'}, 
+            boneless_thighs: {count:0, en:'Thighs (Boneless)', ar:'أوراك (مخلي)'}, 
+            wings: {count:0, en:'Wings', ar:'أجنحة'}, 
+            pane: {count:0, en:'Pane', ar:'بانيه'}, 
+            liver: {count:0, en:'Pure Liver', ar:'كبدة صافي'}
         };
 
         // **IMPORTANT** Paste your Google Web App URL here!
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxv8Z7BSjnIFoZebPcfwtUU_anxvnZ_uBm-1cf68y6AToi5n_lcdRqFs59_3tdT7fHR/exec"; 
 
+        function renderPrices(priceData) {
+            // Units map for defaults
+            const units = {
+                baladi: 'pc', white: 'pc', duck: 'kg', pigeon: 'pair', 
+                drumsticks: 'kg', thighs: 'kg', boneless_thighs: 'kg', 
+                wings: 'kg', pane: 'kg', liver: 'kg'
+            };
+            
+            for (const [key, val] of Object.entries(priceData)) {
+                const el = document.getElementById(`price-${key}`);
+                if (el) {
+                    el.textContent = `${val} EGP/${units[key] || 'unit'}`;
+                }
+            }
+        }
+
         async function fetchPrices() {
-            if(SCRIPT_URL.includes("REPLACE")) return; // Don't run if URL not set
+            if(SCRIPT_URL.includes("REPLACE")) return;
             
             try {
                 const response = await fetch(SCRIPT_URL);
                 const data = await response.json();
                 
-                // Map Sheet Names to ID Keys
-                // Ensure your Sheet Column A matches these exactly
-                const mapping = {
-                    "Duck": "duck",
-                    "Baladi Chicken": "chicken",
-                    "Baladi Eggs": "eggs",
-                    "Pigeon": "pigeon",
-                    "Shish Taouk": "shish",
-                    "Chicken Thighs": "thighs"
-                };
+                if (!Array.isArray(data)) {
+                    console.warn("API returned non-array data:", data);
+                    return; 
+                }
 
+                // IMPORTANT: Logic to match Spreadsheet Rows to IDs
+                // We check Name + Description to distinguish bone-in/boneless
                 data.forEach(item => {
-                    const key = mapping[item.name];
+                    let key = null;
+                    const name = item.name.trim();
+                    const desc = item.description ? item.description.trim() : "";
+
+                    if (name === "Baladi Chicken") key = "baladi";
+                    else if (name === "White Chicken") key = "white";
+                    else if (name === "Duck") key = "duck";
+                    else if (name === "Pigeons") key = "pigeon";
+                    else if (name === "Drumsticks") key = "drumsticks";
+                    else if (name === "Wings") key = "wings";
+                    else if (name === "Pure Liver") key = "liver";
+                    else if (name.includes("Pane Cuts")) key = "pane";
+                    else if (name === "Chicken Thighs") {
+                        if (desc === "Boneless") key = "boneless_thighs";
+                        else key = "thighs"; // Default to bone-in
+                    }
+
                     if (key) {
-                        // Update Logic
                         prices[key] = item.price;
-                        // Update UI
                         const displayEl = document.getElementById(`price-${key}`);
                         if(displayEl) {
                             displayEl.textContent = `${item.price} EGP/${item.unit}`;
                         }
                     }
                 });
-                
-                // Recalculate calculator in case defaults were different
                 calculateTotal();
 
             } catch (error) {
                 console.error("Failed to fetch prices:", error);
-                // Fallback: Default prices remain active
             }
         }
 
@@ -1080,7 +1145,7 @@
             e.preventDefault();
             
             // 1. Prepare Data
-            const orderData = getOrderString('en'); // Always send English details to backend for consistency
+            const orderData = getOrderString('en'); // Always send English details to backend
             if(orderData.total === 0) {
                 alert("Please add items to your cart first.");
                 return;
@@ -1094,7 +1159,6 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
             btn.disabled = true;
 
-            // 2. Collect Form Data
             const formData = new FormData(this);
 
             if(SCRIPT_URL.includes("REPLACE")) {
@@ -1108,7 +1172,6 @@
             .then(response => {
                 document.getElementById('successMessage').style.display = 'block';
                 document.getElementById('deliveryForm').reset();
-                // Reset counts
                 for(let k in items) { items[k].count = 0; document.getElementById(k).value = 0; }
                 calculateTotal();
                 btn.innerHTML = originalText;
@@ -1117,7 +1180,6 @@
             })
             .catch(error => {
                 console.error('Error!', error.message);
-                // Even if CORS error occurs, it usually submits. Show success anyway for UX in static sites.
                 document.getElementById('successMessage').style.display = 'block'; 
                 btn.innerHTML = originalText;
                 btn.disabled = false;
