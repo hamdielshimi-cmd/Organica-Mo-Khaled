@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Orgánica | The Gold Standard of Organic Poultry</title>
 <meta name="description" content="Orgánica - Premium farm-to-table organic poultry. 100% natural diet, founder-led care, and bio-vitality environment.">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://script.google.com/macros/s/AKfycbz73rJvkobackFP9LWVMd5FzqBYMnlzU9ueqYCJ03bb0ET0MsaWaP5xiZC_8xQ1gD-4/exec" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <style>
@@ -73,11 +73,40 @@ html.lang-ar .footer-content{direction:ltr}
 .btn-secondary{background:var(--white);color:var(--text);margin-left:10px}
 .btn-secondary:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.2)}
 
-/* ── WHATSAPP ── */
-.whatsapp-float{position:fixed;bottom:30px;right:30px;background:#25d366;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;z-index:1000;box-shadow:0 8px 25px rgba(37,211,102,.4);transition:all .3s ease;animation:float 3s ease-in-out infinite}
-html.lang-ar .whatsapp-float{right:auto;left:30px}
-.whatsapp-float:hover{transform:scale(1.1);box-shadow:0 10px 30px rgba(37,211,102,.6)}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+/* ── BUNDLE SELECT ── */
+.bundle-select{flex:1;min-width:180px;padding:8px 12px;border:1.5px solid var(--primary);border-radius:10px;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text);background:#f9f9f9;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234A6741' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;transition:border-color .2s}
+.bundle-select:focus{outline:none;border-color:var(--accent)}
+.ramadan-bundle-row{grid-template-columns:1fr!important}
+
+/* ── ORDER SUCCESS BANNER ── */
+.order-success{display:none;background:linear-gradient(135deg,#4A6741,#7A9A7E);color:#fff;padding:20px 28px;border-radius:16px;margin-top:20px;text-align:center;font-size:1rem;font-weight:600;gap:10px;align-items:center;justify-content:center}
+.order-success.show{display:flex}
+.order-success i{font-size:1.5rem}
+
+/* ── CONTACT NOTICE ── */
+.contact-notice{background:var(--white);border:2px solid #e8f0e9;border-radius:20px;padding:22px 28px;margin-top:1.5rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.contact-notice i{font-size:1.8rem;color:#25d366;flex-shrink:0}
+.contact-notice-text{flex:1;min-width:200px}
+.contact-notice-text strong{display:block;color:var(--text);font-size:.95rem;margin-bottom:4px}
+.contact-notice-text span{color:var(--text-light);font-size:.85rem}
+.contact-notice a{display:inline-flex;align-items:center;gap:6px;background:#25d366;color:#fff;padding:10px 20px;border-radius:50px;text-decoration:none;font-weight:700;font-size:.85rem;transition:all .3s ease;white-space:nowrap}
+.contact-notice a:hover{background:#1db954;transform:translateY(-2px)}
+
+/* ── Q&A ACCORDION ── */
+.faq-section{background:var(--white);padding:100px 5%;max-width:100%!important}
+.faq-inner{max-width:860px;margin:0 auto}
+.faq-item{border:2px solid #e8f0e9;border-radius:16px;margin-bottom:14px;overflow:hidden;transition:border-color .3s ease}
+.faq-item.open{border-color:var(--primary)}
+.faq-question{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;cursor:pointer;background:transparent;border:none;width:100%;text-align:left;gap:16px;transition:background .2s ease}
+html.lang-ar .faq-question{text-align:right;flex-direction:row-reverse}
+.faq-question:hover{background:#f7faf7}
+.faq-item.open .faq-question{background:#f0f7f0}
+.faq-question-text{font-weight:700;font-size:1rem;color:var(--text);flex:1;line-height:1.4}
+.faq-item.open .faq-question-text{color:var(--primary)}
+.faq-icon{width:32px;height:32px;border-radius:50%;border:2px solid var(--primary-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .35s ease;color:var(--primary);font-size:.85rem}
+.faq-item.open .faq-icon{background:var(--primary);color:#fff;transform:rotate(45deg);border-color:var(--primary)}
+.faq-drawer{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1),padding .35s ease}
+.faq-drawer-inner{padding:0 24px 20px;color:var(--text-light);font-size:.95rem;line-height:1.8;border-top:1px solid #e8f0e9}
 
 /* ── CAROUSEL ── */
 .carousel-belt{background:var(--primary);padding:60px 0;overflow:hidden;position:relative}
@@ -213,7 +242,7 @@ footer{background:var(--primary);color:var(--white);padding:4rem 5%;text-align:c
 }
 @media(max-width:480px){
   .hero h1{font-size:2rem}
-  .whatsapp-float{width:50px;height:50px;font-size:24px;bottom:20px;right:20px}
+  .faq-question-text{font-size:.9rem}
 }
 </style>
 </head>
@@ -224,7 +253,7 @@ footer{background:var(--primary);color:var(--white);padding:4rem 5%;text-align:c
   <div class="nav-container">
     <a href="#home" class="logo">
       <img src="https://ik.imagekit.io/244zlaxy8/Gemini_Generated_Image_i27me5i27me5i27m-modified.png" alt="Organica Logo">
-      <span class="en">Organica</span><span class="ar">أورجانيكا</span>
+      <span class="en">Orgánica</span><span class="ar">أورجانيكا</span>
     </a>
     <ul class="nav-menu">
       <li><a href="#home"    class="nav-link en">Home</a>      <a href="#home"    class="nav-link ar">الرئيسية</a></li>
@@ -232,16 +261,13 @@ footer{background:var(--primary);color:var(--white);padding:4rem 5%;text-align:c
       <li><a href="#order"   class="nav-link en">Order Now</a> <a href="#order"   class="nav-link ar">اطلب الآن</a></li>
       <li><a href="#ramadan" class="nav-link en">🌙 Offers</a>  <a href="#ramadan" class="nav-link ar">🌙 العروض</a></li>
       <li><a href="#gallery" class="nav-link en">Farm Life</a> <a href="#gallery" class="nav-link ar">حياة المزرعة</a></li>
+      <li><a href="#faq" class="nav-link en">FAQ</a> <a href="#faq" class="nav-link ar">أسئلة شائعة</a></li>
     </ul>
     <div class="lang-switcher" onclick="toggleLang()">
       <span class="en">عربي</span><span class="ar">English</span>
     </div>
   </div>
 </nav>
-
-<a href="https://wa.me/201067776664" class="whatsapp-float" target="_blank" rel="noopener">
-  <i class="fab fa-whatsapp"></i>
-</a>
 
 <!-- ════════════════════ HERO ════════════════════ -->
 <section id="home" class="hero">
@@ -402,6 +428,26 @@ footer{background:var(--primary);color:var(--white);padding:4rem 5%;text-align:c
         <span class="price-val">190 EGP/kg</span>
       </div>
 
+      <!-- RAMADAN BUNDLES -->
+      <div style="margin-top:8px"><span class="price-section-label en">🌙 Ramadan Bundles</span><span class="price-section-label ar">🌙 عروض رمضان</span></div>
+
+      <div class="price-item ramadan-bundle-row">
+        <div style="grid-column:1/-1;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <select id="ramadan_bundle_select" class="bundle-select" onchange="updateTotal()">
+            <option value="" class="en" data-en="— Select a bundle —" data-ar="— اختار باقة —">— Select a bundle —</option>
+            <option value="small"  data-en="Small Family (4 Pers.) — 295 EGP" data-ar="العيلة الصغيرة (٤ أفراد) — ٢٩٥ ج"  data-price="295">Small Family (4 Pers.) — 295 EGP</option>
+            <option value="gathering" data-en="The Gathering (6 Pers.) — 680 EGP" data-ar="التجمّع (٦ أفراد) — ٦٨٠ ج" data-price="680">The Gathering (6 Pers.) — 680 EGP</option>
+            <option value="feast"  data-en="Big Feast (8 Pers.) — 999 EGP" data-ar="الوليمة الكبيرة (٨ أفراد) — ٩٩٩ ج"  data-price="999">Big Feast (8 Pers.) — 999 EGP</option>
+          </select>
+          <div class="quantity-control">
+            <button class="qty-btn" onclick="decreaseBundle()">-</button>
+            <input type="number" id="ramadan_qty" class="qty-input" value="0" min="0" onchange="updateTotal()">
+            <button class="qty-btn" onclick="increaseBundle()">+</button>
+          </div>
+        </div>
+        <div id="bundle-desc" style="grid-column:1/-1;font-size:.78rem;color:var(--text-light);padding:6px 0 2px;line-height:1.5;display:none;"></div>
+      </div>
+
       <!-- TOTAL -->
       <div class="total-section">
         <h4 class="en" style="color:var(--text-light);text-transform:uppercase;letter-spacing:1px;font-size:.85rem;">Order Total</h4>
@@ -443,10 +489,15 @@ footer{background:var(--primary);color:var(--white);padding:4rem 5%;text-align:c
           <textarea id="notes" placeholder="Any special requests or delivery instructions..."></textarea>
         </div>
         <button type="submit" class="submit-order-btn" id="submitBtn">
-          <i class="fab fa-whatsapp"></i>
-          <span class="en">Send Order via WhatsApp</span>
-          <span class="ar">إرسال الطلب عبر واتساب</span>
+          <i class="fas fa-paper-plane"></i>
+          <span class="en">Submit Order</span>
+          <span class="ar">إرسال الطلب</span>
         </button>
+        <div class="order-success" id="orderSuccess">
+          <i class="fas fa-check-circle"></i>
+          <span class="en">Order received! We'll contact you shortly to confirm. 🎉</span>
+          <span class="ar">تم استلام طلبك! سنتواصل معك قريباً للتأكيد. 🎉</span>
+        </div>
       </form>
     </div>
   </div>
@@ -463,10 +514,21 @@ footer{background:var(--primary);color:var(--white);padding:4rem 5%;text-align:c
       <p class="en">Orders must be confirmed 24h prior. For Friday orders, confirm by Thursday 9 AM. For Tuesday orders, confirm by Monday 9 AM.</p>
       <p class="ar">يجب تأكيد الطلبات قبل ٢٤ ساعة. لطلبات الجمعة يتم التأكيد الخميس ٩ ص. لطلبات الثلاثاء يتم التأكيد الاثنين ٩ ص.</p>
     </div>
+  <!-- Contact Notice -->
+  <div class="contact-notice" data-aos="fade-up">
+    <i class="fab fa-whatsapp"></i>
+    <div class="contact-notice-text">
+      <strong class="en">📦 All orders — including Ramadan bundles — are placed exclusively through the form above.</strong>
+      <strong class="ar">📦 جميع الطلبات — بما فيها عروض رمضان — تتم حصرياً من خلال النموذج أعلاه.</strong>
+      <span class="en">For general inquiries, special requests, or questions — reach us on WhatsApp.</span>
+      <span class="ar">للاستفسارات العامة، الطلبات الخاصة، أو أي أسئلة — تواصل معنا على واتساب.</span>
+    </div>
+    <a href="https://wa.me/201067776664" target="_blank" rel="noopener">
+      <i class="fab fa-whatsapp"></i>
+      <span class="en">Inquiries Only</span><span class="ar">للاستفسارات فقط</span>
+    </a>
   </div>
 </section>
-
-<!-- ════════════════════ RAMADAN OFFERS ════════════════════ -->
 <div id="ramadan" class="ramadan-section">
   <!-- Animated stars -->
   <div class="stars" id="starsContainer"></div>
@@ -614,6 +676,108 @@ footer{background:var(--primary);color:var(--white);padding:4rem 5%;text-align:c
   </div>
 </section>
 
+<!-- ════════════════════ FAQ ════════════════════ -->
+<div id="faq" class="faq-section">
+  <div class="faq-inner">
+    <h2 class="section-title en" data-aos="fade-up" style="text-align:center;">Frequently Asked Questions</h2>
+    <h2 class="section-title ar" data-aos="fade-up" style="text-align:center;">أسئلة شائعة</h2>
+    <p class="section-subtitle en" data-aos="fade-up">Everything you need to know about Orgánica</p>
+    <p class="section-subtitle ar" data-aos="fade-up">كل اللي محتاج تعرفه عن Orgánica</p>
+
+    <div data-aos="fade-up">
+
+      <!-- Q1 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-question-text en">What makes Orgánica's poultry "organic"?</span>
+          <span class="faq-question-text ar">إيه اللي بيخلي دواجن Orgánica "عضوية"؟</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-drawer">
+          <div class="faq-drawer-inner">
+            <p class="en">Orgánica ensures its poultry is organic through three pillars: <strong>Diet</strong> — birds are fed a natural mix called "Al-'Aleqa" made of beets, carrots, and vegetables, with zero hormones or chemicals. <strong>Environment</strong> — birds move freely in open spaces with ample sunlight and infrared heating to support natural immunity. <strong>Care</strong> — the farm owner personally oversees every step of the feeding process to guarantee quality.</p>
+            <p class="ar">Orgánica تضمن طبيعة دواجنها من خلال ثلاث ركائز: <strong>التغذية</strong> — الطيور تتغذى على خليط طبيعي اسمه "العليقة" من البنجر والجزر والخضروات، بدون هرمونات أو كيماويات. <strong>البيئة</strong> — الطيور تتحرك بحرية في أماكن مفتوحة مع أشعة شمس كافية وتدفئة بالأشعة تحت الحمراء. <strong>الرعاية</strong> — صاحب المزرعة بيتابع كل خطوة في التغذية بنفسه.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-question-text en">What products does Orgánica offer?</span>
+          <span class="faq-question-text ar">إيه المنتجات اللي Orgánica بتقدمها؟</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-drawer">
+          <div class="faq-drawer-inner">
+            <p class="en">We offer a full range of premium organic poultry: <strong>Whole Poultry</strong> (Baladi Chicken, White Chicken, Pigeons, Duck) — <strong>Cuts</strong> (Drumsticks, Thighs bone-in & boneless, Wings) — <strong>Processed</strong> (Pané cuts in frying, cubes, minced, shawarma, or whole) — <strong>Offal</strong> (Pure Liver). Grilling marinades are also available on request.</p>
+            <p class="ar">بنقدم تشكيلة كاملة من الدواجن العضوية الفاخرة: <strong>دواجن كاملة</strong> (دجاج بلدي، دجاج أبيض، حمام، بط) — <strong>قطعيات</strong> (دبوس، أوراك بالعظم والمخلية، أجنحة) — <strong>مصنعات</strong> (قطعيات بانيه بجميع أشكالها) — <strong>كبدة صافي</strong>. تتبيلات الشوي متوفرة عند الطلب.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-question-text en">How do I place an order?</span>
+          <span class="faq-question-text ar">إزاي أطلب؟</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-drawer">
+          <div class="faq-drawer-inner">
+            <p class="en">All orders are placed <strong>exclusively through the order form</strong> on this page. Simply select your items and quantities, fill in your name, phone number, and delivery address, then click "Submit Order." You'll receive a confirmation from us shortly. For any questions or special requests, you can reach us on WhatsApp.</p>
+            <p class="ar">جميع الطلبات تتم <strong>حصرياً من خلال نموذج الطلب</strong> في هذه الصفحة. اختار منتجاتك وكمياتها، ادخل اسمك ورقم تليفونك وعنوانك، واضغط "إرسال الطلب." هنتواصل معاك قريباً للتأكيد. لأي أسئلة أو طلبات خاصة، تقدر تتواصل معنا على واتساب.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-question-text en">How does Orgánica ensure the well-being of its birds?</span>
+          <span class="faq-question-text ar">إزاي Orgánica بتضمن صحة الطيور وراحتها؟</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-drawer">
+          <div class="faq-drawer-inner">
+            <p class="en">We prioritize animal welfare through a "Bio-Vitality Environment" — birds enjoy free movement in open spaces, plenty of natural sunlight, and are never confined to cages all day. Infrared heating supports their natural immunity without chemicals. This approach not only ensures healthier, happier birds but also results in lower fat content and better-tasting meat.</p>
+            <p class="ar">بنولي اهتمام كبير لرفاهية الحيوانات من خلال "بيئة حيوية" — الطيور بتتحرك بحرية في أماكن مفتوحة، بتاخد قدر كافي من أشعة الشمس الطبيعية، ومش محبوسة في أقفاص طول اليوم. التدفئة بالأشعة تحت الحمراء بتدعم مناعتها بشكل طبيعي من غير كيماويات. النتيجة: طيور أصح وأسعد، دهون أقل، ومذاق أحسن.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-question-text en">What is "Al-'Aleqa"?</span>
+          <span class="faq-question-text ar">إيه هي "العليقة"؟</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <div class="faq-drawer">
+          <div class="faq-drawer-inner">
+            <p class="en">"Al-'Aleqa" is the special feed personally prepared by the farm owner, consisting of a carefully balanced mix of beets, carrots, and fresh vegetables. This natural diet is the secret behind the noticeably improved taste and tenderness of our meat, while preserving all the beneficial nutrients — and causing absolutely no harm to the consumer's health.</p>
+            <p class="ar">"العليقة" هي الغذاء الخاص اللي بيحضّره صاحب المزرعة بنفسه، وبيتكون من مزيج متوازن من البنجر والجزر والخضروات الطازة. النظام الغذائي الطبيعي ده هو السر وراء التحسن الواضح في مذاق اللحوم وطراوتها، مع الحفاظ على كل العناصر الغذائية المفيدة — من غير أي ضرر على صحة المستهلك.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Still have questions -->
+    <div style="text-align:center;margin-top:3rem;" data-aos="fade-up">
+      <p class="en" style="color:var(--text-light);margin-bottom:1rem;">Still have a question? We're happy to help.</p>
+      <p class="ar" style="color:var(--text-light);margin-bottom:1rem;">لسه عندك سؤال؟ احنا هنا نساعدك.</p>
+      <a href="https://wa.me/201067776664" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:13px 28px;border-radius:50px;text-decoration:none;font-weight:700;font-size:.95rem;transition:all .3s ease;box-shadow:0 4px 15px rgba(37,211,102,.3);"
+         onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(37,211,102,.4)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 4px 15px rgba(37,211,102,.3)'">
+        <i class="fab fa-whatsapp"></i>
+        <span class="en">Ask us on WhatsApp</span><span class="ar">اسألنا على واتساب</span>
+      </a>
+    </div>
+  </div>
+</div>
+
 <footer>
   <div class="footer-content">
     <h2 style="margin-bottom:20px;">Orgánica</h2>
@@ -634,7 +798,7 @@ footer{background:var(--primary);color:var(--white);padding:4rem 5%;text-align:c
 //  ⚠️  STEP: Replace the URL below with your deployed
 //      Google Apps Script Web App URL.
 // ══════════════════════════════════════════════════════════════
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzRFlswgVV6Eu3dyaO1OWHPKG6iQX-oiWbyk7VqZYntt7CvnbtzzMbTQ1BnUJqNk6b6/exec";
+const SCRIPT_URL = "PASTE_YOUR_DEPLOYED_SCRIPT_URL_HERE";
 
 // ── Init ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -667,6 +831,7 @@ function toggleLang() {
   html.classList.toggle('lang-ar', isEn);
   html.setAttribute('lang', isEn ? 'ar' : 'en');
   html.setAttribute('dir', isEn ? 'rtl' : 'ltr');
+  updateBundleLabels();
 }
 
 // ── Prices ────────────────────────────────────────────────────
@@ -696,6 +861,74 @@ const productNames = {
   liver:           { en: 'Pure Liver',            ar: 'كبدة صافي',         unit: 'kg'    }
 };
 
+const bundles = {
+  small: {
+    price: 295,
+    en: 'Small Family Bundle (4 Pers.)',
+    ar: 'باقة العيلة الصغيرة (٤ أفراد)',
+    desc_en: '1 Baladi Chicken + 1kg Thighs (bone-in) + Free Marinade',
+    desc_ar: 'دجاجة بلدي + كيلو أوراك بالعظم + تتبيلة مجانية'
+  },
+  gathering: {
+    price: 680,
+    en: 'The Gathering Bundle (6 Pers.)',
+    ar: 'باقة التجمّع (٦ أفراد)',
+    desc_en: '1 Whole Duck (~2.5kg) + 1kg Pané Cuts + Free Marinade',
+    desc_ar: 'بطة كاملة (~٢.٥ كيلو) + كيلو قطعيات بانيه + تتبيلة مجانية'
+  },
+  feast: {
+    price: 999,
+    en: 'Big Feast Bundle (8 Pers.)',
+    ar: 'باقة الوليمة الكبيرة (٨ أفراد)',
+    desc_en: '1 Whole Duck + 2 Pairs Pigeons + 1kg Drumsticks + Free Marinade & Liver',
+    desc_ar: 'بطة كاملة + جوزين حمام + كيلو دبوس + تتبيلة ومحشي مجاني'
+  }
+};
+
+// Update bundle dropdown labels on language switch
+function updateBundleLabels() {
+  const isAr = document.getElementById('mainHtml').classList.contains('lang-ar');
+  const select = document.getElementById('ramadan_bundle_select');
+  Array.from(select.options).forEach(opt => {
+    if (opt.dataset.ar) opt.textContent = isAr ? opt.dataset.ar : opt.dataset.en;
+  });
+  updateBundleDesc();
+}
+
+function updateBundleDesc() {
+  const isAr = document.getElementById('mainHtml').classList.contains('lang-ar');
+  const val  = document.getElementById('ramadan_bundle_select').value;
+  const desc = document.getElementById('bundle-desc');
+  if (val && bundles[val]) {
+    desc.style.display = 'block';
+    desc.textContent   = '📦 ' + (isAr ? bundles[val].desc_ar : bundles[val].desc_en);
+  } else {
+    desc.style.display = 'none';
+  }
+}
+
+document.getElementById('ramadan_bundle_select').addEventListener('change', function() {
+  const val = this.value;
+  const qtyEl = document.getElementById('ramadan_qty');
+  if (val && parseInt(qtyEl.value) === 0) qtyEl.value = 1;
+  if (!val) qtyEl.value = 0;
+  updateBundleDesc();
+  updateTotal();
+});
+
+function increaseBundle() {
+  const sel = document.getElementById('ramadan_bundle_select');
+  if (!sel.value) { alert(document.getElementById('mainHtml').classList.contains('lang-ar') ? 'اختار باقة أولاً' : 'Please select a bundle first.'); return; }
+  const i = document.getElementById('ramadan_qty');
+  i.value = parseInt(i.value) + 1;
+  updateTotal();
+}
+function decreaseBundle() {
+  const i = document.getElementById('ramadan_qty');
+  if (parseInt(i.value) > 0) { i.value = parseInt(i.value) - 1; }
+  updateTotal();
+}
+
 function increaseQty(item) { const i=document.getElementById(item); i.value=parseInt(i.value)+1; updateTotal(); }
 function decreaseQty(item) { const i=document.getElementById(item); if(parseInt(i.value)>0){i.value=parseInt(i.value)-1;} updateTotal(); }
 
@@ -705,6 +938,10 @@ function updateTotal() {
     const qty = parseInt(document.getElementById(item).value) || 0;
     total += qty * prices[item];
   }
+  // Add bundle price
+  const bundleVal = document.getElementById('ramadan_bundle_select').value;
+  const bundleQty = parseInt(document.getElementById('ramadan_qty').value) || 0;
+  if (bundleVal && bundles[bundleVal]) total += bundleQty * bundles[bundleVal].price;
   document.getElementById('grand-total').textContent = total + ' EGP';
 }
 
@@ -720,8 +957,9 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
   const isAr     = document.getElementById('mainHtml').classList.contains('lang-ar');
   const lang     = isAr ? 'ar' : 'en';
 
-  let orderDetails = '';
-  let hasItems = false;
+  let orderDetails  = '';
+  let bundleDetails = '';
+  let hasItems      = false;
 
   for (const item in prices) {
     const qty = parseInt(document.getElementById(item).value) || 0;
@@ -732,12 +970,20 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
     }
   }
 
+  // Bundle
+  const bundleVal = document.getElementById('ramadan_bundle_select').value;
+  const bundleQty = parseInt(document.getElementById('ramadan_qty').value) || 0;
+  if (bundleVal && bundleQty > 0 && bundles[bundleVal]) {
+    hasItems = true;
+    bundleDetails = `${bundleQty}x ${bundles[bundleVal][lang]} (${bundles[bundleVal].price * bundleQty} EGP)`;
+    orderDetails += bundleDetails + ', ';
+  }
+
   if (!hasItems) {
     alert(isAr ? 'يرجى اختيار عنصر واحد على الأقل.' : 'Please select at least one item.');
     return;
   }
 
-  // 1. Send to Google Sheets (background, no-cors)
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
   const formData = new URLSearchParams();
@@ -747,6 +993,7 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
   formData.append('landmark', landmark);
   formData.append('notes', notes);
   formData.append('orderDetails', orderDetails);
+  formData.append('bundleDetails', bundleDetails);
   formData.append('totalAmount', total);
 
   fetch(SCRIPT_URL, {
@@ -754,14 +1001,18 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
     mode: 'no-cors',
     body: formData.toString(),
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-  }).finally(() => { btn.disabled = false; });
-
-  // 2. Open WhatsApp
-  const waMsg = isAr
-    ? `مرحباً Orgánica 🌿\n\nطلب جديد من: ${name}\n📦 الطلب: ${orderDetails}\n💰 الإجمالي: ${total}\n📍 العنوان: ${address}${landmark ? '\n🏢 علامة: '+landmark : ''}${notes ? '\n📝 ملاحظات: '+notes : ''}`
-    : `Hello Orgánica 🌿\n\nNew order from: ${name}\n📦 Items: ${orderDetails}\n💰 Total: ${total}\n📍 Address: ${address}${landmark ? '\n🏢 Landmark: '+landmark : ''}${notes ? '\n📝 Notes: '+notes : ''}`;
-
-  window.open(`https://wa.me/201067776664?text=${encodeURIComponent(waMsg)}`, '_blank');
+  }).finally(() => {
+    btn.disabled = false;
+    const successEl = document.getElementById('orderSuccess');
+    successEl.classList.add('show');
+    document.getElementById('orderForm').reset();
+    for (const item in prices) { document.getElementById(item).value = 0; }
+    document.getElementById('ramadan_qty').value = 0;
+    document.getElementById('bundle-desc').style.display = 'none';
+    updateTotal();
+    successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => successEl.classList.remove('show'), 8000);
+  });
 });
 
 // ── Smooth scroll ─────────────────────────────────────────────
@@ -773,7 +1024,26 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── Audio toggle ──────────────────────────────────────────────
+// ── FAQ Accordion ─────────────────────────────────────────────
+function toggleFaq(btn) {
+  const item   = btn.closest('.faq-item');
+  const drawer = item.querySelector('.faq-drawer');
+  const isOpen = item.classList.contains('open');
+
+  // Close all open items
+  document.querySelectorAll('.faq-item.open').forEach(openItem => {
+    openItem.classList.remove('open');
+    openItem.querySelector('.faq-drawer').style.maxHeight = '0';
+    openItem.querySelector('.faq-drawer').style.paddingBottom = '0';
+  });
+
+  // If it wasn't open, open it
+  if (!isOpen) {
+    item.classList.add('open');
+    drawer.style.maxHeight = drawer.scrollHeight + 40 + 'px';
+  }
+}
+
 function toggleAudio() {
   const v = document.getElementById('aboutVideo');
   const i = document.getElementById('soundIcon');
