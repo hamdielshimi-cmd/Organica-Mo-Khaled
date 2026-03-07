@@ -2079,157 +2079,19 @@
     });
 
     // ── FETCH ONE SHEET AS GVIZ JSON ──────────────────────────────
-    async function fetchSheet(sheetName) {
-      const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
-                  '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(sheetName) +
-                  '&t=' + Date.now();
-      const res  = await fetch(url);
-      const text = await res.text();
-      // Strip JSONP wrapper: /*O_o*/\ngoogle.visualization.Query.setResponse({...});
-      const json = JSON.parse(text.match(/setResponse\(([\s\S]*)\)/)[1]);
-      return json.table;
-    }
-
-    // Helper: safely get cell value from gviz row
-    function gv(cell) {
-      return (cell && cell.v !== null && cell.v !== undefined) ? cell.v : '';
-    }
-
-    // ── PARSE PRICELIST SHEET → sections array ────────────────────
-    // ── PARSE SECTIONS SHEET (its own sheet now) ─────────────────
-    function parseSections(table) {
-      var sections = [];
-      for (var i = 0; i < table.rows.length; i++) {
-        var r = table.rows[i].c || [];
-        var cell = String(gv(r[0])).trim();
-        if (!cell || cell === 'ID') continue;   // skip header + blanks
-        sections.push({
-          id:      cell,
-          labelEn: String(gv(r[1])).trim(),
-          labelAr: String(gv(r[2])).trim(),
-          order:   Number(gv(r[3])) || 0
-        });
-      }
-      return sections.sort(function(a, b) { return a.order - b.order; });
-    }
-
-    // ── PARSE PRICELIST SHEET → products array ────────────────────
-    function parseProducts(table) {
-      var products = [];
-      for (var i = 0; i < table.rows.length; i++) {
-        var r = table.rows[i].c || [];
-        var cell = String(gv(r[0])).trim();
-        if (!cell || cell === 'ID') continue;   // skip header + blanks
-        var type = String(gv(r[4]) || 'fixed').trim();
-        var activeVal = gv(r[12]);
-        var prod = {
-          id:          cell,
-          section:     String(gv(r[1])).trim(),
-          nameEn:      String(gv(r[2])).trim(),
-          nameAr:      String(gv(r[3])).trim(),
-          pricingType: type,
-          active:      (activeVal !== false && String(activeVal).toLowerCase() !== 'false')
-        };
-        if (type === 'variable_weight') {
-          prod.pricePerKg     = Number(gv(r[5]))  || 0;
-          prod.defaultWeightG = Number(gv(r[9]))  || 1200;
-          prod.minWeightG     = Number(gv(r[10])) || 800;
-          prod.maxWeightG     = Number(gv(r[11])) || 2500;
-        } else {
-          prod.fixedPrice  = Number(gv(r[6]))         || 0;
-          prod.fixedUnit   = String(gv(r[7]) || 'kg').trim();
-          prod.fixedUnitAr = String(gv(r[8]) || '').trim();
-        }
-        products.push(prod);
-      }
-      return products;
-    }
-
-    // ── PARSE BUNDLES SHEET ───────────────────────────────────────
-    function parseBundles(table) {
-      var bundles = [];
-      for (var i = 1; i < table.rows.length; i++) {   // skip header row
-        var r = table.rows[i].c || [];
-        if (!gv(r[0])) continue;
-        var enRaw = String(gv(r[12]) || '');
-        var arRaw = String(gv(r[13]) || '');
-        var activeVal = gv(r[16]);
-        bundles.push({
-          id:              String(gv(r[0])).trim(),
-          nameEn:          String(gv(r[1])  || '').trim(),
-          nameAr:          String(gv(r[2])  || '').trim(),
-          badgeEn:         String(gv(r[3])  || '').trim(),
-          badgeAr:         String(gv(r[4])  || '').trim(),
-          badgeEmoji:      String(gv(r[5])  || '✦').trim(),
-          bundlePrice:     Number(gv(r[6])) || 0,
-          originalPriceEn: String(gv(r[7])  || '').trim(),
-          originalPriceAr: String(gv(r[7])  || '').trim(),
-          saveEn:          String(gv(r[8])  || '').trim(),
-          saveAr:          String(gv(r[9])  || '').trim(),
-          personsEn:       String(gv(r[10]) || '').trim(),
-          personsAr:       String(gv(r[11]) || '').trim(),
-          contentsEn: enRaw ? enRaw.split('\n').map(function(s){return s.trim();}).filter(Boolean) : [],
-          contentsAr: arRaw ? arRaw.split('\n').map(function(s){return s.trim();}).filter(Boolean) : [],
-          descEn:   String(gv(r[14]) || '').trim(),
-          descAr:   String(gv(r[15]) || '').trim(),
-          active:   (activeVal !== false && String(activeVal).toLowerCase() !== 'false')
-        });
-      }
-      return bundles;
-    }
-
-    // ── PARSE FAQ SHEET ───────────────────────────────────────────
-    function parseFaq(table) {
-      var items = [];
-      for (var i = 1; i < table.rows.length; i++) {   // skip header row
-        var r = table.rows[i].c || [];
-        if (!gv(r[0])) continue;
-        var activeVal = gv(r[5]);
-        items.push({
-          id:         String(gv(r[0])).trim(),
-          questionEn: String(gv(r[1]) || '').trim(),
-          questionAr: String(gv(r[2]) || '').trim(),
-          answerEn:   String(gv(r[3]) || '').trim(),
-          answerAr:   String(gv(r[4]) || '').trim(),
-          active:     (activeVal !== false && String(activeVal).toLowerCase() !== 'false'),
-          order:      Number(gv(r[6])) || 0
-        });
-      }
-      return items.sort(function(a, b) { return a.order - b.order; });
-    }
-
-    // ── LOAD CONFIG — reads directly from Google Sheets ──────────
+    // ── LOAD CONFIG — fetches from Apps Script ──────────────────
     async function loadConfig() {
       try {
-        const [secData, plData, bnData, fqData] = await Promise.all([
-          fetchSheet('sections'),
-          fetchSheet('pricelist'),
-          fetchSheet('boundles'),
-          fetchSheet('q&a')
-        ]);
-        const sections = parseSections(secData);
-        const products = parseProducts(plData);
-        const bundles  = parseBundles(bnData);
-        const faq      = parseFaq(fqData);
-        // Only use live data if we actually got products back
-        if (products.length > 0) {
-          siteConfig = {
-            meta: {
-              siteName: 'Orgánica', siteNameAr: 'أورجانيكا',
-              whatsapp: '201067776664', deliveryFeeEGP: 75,
-              deliveryHours:   '9 AM – 9 PM (All Week days)',
-              deliveryHoursAr: '٩ صباحاً – ٩ مساءً (طوال أيام الأسبوع)'
-            },
-            sections:       sections,
-            products:       products,
-            ramadanBundles: bundles,
-            faqItems:       faq
-          };
+        const res  = await fetch(SCRIPT_URL + '?t=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        if (data && data.products && data.products.length > 0) {
+          siteConfig = data;
         } else {
-          throw new Error('No products returned from sheet');
+          throw new Error('Empty products from script');
         }
       } catch (e) {
-        console.warn('Sheet fetch failed, using fallback:', e);
+        console.warn('Script fetch failed, using fallback:', e.message);
         siteConfig = FALLBACK_CONFIG;
       }
       applyConfig();
