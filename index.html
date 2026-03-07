@@ -2008,6 +2008,52 @@
     const W_MIN = 800, W_MAX = 2500, W_STEP = 100;
 
     let siteConfig = null;
+
+    // ── FALLBACK CONFIG (shown instantly if Apps Script is unavailable) ──────
+    const FALLBACK_CONFIG = {
+      meta: {
+        siteName: 'Orgánica', siteNameAr: 'أورجانيكا', whatsapp: '201067776664',
+        deliveryFeeEGP: 75,
+        deliveryHours:   '9 AM – 9 PM (All Week days)',
+        deliveryHoursAr: '٩ صباحاً – ٩ مساءً (طوال أيام الأسبوع)'
+      },
+      sections: [
+        { id:'whole_poultry', labelEn:'🐔 Whole Poultry', labelAr:'🐔 دواجن كاملة', order:1 },
+        { id:'cuts',          labelEn:'🍗 Cuts',           labelAr:'🍗 قطعيات',       order:2 },
+        { id:'processed',     labelEn:'⚡ Processed',      labelAr:'⚡ مصنعات',        order:3 },
+        { id:'offal',         labelEn:'🫀 Offal',          labelAr:'🫀 مخلفات',        order:4 }
+      ],
+      products: [
+        { id:'baladi_chicken',  section:'whole_poultry', nameEn:'Baladi Chicken',    nameAr:'دجاج بلدي',     pricingType:'variable_weight', pricePerKg:190, defaultWeightG:1200, minWeightG:800,  maxWeightG:2500, active:true },
+        { id:'white_chicken',   section:'whole_poultry', nameEn:'White Chicken',     nameAr:'دجاج أبيض',     pricingType:'variable_weight', pricePerKg:140, defaultWeightG:1200, minWeightG:800,  maxWeightG:2500, active:true },
+        { id:'duck',            section:'whole_poultry', nameEn:'Duck',              nameAr:'بط',            pricingType:'variable_weight', pricePerKg:210, defaultWeightG:1500, minWeightG:800,  maxWeightG:2500, active:true },
+        { id:'pigeons',         section:'whole_poultry', nameEn:'Pigeons',           nameAr:'حمام',          pricingType:'fixed', fixedPrice:275,  fixedUnit:'pair', fixedUnitAr:'زوج', active:true },
+        { id:'rabbit',          section:'whole_poultry', nameEn:'Rabbit',            nameAr:'أرنب',          pricingType:'variable_weight', pricePerKg:230, defaultWeightG:1200, minWeightG:800,  maxWeightG:2000, active:true },
+        { id:'drumsticks',      section:'cuts',          nameEn:'Drumsticks',        nameAr:'دبوس',          pricingType:'fixed', fixedPrice:180,  fixedUnit:'kg', fixedUnitAr:'كجم', active:true },
+        { id:'thighs_bone',     section:'cuts',          nameEn:'Thighs (bone-in)',  nameAr:'أوراك بالعظم',  pricingType:'fixed', fixedPrice:160,  fixedUnit:'kg', fixedUnitAr:'كجم', active:true },
+        { id:'thighs_boneless', section:'cuts',          nameEn:'Thighs (boneless)', nameAr:'أوراك مخلية',   pricingType:'fixed', fixedPrice:260,  fixedUnit:'kg', fixedUnitAr:'كجم', active:true },
+        { id:'wings',           section:'cuts',          nameEn:'Wings',             nameAr:'أجنحة',         pricingType:'fixed', fixedPrice:80,   fixedUnit:'kg', fixedUnitAr:'كجم', active:true },
+        { id:'pane',            section:'processed',     nameEn:'Pané',              nameAr:'بانيه',         pricingType:'fixed', fixedPrice:275,  fixedUnit:'kg', fixedUnitAr:'كجم', active:true },
+        { id:'shish_tawook',    section:'processed',     nameEn:'Shish Tawook',      nameAr:'شيش طاووق',     pricingType:'fixed', fixedPrice:275,  fixedUnit:'kg', fixedUnitAr:'كجم', active:true },
+        { id:'breasts',         section:'processed',     nameEn:'Chicken Breasts',   nameAr:'صدور',          pricingType:'fixed', fixedPrice:275,  fixedUnit:'kg', fixedUnitAr:'كجم', active:true },
+        { id:'minced',          section:'processed',     nameEn:'Minced',            nameAr:'مفروم',         pricingType:'fixed', fixedPrice:275,  fixedUnit:'kg', fixedUnitAr:'كجم', active:true },
+        { id:'shawarma',        section:'processed',     nameEn:'Shawarma',          nameAr:'شاورما',        pricingType:'fixed', fixedPrice:275,  fixedUnit:'kg', fixedUnitAr:'كجم', active:true },
+        { id:'liver',           section:'offal',         nameEn:'Liver',             nameAr:'كبدة',          pricingType:'fixed', fixedPrice:190,  fixedUnit:'kg', fixedUnitAr:'كجم', active:true }
+      ],
+      ramadanBundles: [
+        { id:'small_family', nameEn:'Small Family Bundle', nameAr:'باقة العيلة الصغيرة',  badgeEn:'Small Family',  badgeAr:'العيلة الصغيرة',  badgeEmoji:'🌿', bundlePrice:395,  originalPriceEn:'445 EGP',  originalPriceAr:'٤٤٥ ج',  saveEn:'Save 50 EGP',  saveAr:'وفّر ٥٠ ج',  personsEn:'Ideal for 4',    personsAr:'مثالي لـ ٤',    contentsEn:['1 Baladi Chicken ~1.5kg','1 kg Thighs (bone-in)'],                              contentsAr:['دجاجة بلدي ~١.٥كجم','كيلو أوراك بالعظم'],                            descEn:'Baladi + Thighs',              descAr:'دجاجة بلدي + أوراك',              active:true },
+        { id:'gathering',    nameEn:'The Gathering Bundle',nameAr:'باقة التجمّع',           badgeEn:'The Gathering', badgeAr:'التجمّع',          badgeEmoji:'✨', bundlePrice:1090, originalPriceEn:'1190 EGP', originalPriceAr:'١١٩٠ ج', saveEn:'Save 100 EGP', saveAr:'وفّر ١٠٠ ج', personsEn:'Classic for 6',  personsAr:'مائدة لـ ٦',    contentsEn:['1 Duck ~3kg','1 kg Pané','1 Baladi Chicken ~1.5kg'],                            contentsAr:['بطة ~٣كجم','كيلو بانيه','دجاجة بلدي ~١.٥كجم'],                       descEn:'Duck + Pané + Baladi Chicken', descAr:'بطة + بانيه + دجاجة بلدي',        active:true },
+        { id:'big_feast',    nameEn:'Big Feast Bundle',    nameAr:'باقة الوليمة الكبيرة',  badgeEn:'Big Feast',     badgeAr:'الوليمة الكبيرة', badgeEmoji:'👑', bundlePrice:1565, originalPriceEn:'1740 EGP', originalPriceAr:'١٧٤٠ ج', saveEn:'Save 175 EGP', saveAr:'وفّر ١٧٥ ج', personsEn:'Luxury for 8',   personsAr:'رفاهية لـ ٨',   contentsEn:['1 Duck ~3kg','2 Pairs Pigeons','1 Baladi Chicken ~1.5kg','1 kg Pané'],         contentsAr:['بطة ~٣كجم','جوزين حمام','دجاجة بلدي ~١.٥كجم','كيلو بانيه'],         descEn:'Duck + Pigeons + Baladi + Pané',descAr:'بطة + حمام + دجاجة بلدي + بانيه',active:true }
+      ],
+      faqItems: [
+        { id:'faq_1', questionEn:"What makes Orgánica's poultry organic?",   questionAr:'إيه اللي بيخلي دواجن Orgánica عضوية؟', answerEn:'Raised on natural feed — beets, carrots, fresh greens. Zero hormones, zero antibiotics.', answerAr:'تتربى على تغذية طبيعية — بنجر وجزر وخضرة. صفر هرمونات، صفر مضادات حيوية.', active:true, order:1 },
+        { id:'faq_2', questionEn:'What products does Orgánica offer?',        questionAr:'إيه المنتجات اللي Orgánica بتقدمها؟',  answerEn:'Whole poultry, cuts, processed items, and offal — all premium organic.', answerAr:'دواجن كاملة وقطعيات ومصنعات ومخلفات — كلها عضوية فاخرة.', active:true, order:2 },
+        { id:'faq_3', questionEn:'How do I place an order?',                  questionAr:'إزاي أطلب؟',                           answerEn:'Fill the order form and submit — we confirm via WhatsApp or phone.', answerAr:'ادخل بياناتك في نموذج الطلب وهنأكد معاك على واتساب أو مكالمة.', active:true, order:3 },
+        { id:'faq_4', questionEn:"How does Orgánica ensure bird welfare?",    questionAr:'إزاي Orgánica بتضمن صحة الطيور؟',     answerEn:'Bio-Vitality Environment with infrared heating, personally overseen by the farm owner.', answerAr:'بيئة حيوية بتدفئة بالأشعة تحت الحمراء، وصاحب المزرعة يشرف بنفسه.', active:true, order:4 },
+        { id:'faq_5', questionEn:'What is the delivery fee and hours?',       questionAr:'إيه رسوم التوصيل والمواعيد؟',         answerEn:'75 EGP delivery fee. We deliver 9 AM – 9 PM, all week.', answerAr:'رسوم التوصيل ٧٥ جنيه. بنوصّل من ٩ الصبح لـ ٩ بالليل، طول الأسبوع.', active:true, order:5 }
+      ]
+    };
+
     const vwState = {};
     const fxState = {};
     let bundleQty = 0;
@@ -2026,30 +2072,33 @@
       if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // ── LOAD CONFIG ─── reads live from Google Sheet via App Script ──
+    // ── LOAD CONFIG — fetches from Apps Script, falls back to hardcoded data ──
     async function loadConfig() {
-      try {
-        const res  = await fetch(SCRIPT_URL + '?t=' + Date.now());
-        const data = await res.json();
-        if (data && data.products && data.products.length > 0) {
-          siteConfig = data;
-        } else {
-          throw new Error('Empty or invalid response');
-        }
-      } catch (e) {
-        // Fallback: try local config.json (for offline dev / backup)
-        try {
-          const res2 = await fetch('./Control/config.json?t=' + Date.now());
-          siteConfig = await res2.json();
-        } catch (e2) {
-          console.warn('Could not load config from App Script or config.json');
-        }
-      }
+      // Always render fallback first so page is never stuck loading
+      siteConfig = JSON.parse(JSON.stringify(FALLBACK_CONFIG));
       applyConfig();
       renderPriceList();
       renderBundleDropdown();
       renderBundleCards();
       renderFaqs();
+
+      // Then try to get live data from Apps Script (5 second timeout)
+      try {
+        const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 5000));
+        const res  = await Promise.race([fetch(SCRIPT_URL + '?t=' + Date.now()), timeout]);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        if (data && data.products && data.products.length > 0) {
+          siteConfig = data;
+          applyConfig();
+          renderPriceList();
+          renderBundleDropdown();
+          renderBundleCards();
+          renderFaqs();
+        }
+      } catch (e) {
+        console.warn('Live data unavailable, using built-in data:', e.message);
+      }
     }
 
     function renderFaqs() {
