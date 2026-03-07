@@ -2003,11 +2003,17 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     // ══════════════════════════════════════════════════════════════
-    //  ⚠️  STEP: Replace the URL below with your deployed
-    //      Google Apps Script Web App URL.
+    //  Orgánica — Direct Google Sheets data fetching (no admin panel needed)
+    //  Edit products/FAQ/bundles directly in the Google Sheet.
+    //  Apps Script is used ONLY for saving orders + sending emails.
     // ══════════════════════════════════════════════════════════════
-    // ⚠️ PASTE YOUR APP SCRIPT URL HERE AFTER DEPLOYING
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzUGYYuaH7IwLNRyhK6K4hwsCYlumXMFMmeYvgfFhdw4gQiBJuTcrwHzp8K3MQmZrEy5g/exec";
+
+    // ── Order recording (Apps Script — order saving + email only) ──
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz-QZvruLMplWfwJMgCWqgVkqbLA6tZm_mxalTmGAe8OxX-U-x_BJFU_0BTTsfWf40rEg/exec";
+
+    // ── Google Sheet ID ───────────────────────────────────────────
+    const SHEET_ID = "1TeuEWand9BAB8VvBlW6hfO-SodIbzxrzDBwFKozeAh8";
+
     const W_MIN = 800, W_MAX = 2500, W_STEP = 100;
 
     let siteConfig = null;
@@ -2015,6 +2021,49 @@
     const fxState = {};
     let bundleQty = 0;
     let selectedBundleId = '';
+
+    // ── FALLBACK CONFIG (used if Sheet is unreachable) ────────────
+    const FALLBACK_CONFIG = {
+      meta: {
+        siteName: 'Orgánica', siteNameAr: 'أورجانيكا',
+        whatsapp: '201067776664', deliveryFeeEGP: 75,
+        deliveryHours: '9 AM – 9 PM (All Week days)',
+        deliveryHoursAr: '٩ صباحاً – ٩ مساءً (طوال أيام الأسبوع)'
+      },
+      sections: [
+        { id:'whole_poultry', labelEn:'Whole Poultry',  labelAr:'الدواجن الكاملة', order:1 },
+        { id:'cuts',          labelEn:'Cuts',           labelAr:'القطع',           order:2 },
+        { id:'processed',     labelEn:'Processed',      labelAr:'المصنعة',         order:3 },
+        { id:'offal',         labelEn:'Offal',          labelAr:'المخلفات',        order:4 }
+      ],
+      products: [
+        { id:'baladi_chicken',  section:'whole_poultry', nameEn:'Baladi Chicken',      nameAr:'فراخ بلدي',        pricingType:'variable_weight', pricePerKg:190, defaultWeightG:1200, minWeightG:800,  maxWeightG:2500, active:true },
+        { id:'white_chicken',   section:'whole_poultry', nameEn:'White Chicken',       nameAr:'فراخ بيضاء',       pricingType:'variable_weight', pricePerKg:140, defaultWeightG:1200, minWeightG:800,  maxWeightG:2500, active:true },
+        { id:'duck',            section:'whole_poultry', nameEn:'Duck',                nameAr:'بط',               pricingType:'variable_weight', pricePerKg:210, defaultWeightG:1500, minWeightG:800,  maxWeightG:2500, active:true },
+        { id:'pigeons',         section:'whole_poultry', nameEn:'Pigeons',             nameAr:'حمام',             pricingType:'fixed',           fixedPrice:275,  fixedUnit:'pair',   fixedUnitAr:'زوج',              active:true },
+        { id:'rabbit',          section:'whole_poultry', nameEn:'Rabbit',              nameAr:'أرانب',            pricingType:'variable_weight', pricePerKg:230, defaultWeightG:1200, minWeightG:800,  maxWeightG:2000, active:true },
+        { id:'drumsticks',      section:'cuts',          nameEn:'Drumsticks',          nameAr:'كوارع',            pricingType:'fixed',           fixedPrice:180,  fixedUnit:'kg',     fixedUnitAr:'كيلو',             active:true },
+        { id:'thighs_bone',     section:'cuts',          nameEn:'Thighs (Bone-in)',    nameAr:'أفخاذ بالعظم',    pricingType:'fixed',           fixedPrice:160,  fixedUnit:'kg',     fixedUnitAr:'كيلو',             active:true },
+        { id:'thighs_boneless', section:'cuts',          nameEn:'Thighs (Boneless)',   nameAr:'أفخاذ بدون عظم',  pricingType:'fixed',           fixedPrice:260,  fixedUnit:'kg',     fixedUnitAr:'كيلو',             active:true },
+        { id:'wings',           section:'cuts',          nameEn:'Wings',               nameAr:'أجنحة',            pricingType:'fixed',           fixedPrice:80,   fixedUnit:'kg',     fixedUnitAr:'كيلو',             active:true },
+        { id:'pane',            section:'processed',     nameEn:'Pané',                nameAr:'بانيه',            pricingType:'fixed',           fixedPrice:275,  fixedUnit:'kg',     fixedUnitAr:'كيلو',             active:true },
+        { id:'shish_tawook',    section:'processed',     nameEn:'Shish Tawook',        nameAr:'شيش طاووق',        pricingType:'fixed',           fixedPrice:275,  fixedUnit:'kg',     fixedUnitAr:'كيلو',             active:true },
+        { id:'breasts',         section:'processed',     nameEn:'Breasts',             nameAr:'صدور',             pricingType:'fixed',           fixedPrice:275,  fixedUnit:'kg',     fixedUnitAr:'كيلو',             active:true },
+        { id:'minced',          section:'processed',     nameEn:'Minced',              nameAr:'مفروم',            pricingType:'fixed',           fixedPrice:275,  fixedUnit:'kg',     fixedUnitAr:'كيلو',             active:true },
+        { id:'shawarma',        section:'processed',     nameEn:'Shawarma',            nameAr:'شاورما',           pricingType:'fixed',           fixedPrice:275,  fixedUnit:'kg',     fixedUnitAr:'كيلو',             active:true },
+        { id:'liver',           section:'offal',         nameEn:'Liver',               nameAr:'كبدة',             pricingType:'fixed',           fixedPrice:190,  fixedUnit:'kg',     fixedUnitAr:'كيلو',             active:true }
+      ],
+      ramadanBundles: [
+        { id:'small_family', nameEn:'Small Family Bundle', nameAr:'باقة العائلة الصغيرة', badgeEn:'Popular', badgeAr:'الأكثر طلباً', badgeEmoji:'✦', bundlePrice:850,  originalPriceEn:'1,050 EGP', originalPriceAr:'١٠٥٠ ج', saveEn:'Save 200 EGP', saveAr:'وفر ٢٠٠ ج', personsEn:'2–3 persons', personsAr:'٢–٣ أشخاص', contentsEn:['1 Baladi Chicken','1 kg Drumsticks','500g Liver'], contentsAr:['فراخ بلدي كاملة','كيلو كوارع','٥٠٠ جرام كبدة'], descEn:'Perfect for a small family gathering.', descAr:'مثالية للعائلة الصغيرة.', active:true },
+        { id:'gathering',    nameEn:'The Gathering',       nameAr:'باقة التجمع',          badgeEn:'Best Value', badgeAr:'أفضل قيمة',   badgeEmoji:'★', bundlePrice:1450, originalPriceEn:'1,750 EGP', originalPriceAr:'١٧٥٠ ج', saveEn:'Save 300 EGP', saveAr:'وفر ٣٠٠ ج', personsEn:'4–5 persons', personsAr:'٤–٥ أشخاص', contentsEn:['2 White Chickens','1 Duck','1 kg Thighs'], contentsAr:['فراختان بيضاء','بطة كاملة','كيلو أفخاذ'], descEn:'Great for a mid-sized gathering.', descAr:'مثالية للتجمعات المتوسطة.', active:true },
+        { id:'big_feast',    nameEn:'Big Feast Bundle',    nameAr:'باقة الوليمة الكبرى',  badgeEn:'Premium', badgeAr:'مميزة',        badgeEmoji:'♛', bundlePrice:2200, originalPriceEn:'2,650 EGP', originalPriceAr:'٢٦٥٠ ج', saveEn:'Save 450 EGP', saveAr:'وفر ٤٥٠ ج', personsEn:'8–10 persons', personsAr:'٨–١٠ أشخاص', contentsEn:['2 Baladi Chickens','1 Duck','2 Rabbits','1 kg Wings'], contentsAr:['فراختان بلدي','بطة','أرنبان','كيلو أجنحة'], descEn:'The ultimate feast for large families.', descAr:'الوليمة الكبرى للعائلات الكبيرة.', active:true }
+      ],
+      faqItems: [
+        { id:'faq_1', questionEn:"What makes Orgánica's poultry organic?", questionAr:'إيه اللي بيخلي دواجن Orgánica عضوية؟', answerEn:'Our poultry is raised free-range on natural feed with no hormones or antibiotics.', answerAr:'دواجننا بتتربى طبيعي على علف طبيعي بدون هرمونات أو مضادات حيوية.', active:true, order:1 },
+        { id:'faq_2', questionEn:'What products does Orgánica offer?',      questionAr:'إيه المنتجات اللي Orgánica بتقدمها؟',   answerEn:'We offer whole poultry, cuts, processed items and offal.',                   answerAr:'بنقدم دواجن كاملة وقطع ومنتجات مصنعة ومخلفات.',                         active:true, order:2 },
+        { id:'faq_3', questionEn:'How do I place an order?',                questionAr:'إزاي أطلب؟',                            answerEn:'Fill in the order form on this page and submit — we will contact you.',     answerAr:'املأ نموذج الطلب في هذه الصفحة وأرسله وسنتواصل معك.',                   active:true, order:3 }
+      ]
+    };
 
     // ── INIT ──────────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', async () => {
@@ -2029,89 +2078,160 @@
       if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // ── LOAD CONFIG ─── reads live from Google Sheet via App Script ──
-    // ── HARDCODED FALLBACK (mirrors your Google Sheet exactly) ──
-    const FALLBACK_CONFIG = {
-      meta: {
-        siteName: 'Orgánica', siteNameAr: 'أورجانيكا', whatsapp: '201067776664',
-        deliveryFeeEGP: 75, deliveryHours: '9 AM – 9 PM (All Week days)',
-        deliveryHoursAr: '٩ صباحاً – ٩ مساءً (طوال أيام الأسبوع)'
-      },
-      sections: [
-        { id: 'whole_poultry', labelEn: '🐔 Whole Poultry', labelAr: '🐔 دواجن كاملة', order: 1 },
-        { id: 'cuts', labelEn: '🍗 Cuts', labelAr: '🍗 قطعيات', order: 2 },
-        { id: 'processed', labelEn: '⚡ Processed', labelAr: '⚡ مصنعات', order: 3 },
-        { id: 'offal', labelEn: '🫀 Offal', labelAr: '🫀 كبدة', order: 4 }
-      ],
-      products: [
-        { id: 'baladi_chicken', section: 'whole_poultry', nameEn: 'Baladi Chicken', nameAr: 'دجاج بلدي', pricingType: 'variable_weight', pricePerKg: 190, defaultWeightG: 1200, minWeightG: 800, maxWeightG: 2500, active: true },
-        { id: 'white_chicken', section: 'whole_poultry', nameEn: 'White Chicken', nameAr: 'دجاج أبيض', pricingType: 'variable_weight', pricePerKg: 140, defaultWeightG: 1200, minWeightG: 800, maxWeightG: 2500, active: true },
-        { id: 'duck', section: 'whole_poultry', nameEn: 'Duck', nameAr: 'بط', pricingType: 'variable_weight', pricePerKg: 210, defaultWeightG: 1500, minWeightG: 800, maxWeightG: 2500, active: true },
-        { id: 'pigeons', section: 'whole_poultry', nameEn: 'Pigeons', nameAr: 'حمام', pricingType: 'fixed', fixedPrice: 275, fixedUnit: 'pair', fixedUnitAr: 'زوج', active: true },
-        { id: 'rabbit', section: 'whole_poultry', nameEn: 'Rabbit', nameAr: 'أرنب', pricingType: 'variable_weight', pricePerKg: 230, defaultWeightG: 1200, minWeightG: 800, maxWeightG: 2500, active: true },
-        { id: 'drumsticks', section: 'cuts', nameEn: 'Drumsticks (bone-in)', nameAr: 'دبوس بالعظم', pricingType: 'fixed', fixedPrice: 180, fixedUnit: 'kg', fixedUnitAr: 'كجم', active: true },
-        { id: 'thighs_bone', section: 'cuts', nameEn: 'Thighs (bone-in)', nameAr: 'أوراك بالعظم', pricingType: 'fixed', fixedPrice: 160, fixedUnit: 'kg', fixedUnitAr: 'كجم', active: true },
-        { id: 'thighs_boneless', section: 'cuts', nameEn: 'Thighs (boneless)', nameAr: 'أوراك مخلية', pricingType: 'fixed', fixedPrice: 260, fixedUnit: 'kg', fixedUnitAr: 'كجم', active: true },
-        { id: 'wings', section: 'cuts', nameEn: 'Wings', nameAr: 'أجنحة', pricingType: 'fixed', fixedPrice: 80, fixedUnit: 'kg', fixedUnitAr: 'كجم', active: true },
-        { id: 'pane', section: 'processed', nameEn: 'Pané Fillets', nameAr: 'بانية', pricingType: 'fixed', fixedPrice: 275, fixedUnit: 'kg', fixedUnitAr: 'كجم', active: true },
-        { id: 'shish_tawook', section: 'processed', nameEn: 'Shish Tawook', nameAr: 'شيش طاووق', pricingType: 'fixed', fixedPrice: 275, fixedUnit: 'kg', fixedUnitAr: 'كجم', active: true },
-        { id: 'breasts', section: 'processed', nameEn: 'Chicken Breasts', nameAr: 'صدور', pricingType: 'fixed', fixedPrice: 275, fixedUnit: 'kg', fixedUnitAr: 'كجم', active: true },
-        { id: 'minced', section: 'processed', nameEn: 'Minced', nameAr: 'مفروم', pricingType: 'fixed', fixedPrice: 275, fixedUnit: 'kg', fixedUnitAr: 'كجم', active: true },
-        { id: 'shawarma', section: 'processed', nameEn: 'Shawarma', nameAr: 'شاورما', pricingType: 'fixed', fixedPrice: 275, fixedUnit: 'kg', fixedUnitAr: 'كجم', active: true },
-        { id: 'liver', section: 'offal', nameEn: 'Pure Liver', nameAr: 'كبدة صافي', pricingType: 'fixed', fixedPrice: 190, fixedUnit: 'kg', fixedUnitAr: 'كجم', active: true }
-      ],
-      ramadanBundles: [
-        {
-          id: 'small', nameEn: 'Small Family Bundle (4 Pers.)', nameAr: 'باقة العيلة الصغيرة (٤ أفراد)',
-          badgeEn: 'Small Family', badgeAr: 'العيلة الصغيرة', badgeEmoji: '🌿', bundlePrice: 395,
-          originalPriceEn: '445', originalPriceAr: '٤٤٥', saveEn: 'Save 50 EGP · ~11%', saveAr: 'وفّر ٥٠ ج · ١١٪',
-          personsEn: '👨‍👩‍👧‍👦 Ideal for a cozy 4-person Iftar', personsAr: '👨‍👩‍👧‍👦 مثالي لإفطار عيلة ٤ أفراد',
-          contentsEn: ['1 Baladi Chicken (whole) — 190 EGP @ 1.5 kg', '1 kg Chicken Thighs (bone-in) — 160 EGP'],
-          contentsAr: ['١ دجاجة بلدي كاملة — ٢٨٥ ج @ ١.٥ كجم', '١ كجم أوراك بالعظم — ١٦٠ ج'],
-          descEn: '1 Baladi Chicken (~1.5kg) + 1kg Thighs (bone-in)', descAr: 'دجاجة بلدي (~١.٥ كيلو) + كيلو أوراك بالعظم', active: true
-        },
-        {
-          id: 'gathering', nameEn: 'The Gathering Bundle (6 Pers.)', nameAr: 'باقة التجمّع (٦ أفراد)',
-          badgeEn: 'The Gathering', badgeAr: 'التجمّع', badgeEmoji: '✨', bundlePrice: 1090,
-          originalPriceEn: '1190', originalPriceAr: '١١٩٠', saveEn: 'Save 100 EGP · ~8%', saveAr: 'وفّر ١٠٠ ج · ٨٪',
-          personsEn: '👨‍👩‍👧‍👦👶 The classic Ramadan spread for 6 persons', personsAr: '👨‍👩‍👧‍👦👶 مائدة رمضان الكلاسيكية لـ ٦ أفراد',
-          contentsEn: ['1 Whole Duck (~3 kg @ 210/kg) — 630 EGP', '1 kg All Pané Cuts — 275 EGP', '1 Baladi Chicken (whole) — 190 EGP @ 1.5 kg'],
-          contentsAr: ['١ بطة كاملة (~٣ كجم) — ٦٣٠ ج', '١ كجم قطعيات بانيه — ٢٧٥ ج', '١ دجاجة بلدي كاملة — ٢٨٥ ج @ ١.٥ كجم'],
-          descEn: '1 Whole Duck (~3kg) + 1kg Pané Cuts + 1 Baladi Chicken', descAr: 'بطة كاملة (~٣ كيلو) + كيلو قطعيات بانيه + دجاجة بلدي', active: true
-        },
-        {
-          id: 'feast', nameEn: 'Big Feast Bundle (8 Pers.)', nameAr: 'باقة الوليمة الكبيرة (٨ أفراد)',
-          badgeEn: 'Big Feast', badgeAr: 'الوليمة الكبيرة', badgeEmoji: '👑', bundlePrice: 1565,
-          originalPriceEn: '1740', originalPriceAr: '١٧٤٠', saveEn: 'Save 175 EGP · ~10%', saveAr: 'وفّر ١٧٥ ج · ١٠٪',
-          personsEn: '🎉 The ultimate First-Day-of-Ramadan luxury — 8 persons', personsAr: '🎉 الرفاهية المطلقة ليوم رمضان الأول — ٨ أفراد',
-          contentsEn: ['1 Whole Duck (~3 kg @ 210/kg) — 630 EGP', '2 Pairs of Pigeons (2 × 275) — 550 EGP', '1 Baladi Chicken (whole) — 190 EGP @ 1.5 kg', '1 kg All Pané Cuts — 275 EGP'],
-          contentsAr: ['١ بطة كاملة (~٣ كجم) — ٦٣٠ ج', '٢ جوز حمام (٢ × ٢٧٥) — ٥٥٠ ج', '١ دجاجة بلدي كاملة — ٢٨٥ ج @ ١.٥ كجم', '١ كجم قطعيات بانيه — ٢٧٥ ج'],
-          descEn: '1 Whole Duck (~3kg) + 2 Pairs Pigeons + 1 Baladi Chicken + 1kg Pané Cuts', descAr: 'بطة كاملة (~٣ كيلو) + جوزين حمام + دجاجة بلدي + كيلو قطعيات بانيه', active: true
-        }
-      ],
-      faqItems: [
-        { id: "faq_1", questionEn: "What makes Orgánica’s poultry organic?", questionAr: "إيه اللي بيخلي دواجن Orgánica عضوية؟", answerEn: "At Orgánica, our poultry is raised on three essentials: Natural Diet, Healthy Environment, Responsible Care.", answerAr: "في Orgánica، بنربي دواجننا على ثلاث أسس: تغذية طبيعية، بيئة صحية، رعاية مسؤولة.", active: true, order: 1 },
-        { id: "faq_2", questionEn: "What products does Orgánica offer?", questionAr: "إيه المنتجات اللي Orgánica بتقدمها؟", answerEn: "We offer a full range of premium organic poultry: Whole Poultry, Cuts, Processed, Offal.", answerAr: "بنقدم تشكيلة كاملة من الدواجن العضوية الفاخرة: دواجن كاملة، قطعيات، مصنعات، كبدة صافي.", active: true, order: 2 },
-        { id: "faq_3", questionEn: "How do I place an order?", questionAr: "إزاي أطلب؟", answerEn: "All orders are placed exclusively through the order form on this page.", answerAr: "جميع الطلبات تتم حصرياً من خلال نموذج الطلب في هذه الصفحة.", active: true, order: 3 },
-        { id: "faq_4", questionEn: "How does Orgánica ensure the well-being of its birds?", questionAr: "إزاي Orgánica بتضمن صحة الطيور وراحتها؟", answerEn: "We prioritize animal welfare through a Bio-Vitality Environment with infrared heating for natural immunity.", answerAr: "بنولي اهتمام كبير لرفاهية الحيوانات من خلال بيئة حيوية.", active: true, order: 4 },
-        { id: "faq_5", questionEn: "What is Al-Aleqa?", questionAr: "إيه هي العليقة؟", answerEn: "A custom feed mix the farm owner prepares personally: fresh vegetables, beets, carrots, and corn.", answerAr: "خلطة أعلاف خاصة يُعدّها صاحب المزرعة بنفسه — خضروات طازة، بنجر، جزر، وذرة.", active: true, order: 5 }
-      ]
-    };
+    // ── FETCH ONE SHEET AS GVIZ JSON ──────────────────────────────
+    async function fetchSheet(sheetName) {
+      const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
+                  '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(sheetName) +
+                  '&t=' + Date.now();
+      const res  = await fetch(url);
+      const text = await res.text();
+      // Strip JSONP wrapper: /*O_o*/\ngoogle.visualization.Query.setResponse({...});
+      const json = JSON.parse(text.match(/setResponse\(([\s\S]*)\)/)[1]);
+      return json.table;
+    }
 
+    // Helper: safely get cell value from gviz row
+    function gv(cell) {
+      return (cell && cell.v !== null && cell.v !== undefined) ? cell.v : '';
+    }
+
+    // ── PARSE PRICELIST SHEET → sections array ────────────────────
+    function parseSections(table) {
+      var sections = [], inSections = false;
+      for (var i = 0; i < table.rows.length; i++) {
+        var r = table.rows[i].c || [];
+        var cell = String(gv(r[0])).trim();
+        if (cell.includes('SECTIONS')) { inSections = true; continue; }
+        if (cell.includes('PRODUCTS')) { break; }
+        if (!inSections || !cell || cell === 'ID') continue;
+        sections.push({
+          id:      cell,
+          labelEn: String(gv(r[1])).trim(),
+          labelAr: String(gv(r[2])).trim(),
+          order:   Number(gv(r[3])) || 0
+        });
+      }
+      return sections.sort(function(a, b) { return a.order - b.order; });
+    }
+
+    // ── PARSE PRICELIST SHEET → products array ────────────────────
+    function parseProducts(table) {
+      var products = [], inProducts = false;
+      for (var i = 0; i < table.rows.length; i++) {
+        var r = table.rows[i].c || [];
+        var cell = String(gv(r[0])).trim();
+        if (cell.includes('PRODUCTS')) { inProducts = true; continue; }
+        if (!inProducts || !cell || cell === 'ID') continue;
+        var type = String(gv(r[4]) || 'fixed').trim();
+        var activeVal = gv(r[12]);
+        var prod = {
+          id:          cell,
+          section:     String(gv(r[1])).trim(),
+          nameEn:      String(gv(r[2])).trim(),
+          nameAr:      String(gv(r[3])).trim(),
+          pricingType: type,
+          active:      (activeVal !== false && String(activeVal).toLowerCase() !== 'false')
+        };
+        if (type === 'variable_weight') {
+          prod.pricePerKg     = Number(gv(r[5]))  || 0;
+          prod.defaultWeightG = Number(gv(r[9]))  || 1200;
+          prod.minWeightG     = Number(gv(r[10])) || 800;
+          prod.maxWeightG     = Number(gv(r[11])) || 2500;
+        } else {
+          prod.fixedPrice  = Number(gv(r[6]))         || 0;
+          prod.fixedUnit   = String(gv(r[7]) || 'kg').trim();
+          prod.fixedUnitAr = String(gv(r[8]) || '').trim();
+        }
+        products.push(prod);
+      }
+      return products;
+    }
+
+    // ── PARSE BUNDLES SHEET ───────────────────────────────────────
+    function parseBundles(table) {
+      var bundles = [];
+      for (var i = 1; i < table.rows.length; i++) {   // skip header row
+        var r = table.rows[i].c || [];
+        if (!gv(r[0])) continue;
+        var enRaw = String(gv(r[12]) || '');
+        var arRaw = String(gv(r[13]) || '');
+        var activeVal = gv(r[16]);
+        bundles.push({
+          id:              String(gv(r[0])).trim(),
+          nameEn:          String(gv(r[1])  || '').trim(),
+          nameAr:          String(gv(r[2])  || '').trim(),
+          badgeEn:         String(gv(r[3])  || '').trim(),
+          badgeAr:         String(gv(r[4])  || '').trim(),
+          badgeEmoji:      String(gv(r[5])  || '✦').trim(),
+          bundlePrice:     Number(gv(r[6])) || 0,
+          originalPriceEn: String(gv(r[7])  || '').trim(),
+          originalPriceAr: String(gv(r[7])  || '').trim(),
+          saveEn:          String(gv(r[8])  || '').trim(),
+          saveAr:          String(gv(r[9])  || '').trim(),
+          personsEn:       String(gv(r[10]) || '').trim(),
+          personsAr:       String(gv(r[11]) || '').trim(),
+          contentsEn: enRaw ? enRaw.split('\n').map(function(s){return s.trim();}).filter(Boolean) : [],
+          contentsAr: arRaw ? arRaw.split('\n').map(function(s){return s.trim();}).filter(Boolean) : [],
+          descEn:   String(gv(r[14]) || '').trim(),
+          descAr:   String(gv(r[15]) || '').trim(),
+          active:   (activeVal !== false && String(activeVal).toLowerCase() !== 'false')
+        });
+      }
+      return bundles;
+    }
+
+    // ── PARSE FAQ SHEET ───────────────────────────────────────────
+    function parseFaq(table) {
+      var items = [];
+      for (var i = 1; i < table.rows.length; i++) {   // skip header row
+        var r = table.rows[i].c || [];
+        if (!gv(r[0])) continue;
+        var activeVal = gv(r[5]);
+        items.push({
+          id:         String(gv(r[0])).trim(),
+          questionEn: String(gv(r[1]) || '').trim(),
+          questionAr: String(gv(r[2]) || '').trim(),
+          answerEn:   String(gv(r[3]) || '').trim(),
+          answerAr:   String(gv(r[4]) || '').trim(),
+          active:     (activeVal !== false && String(activeVal).toLowerCase() !== 'false'),
+          order:      Number(gv(r[6])) || 0
+        });
+      }
+      return items.sort(function(a, b) { return a.order - b.order; });
+    }
+
+    // ── LOAD CONFIG — reads directly from Google Sheets ──────────
     async function loadConfig() {
       try {
-        const res = await fetch(SCRIPT_URL + '?action=getConfig&t=' + Date.now());
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const data = await res.json();
-        // Only use live data if it actually has products
-        if (data && data.products && data.products.length > 0) {
-          siteConfig = data;
+        const [plData, bnData, fqData] = await Promise.all([
+          fetchSheet('pricelist'),
+          fetchSheet('boundles'),
+          fetchSheet('q&a')
+        ]);
+        const sections = parseSections(plData);
+        const products = parseProducts(plData);
+        const bundles  = parseBundles(bnData);
+        const faq      = parseFaq(fqData);
+        // Only use live data if we actually got products back
+        if (products.length > 0) {
+          siteConfig = {
+            meta: {
+              siteName: 'Orgánica', siteNameAr: 'أورجانيكا',
+              whatsapp: '201067776664', deliveryFeeEGP: 75,
+              deliveryHours:   '9 AM – 9 PM (All Week days)',
+              deliveryHoursAr: '٩ صباحاً – ٩ مساءً (طوال أيام الأسبوع)'
+            },
+            sections:       sections,
+            products:       products,
+            ramadanBundles: bundles,
+            faqItems:       faq
+          };
         } else {
-          throw new Error('Empty products from API');
+          throw new Error('No products returned from sheet');
         }
       } catch (e) {
-        console.warn('Using built-in data:', e.message);
-        siteConfig = JSON.parse(JSON.stringify(FALLBACK_CONFIG));
+        console.warn('Sheet fetch failed, using fallback:', e);
+        siteConfig = FALLBACK_CONFIG;
       }
       applyConfig();
       renderPriceList();
@@ -2144,100 +2264,80 @@
     function applyConfig() {
       if (!siteConfig || !siteConfig.meta) return;
       const m = siteConfig.meta;
-      if (m.deliveryHours) document.getElementById('deliveryHoursEn').textContent = m.deliveryHours;
+      if (m.deliveryHours)   document.getElementById('deliveryHoursEn').textContent = m.deliveryHours;
       if (m.deliveryHoursAr) document.getElementById('deliveryHoursAr').textContent = m.deliveryHoursAr;
     }
 
-    // ── RENDER PRICE LIST ─────────────────────────────────────────
-    function renderPriceList() {
-      const container = document.getElementById('dynamicPriceList');
-      if (!siteConfig || !siteConfig.products) {
-        container.innerHTML = '<p style="color:var(--text-light);padding:20px">No products configured.</p>';
-        return;
-      }
-      const activeProducts = siteConfig.products.filter(p => p.active !== false);
-      if (!activeProducts.length) {
-        container.innerHTML = '<p style="color:var(--text-light);padding:20px">No products available.</p>';
-        return;
-      }
-      let html = '';
-      const sections = (siteConfig.sections && siteConfig.sections.length) ? siteConfig.sections : [];
-      if (sections.length > 0) {
-        sections.forEach(sec => {
-          const prods = activeProducts.filter(p => p.section === sec.id);
-          if (!prods.length) return;
-          html += `<div><span class="price-section-label en">${sec.labelEn}</span><span class="price-section-label ar">${sec.labelAr}</span></div>`;
-          prods.forEach(p => { html += buildProductRow(p); });
-        });
-        const knownIds = sections.map(s => s.id);
-        const others = activeProducts.filter(p => !knownIds.includes(p.section));
-        if (others.length) {
-          html += `<div><span class="price-section-label en">📦 Other</span><span class="price-section-label ar">📦 أخرى</span></div>`;
-          others.forEach(p => { html += buildProductRow(p); });
-        }
-      } else {
-        const sectionOrder = ['whole_poultry', 'cuts', 'processed', 'offal'];
-        const sectionLabels = {
-          whole_poultry: { en: '🐔 Whole Poultry', ar: '🐔 دواجن كاملة' },
-          cuts: { en: '🍗 Cuts', ar: '🍗 قطعيات' },
-          processed: { en: '⚡ Processed', ar: '⚡ مصنعات' },
-          offal: { en: '🫀 Offal', ar: '🫀 كبدة' }
-        };
-        const sectionIds = [...new Set(activeProducts.map(p => p.section).filter(Boolean))];
-        const ordered = [...sectionOrder.filter(id => sectionIds.includes(id)), ...sectionIds.filter(id => !sectionOrder.includes(id))];
-        ordered.forEach(secId => {
-          const lbl = sectionLabels[secId] || { en: secId, ar: secId };
-          const prods = activeProducts.filter(p => p.section === secId);
-          html += `<div><span class="price-section-label en">${lbl.en}</span><span class="price-section-label ar">${lbl.ar}</span></div>`;
-          prods.forEach(p => { html += buildProductRow(p); });
-        });
-      }
-      container.innerHTML = html || '<p style="color:var(--text-light);padding:20px">No products available.</p>';
-      updateTotal();
+// ─────────────────────────────────────────────────────────────────
+//  REPLACE the entire renderPriceList function in index.html
+//  with this version. It handles empty/missing sections gracefully.
+// ─────────────────────────────────────────────────────────────────
+
+function renderPriceList() {
+  const container = document.getElementById('dynamicPriceList');
+  if (!siteConfig || !siteConfig.products) {
+    container.innerHTML = '<p style="color:var(--text-light);padding:20px">No products configured.</p>';
+    return;
+  }
+
+  const activeProducts = siteConfig.products.filter(p => p.active !== false);
+  if (!activeProducts.length) {
+    container.innerHTML = '<p style="color:var(--text-light);padding:20px">No products available.</p>';
+    return;
+  }
+
+  let html = '';
+  const sections = (siteConfig.sections && siteConfig.sections.length)
+    ? siteConfig.sections
+    : [];
+
+  if (sections.length > 0) {
+    // Normal path: render products grouped by section
+    sections.forEach(sec => {
+      const prods = activeProducts.filter(p => p.section === sec.id);
+      if (!prods.length) return;
+      html += `<div><span class="price-section-label en">${sec.labelEn}</span><span class="price-section-label ar">${sec.labelAr}</span></div>`;
+      prods.forEach(p => { html += buildProductRow(p); });
+    });
+
+    // Any products whose section ID isn't in the list
+    const knownIds = sections.map(s => s.id);
+    const others   = activeProducts.filter(p => !knownIds.includes(p.section));
+    if (others.length) {
+      html += `<div><span class="price-section-label en">📦 Other</span><span class="price-section-label ar">📦 أخرى</span></div>`;
+      others.forEach(p => { html += buildProductRow(p); });
     }
 
-    function buildProductRow(p) {
-      if (p.pricingType === 'variable_weight') {
-        if (!vwState[p.id]) vwState[p.id] = { qty: 0, weight: p.defaultWeightG || 1200 };
-        const s = vwState[p.id];
-        return `
-          <div class="price-item" style="border-bottom:none; padding-bottom:0;">
-            <span><span class="en">${p.nameEn}</span><span class="ar">${p.nameAr}</span></span>
-            <div class="quantity-control">
-              <button class="qty-btn" onclick="vwDecQty('${p.id}')">-</button>
-              <input type="number" id="vw_qty_${p.id}" class="qty-input" value="${s.qty}" min="0" onchange="vwSetQty('${p.id}', this.value)">
-              <button class="qty-btn" onclick="vwIncQty('${p.id}')">+</button>
-            </div>
-            <span class="price-val">${p.pricePerKg} EGP / كجم</span>
-          </div>
-          <div class="weight-control">
-            <span class="weight-label">
-              <span class="weight-pointer"><i class="fas fa-hand-point-right"></i></span>
-              <span class="en">Unit Weight</span><span class="ar">وزن الحبة</span>
-            </span>
-            <div class="weight-stepper">
-              <button class="qty-btn" onclick="vwDecW('${p.id}')">-</button>
-              <input type="text" id="vw_wd_${p.id}" class="weight-input" value="${s.weight}g" readonly>
-              <button class="qty-btn" onclick="vwIncW('${p.id}')">+</button>
-            </div>
-          </div>
-          <div style="height:1px;width:100%;border-bottom:1px dashed #ddd;margin:8px 0;"></div>`;
-      } else {
-        if (fxState[p.id] === undefined) fxState[p.id] = 0;
-        const unitLabel = p.fixedUnit || 'kg';
-        const unitLabelAr = p.fixedUnitAr || (unitLabel === 'kg' ? 'كجم' : (unitLabel === 'pair' ? 'زوج' : unitLabel));
-        return `
-          <div class="price-item">
-            <span><span class="en">${p.nameEn}</span><span class="ar">${p.nameAr}</span></span>
-            <div class="quantity-control">
-              <button class="qty-btn" onclick="fxDec('${p.id}')">-</button>
-              <input type="number" id="fx_${p.id}" class="qty-input" value="${fxState[p.id]}" min="0" onchange="fxSet('${p.id}', this.value)">
-              <button class="qty-btn" onclick="fxInc('${p.id}')">+</button>
-            </div>
-            <span class="price-val">${p.fixedPrice} EGP / ${unitLabelAr}</span>
-          </div>`;
-      }
+  } else {
+    // ── FALLBACK: sections array is empty — group by unique section field ──
+    const sectionIds = [...new Set(activeProducts.map(p => p.section).filter(Boolean))];
+
+    // Built-in section labels (matches the sheet data)
+    const sectionLabels = {
+      whole_poultry: { en: '🐔 Whole Poultry',   ar: '🐔 دواجن كاملة' },
+      cuts:          { en: '🍗 Cuts',              ar: '🍗 قطعيات' },
+      processed:     { en: '⚡ Processed',          ar: '⚡ مصنعات' },
+      offal:         { en: '🫀 Offal',              ar: '🫀 كبدة' }
+    };
+
+    sectionIds.forEach(secId => {
+      const lbl  = sectionLabels[secId] || { en: secId, ar: secId };
+      const prods = activeProducts.filter(p => p.section === secId);
+      html += `<div><span class="price-section-label en">${lbl.en}</span><span class="price-section-label ar">${lbl.ar}</span></div>`;
+      prods.forEach(p => { html += buildProductRow(p); });
+    });
+
+    // Products with no section at all
+    const noSection = activeProducts.filter(p => !p.section);
+    if (noSection.length) {
+      html += `<div><span class="price-section-label en">📦 Products</span><span class="price-section-label ar">📦 المنتجات</span></div>`;
+      noSection.forEach(p => { html += buildProductRow(p); });
     }
+  }
+
+  container.innerHTML = html || '<p style="color:var(--text-light);padding:20px">No products available.</p>';
+  updateTotal();
+}
 
     // ── CONTROLS ──────────────────────────────────────────────────
     function vwIncQty(id) { vwState[id].qty++; document.getElementById('vw_qty_' + id).value = vwState[id].qty; updateTotal(); }
