@@ -8,7 +8,7 @@
   <meta name="description"
     content="Orgánica - Premium farm-to-table organic poultry. 100% natural diet, founder-led care, and bio-vitality environment.">
   <link
-    href="https://script.google.com/macros/s/AKfycbz-QZvruLMplWfwJMgCWqgVkqbLA6tZm_mxalTmGAe8OxX-U-x_BJFU_0BTTsfWf40rEg/exec"
+    href="https://script.google.com/macros/s/AKfycbzUGYYuaH7IwLNRyhK6K4hwsCYlumXMFMmeYvgfFhdw4gQiBJuTcrwHzp8K3MQmZrEy5g/exec"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -2009,10 +2009,10 @@
     // ══════════════════════════════════════════════════════════════
 
     // ── Order recording (Apps Script — order saving + email only) ──
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz-QZvruLMplWfwJMgCWqgVkqbLA6tZm_mxalTmGAe8OxX-U-x_BJFU_0BTTsfWf40rEg/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzUGYYuaH7IwLNRyhK6K4hwsCYlumXMFMmeYvgfFhdw4gQiBJuTcrwHzp8K3MQmZrEy5g/exec";
 
     // ── Google Sheet ID ───────────────────────────────────────────
-    const SHEET_ID = "1TeuEWand9BAB8VvBlW6hfO-SodIbzxrzDBwFKozeAh8";
+    const SHEET_ID = "179GDB30Rqih5CT4DxSRJEKpOIc6GaNuZCLGKfXYsWh4";
 
     const W_MIN = 800, W_MAX = 2500, W_STEP = 100;
 
@@ -2096,14 +2096,13 @@
     }
 
     // ── PARSE PRICELIST SHEET → sections array ────────────────────
+    // ── PARSE SECTIONS SHEET (its own sheet now) ─────────────────
     function parseSections(table) {
-      var sections = [], inSections = false;
+      var sections = [];
       for (var i = 0; i < table.rows.length; i++) {
         var r = table.rows[i].c || [];
         var cell = String(gv(r[0])).trim();
-        if (cell.includes('SECTIONS')) { inSections = true; continue; }
-        if (cell.includes('PRODUCTS')) { break; }
-        if (!inSections || !cell || cell === 'ID') continue;
+        if (!cell || cell === 'ID') continue;   // skip header + blanks
         sections.push({
           id:      cell,
           labelEn: String(gv(r[1])).trim(),
@@ -2116,12 +2115,11 @@
 
     // ── PARSE PRICELIST SHEET → products array ────────────────────
     function parseProducts(table) {
-      var products = [], inProducts = false;
+      var products = [];
       for (var i = 0; i < table.rows.length; i++) {
         var r = table.rows[i].c || [];
         var cell = String(gv(r[0])).trim();
-        if (cell.includes('PRODUCTS')) { inProducts = true; continue; }
-        if (!inProducts || !cell || cell === 'ID') continue;
+        if (!cell || cell === 'ID') continue;   // skip header + blanks
         var type = String(gv(r[4]) || 'fixed').trim();
         var activeVal = gv(r[12]);
         var prod = {
@@ -2203,12 +2201,13 @@
     // ── LOAD CONFIG — reads directly from Google Sheets ──────────
     async function loadConfig() {
       try {
-        const [plData, bnData, fqData] = await Promise.all([
+        const [secData, plData, bnData, fqData] = await Promise.all([
+          fetchSheet('sections'),
           fetchSheet('pricelist'),
           fetchSheet('boundles'),
           fetchSheet('q&a')
         ]);
-        const sections = parseSections(plData);
+        const sections = parseSections(secData);
         const products = parseProducts(plData);
         const bundles  = parseBundles(bnData);
         const faq      = parseFaq(fqData);
