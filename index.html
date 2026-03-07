@@ -2078,79 +2078,76 @@
       if (m.deliveryHoursAr) document.getElementById('deliveryHoursAr').textContent = m.deliveryHoursAr;
     }
 
-    // ── RENDER PRICE LIST ─────────────────────────────────────────
-    function renderPriceList() {
-      const container = document.getElementById('dynamicPriceList');
-      if (!siteConfig || !siteConfig.products) {
-        container.innerHTML = '<p style="color:var(--text-light);padding:20px">No products configured.</p>';
-        return;
-      }
-      const sections = siteConfig.sections || [];
-      const activeProducts = siteConfig.products.filter(p => p.active !== false);
-      let html = '';
+// ─────────────────────────────────────────────────────────────────
+//  REPLACE the entire renderPriceList function in index.html
+//  with this version. It handles empty/missing sections gracefully.
+// ─────────────────────────────────────────────────────────────────
 
-      sections.forEach(sec => {
-        const prods = activeProducts.filter(p => p.section === sec.id);
-        if (!prods.length) return;
-        html += `<div><span class="price-section-label en">${sec.labelEn}</span><span class="price-section-label ar">${sec.labelAr}</span></div>`;
-        prods.forEach(p => { html += buildProductRow(p); });
-      });
+function renderPriceList() {
+  const container = document.getElementById('dynamicPriceList');
+  if (!siteConfig || !siteConfig.products) {
+    container.innerHTML = '<p style="color:var(--text-light);padding:20px">No products configured.</p>';
+    return;
+  }
 
-      const knownSectionIds = sections.map(s => s.id);
-      const others = activeProducts.filter(p => !knownSectionIds.includes(p.section));
-      if (others.length) {
-        html += `<div><span class="price-section-label en">📦 Other</span><span class="price-section-label ar">📦 أخرى</span></div>`;
-        others.forEach(p => { html += buildProductRow(p); });
-      }
+  const activeProducts = siteConfig.products.filter(p => p.active !== false);
+  if (!activeProducts.length) {
+    container.innerHTML = '<p style="color:var(--text-light);padding:20px">No products available.</p>';
+    return;
+  }
 
-      container.innerHTML = html;
-      updateTotal();
+  let html = '';
+  const sections = (siteConfig.sections && siteConfig.sections.length)
+    ? siteConfig.sections
+    : [];
+
+  if (sections.length > 0) {
+    // Normal path: render products grouped by section
+    sections.forEach(sec => {
+      const prods = activeProducts.filter(p => p.section === sec.id);
+      if (!prods.length) return;
+      html += `<div><span class="price-section-label en">${sec.labelEn}</span><span class="price-section-label ar">${sec.labelAr}</span></div>`;
+      prods.forEach(p => { html += buildProductRow(p); });
+    });
+
+    // Any products whose section ID isn't in the list
+    const knownIds = sections.map(s => s.id);
+    const others   = activeProducts.filter(p => !knownIds.includes(p.section));
+    if (others.length) {
+      html += `<div><span class="price-section-label en">📦 Other</span><span class="price-section-label ar">📦 أخرى</span></div>`;
+      others.forEach(p => { html += buildProductRow(p); });
     }
 
-    function buildProductRow(p) {
-      if (p.pricingType === 'variable_weight') {
-        if (!vwState[p.id]) vwState[p.id] = { qty: 0, weight: p.defaultWeightG || 1200 };
-        const s = vwState[p.id];
-        return `
-          <div class="price-item" style="border-bottom:none; padding-bottom:0;">
-            <span><span class="en">${p.nameEn}</span><span class="ar">${p.nameAr}</span></span>
-            <div class="quantity-control">
-              <button class="qty-btn" onclick="vwDecQty('${p.id}')">-</button>
-              <input type="number" id="vw_qty_${p.id}" class="qty-input" value="${s.qty}" min="0" onchange="vwSetQty('${p.id}', this.value)">
-              <button class="qty-btn" onclick="vwIncQty('${p.id}')">+</button>
-            </div>
-            <span class="price-val">${p.pricePerKg} EGP / كجم</span>
-          </div>
-          <div class="weight-control">
-            <span class="weight-label">
-              <span class="weight-pointer"><i class="fas fa-hand-point-right"></i></span>
-              <span class="en">Unit Weight</span><span class="ar">وزن الحبة</span>
-            </span>
-            <div class="weight-stepper">
-              <button class="qty-btn" onclick="vwDecW('${p.id}')">-</button>
-              <input type="text" id="vw_wd_${p.id}" class="weight-input" value="${s.weight}g" readonly>
-              <button class="qty-btn" onclick="vwIncW('${p.id}')">+</button>
-            </div>
-          </div>
-          <div style="height:1px; width:100%; border-bottom:1px dashed #ddd; margin: 8px 0;"></div>
-        `;
-      } else {
-        if (!fxState[p.id]) fxState[p.id] = 0;
-        const unitLabel = p.fixedUnit || 'kg';
-        const unitLabelAr = p.fixedUnitAr || (unitLabel === 'kg' ? 'كجم' : (unitLabel === 'pair' ? 'زوج' : unitLabel));
-        return `
-          <div class="price-item">
-            <span><span class="en">${p.nameEn}</span><span class="ar">${p.nameAr}</span></span>
-            <div class="quantity-control">
-              <button class="qty-btn" onclick="fxDec('${p.id}')">-</button>
-              <input type="number" id="fx_${p.id}" class="qty-input" value="${fxState[p.id]}" min="0" onchange="fxSet('${p.id}', this.value)">
-              <button class="qty-btn" onclick="fxInc('${p.id}')">+</button>
-            </div>
-            <span class="price-val">${p.fixedPrice} EGP / ${unitLabelAr}</span>
-          </div>
-        `;
-      }
+  } else {
+    // ── FALLBACK: sections array is empty — group by unique section field ──
+    const sectionIds = [...new Set(activeProducts.map(p => p.section).filter(Boolean))];
+
+    // Built-in section labels (matches the sheet data)
+    const sectionLabels = {
+      whole_poultry: { en: '🐔 Whole Poultry',   ar: '🐔 دواجن كاملة' },
+      cuts:          { en: '🍗 Cuts',              ar: '🍗 قطعيات' },
+      processed:     { en: '⚡ Processed',          ar: '⚡ مصنعات' },
+      offal:         { en: '🫀 Offal',              ar: '🫀 كبدة' }
+    };
+
+    sectionIds.forEach(secId => {
+      const lbl  = sectionLabels[secId] || { en: secId, ar: secId };
+      const prods = activeProducts.filter(p => p.section === secId);
+      html += `<div><span class="price-section-label en">${lbl.en}</span><span class="price-section-label ar">${lbl.ar}</span></div>`;
+      prods.forEach(p => { html += buildProductRow(p); });
+    });
+
+    // Products with no section at all
+    const noSection = activeProducts.filter(p => !p.section);
+    if (noSection.length) {
+      html += `<div><span class="price-section-label en">📦 Products</span><span class="price-section-label ar">📦 المنتجات</span></div>`;
+      noSection.forEach(p => { html += buildProductRow(p); });
     }
+  }
+
+  container.innerHTML = html || '<p style="color:var(--text-light);padding:20px">No products available.</p>';
+  updateTotal();
+}
 
     // ── CONTROLS ──────────────────────────────────────────────────
     function vwIncQty(id) { vwState[id].qty++; document.getElementById('vw_qty_' + id).value = vwState[id].qty; updateTotal(); }
