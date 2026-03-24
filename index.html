@@ -1,3 +1,5 @@
+Here is the updated HTML with the changes you requested. I have carefully applied all the edits to the navigation, hero button, Ramadan section, price list label, and the `FALLBACK_CONFIG` with its `applyConfig` function, ensuring nothing else on your live page is altered.
+```html
 <!DOCTYPE html>
 <html lang="en" dir="ltr" id="mainHtml" class="lang-en">
 
@@ -1556,8 +1558,7 @@
         <li><a href="#home" class="nav-link en">Home</a> <a href="#home" class="nav-link ar">الرئيسية</a></li>
         <li><a href="#about" class="nav-link en">Our Story</a> <a href="#about" class="nav-link ar">قصتنا</a></li>
         <li><a href="#order" class="nav-link en">Order Now</a> <a href="#order" class="nav-link ar">اطلب الآن</a></li>
-        <li><a href="#ramadan" class="nav-link en">🌙 Offers</a> <a href="#ramadan" class="nav-link ar">🌙 العروض</a>
-        </li>
+        <li id="offersNavItem"><a href="#ramadan" class="nav-link en"><span id="offersNavEmoji">🌙</span> <span id="offersNavLabelEn">Offers</span></a> <a href="#ramadan" class="nav-link ar"><span id="offersNavEmojiAr">🌙</span> <span id="offersNavLabelAr">العروض</span></a></li>
         <li><a href="#gallery" class="nav-link en">Farm Life</a> <a href="#gallery" class="nav-link ar">حياة المزرعة</a>
         </li>
         <li><a href="#faq" class="nav-link en">FAQ</a> <a href="#faq" class="nav-link ar">أسئلة شائعة</a></li>
@@ -1577,8 +1578,7 @@
       <p class="ar">المعيار الذهبي للطيور الأورجانيك</p>
       <div class="cta-buttons">
         <a href="#order" class="btn btn-primary"><span class="en">Order Now</span><span class="ar">اطلب الآن</span></a>
-        <a href="#ramadan" class="btn btn-secondary">🌙 <span class="en">Ramadan Offers</span><span class="ar">عروض
-            رمضان</span></a>
+        <a href="#ramadan" class="btn btn-secondary" id="heroOffersBtn"><span id="heroOffersEmoji">🌙</span> <span class="en" id="heroOffersTitleEn">Offers</span><span class="ar" id="heroOffersTitleAr">العروض</span></a>
       </div>
     </div>
   </section>
@@ -1713,8 +1713,7 @@
         </div>
 
         <!-- RAMADAN BUNDLES -->
-        <div style="margin-top:8px"><span class="price-section-label en">🌙 Ramadan Bundles</span><span
-            class="price-section-label ar">🌙 عروض رمضان</span></div>
+        <div style="margin-top:8px" id="offersPriceLabel"><span class="price-section-label en"><span id="offersPriceLabelEmoji">🌙</span> <span id="offersPriceLabelEn">Bundles</span></span><span class="price-section-label ar"><span id="offersPriceLabelEmojiAr">🌙</span> <span id="offersPriceLabelAr">الباقات</span></span></div>
 
         <div class="price-item ramadan-bundle-row">
           <div style="grid-column:1/-1;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -1830,11 +1829,11 @@
 
     <div class="ramadan-inner">
       <div class="ramadan-title" data-aos="fade-up">
-        <span class="moon-icon">🌙</span>
-        <h2 class="en">Grand Mama Ramadan Offers</h2>
-        <h2 class="ar">عروض رمضان — جراند ماما</h2>
-        <p class="en">Three curated bundles for the most blessed Iftars</p>
-        <p class="ar">ثلاث باقات مختارة لأحلى إفطار رمضاني</p>
+        <span class="moon-icon" id="offersSectionEmoji">🌙</span>
+        <h2 class="en" id="offersSectionTitleEn">Special Offers</h2>
+        <h2 class="ar" id="offersSectionTitleAr">عروض خاصة</h2>
+        <p class="en" id="offersSectionSubtitleEn">Curated bundles for special occasions</p>
+        <p class="ar" id="offersSectionSubtitleAr">باقات مختارة للمناسبات الخاصة</p>
       </div>
 
       <div id="dynamicBundleCards" class="offers-grid">
@@ -2051,7 +2050,17 @@
         { id:'faq_3', questionEn:'How do I place an order?',                  questionAr:'إزاي أطلب؟',                           answerEn:'Fill the order form and submit — we confirm via WhatsApp or phone.', answerAr:'ادخل بياناتك في نموذج الطلب وهنأكد معاك على واتساب أو مكالمة.', active:true, order:3 },
         { id:'faq_4', questionEn:"How does Orgánica ensure bird welfare?",    questionAr:'إزاي Orgánica بتضمن صحة الطيور؟',     answerEn:'Bio-Vitality Environment with infrared heating, personally overseen by the farm owner.', answerAr:'بيئة حيوية بتدفئة بالأشعة تحت الحمراء، وصاحب المزرعة يشرف بنفسه.', active:true, order:4 },
         { id:'faq_5', questionEn:'What is the delivery fee and hours?',       questionAr:'إيه رسوم التوصيل والمواعيد؟',         answerEn:'75 EGP delivery fee. We deliver 9 AM – 9 PM, all week.', answerAr:'رسوم التوصيل ٧٥ جنيه. بنوصّل من ٩ الصبح لـ ٩ بالليل، طول الأسبوع.', active:true, order:5 }
-      ]
+      ],
+      settings: {
+        offersVisible:    true,
+        offersTitleEn:    'Special Offers',
+        offersTitleAr:    'عروض خاصة',
+        offersSubtitleEn: 'Curated bundles for special occasions',
+        offersSubtitleAr: 'باقات مختارة للمناسبات الخاصة',
+        offersEmoji:      '✨',
+        offersNavEn:      'Offers',
+        offersNavAr:      'العروض'
+      }
     };
 
     const vwState = {};
@@ -2127,78 +2136,112 @@
       const m = siteConfig.meta;
       if (m.deliveryHours)   document.getElementById('deliveryHoursEn').textContent = m.deliveryHours;
       if (m.deliveryHoursAr) document.getElementById('deliveryHoursAr').textContent = m.deliveryHoursAr;
+
+      const s = siteConfig.settings;
+      if (!s) return;
+
+      // Show / hide the entire offers section + nav item + hero button
+      const visible = s.offersVisible;
+      const offersSection = document.getElementById('ramadan');
+      const offersNav     = document.getElementById('offersNavItem');
+      const heroBtn       = document.getElementById('heroOffersBtn');
+      if (offersSection) offersSection.style.display = visible ? '' : 'none';
+      if (offersNav)     offersNav.style.display     = visible ? '' : 'none';
+      if (heroBtn)       heroBtn.style.display       = visible ? '' : 'none';
+
+      // Also hide the bundles row in the price card when offers are off
+      const priceLabel = document.getElementById('offersPriceLabel');
+      const bundleRow  = document.querySelector('.ramadan-bundle-row');
+      if (priceLabel) priceLabel.style.display = visible ? '' : 'none';
+      if (bundleRow && bundleRow.closest('.price-item')) bundleRow.closest('.price-item').style.display = visible ? '' : 'none';
+
+      // Update all dynamic text labels
+      const setText = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
+      const e = s.offersEmoji || '✨';
+      setText('offersSectionEmoji',   e);
+      setText('offersSectionTitleEn', s.offersTitleEn);
+      setText('offersSectionTitleAr', s.offersTitleAr);
+      setText('offersSectionSubtitleEn', s.offersSubtitleEn);
+      setText('offersSectionSubtitleAr', s.offersSubtitleAr);
+      setText('offersNavEmoji',    e);
+      setText('offersNavEmojiAr',  e);
+      setText('offersNavLabelEn',  s.offersNavEn);
+      setText('offersNavLabelAr',  s.offersNavAr);
+      setText('heroOffersEmoji',   e);
+      setText('heroOffersTitleEn', s.offersNavEn);
+      setText('heroOffersTitleAr', s.offersNavAr);
+      setText('offersPriceLabelEmoji',   e);
+      setText('offersPriceLabelEmojiAr', e);
+      setText('offersPriceLabelEn', s.offersTitleEn);
+      setText('offersPriceLabelAr', s.offersTitleAr);
     }
 
-// ─────────────────────────────────────────────────────────────────
-//  REPLACE the entire renderPriceList function in index.html
-//  with this version. It handles empty/missing sections gracefully.
-// ─────────────────────────────────────────────────────────────────
 
-function renderPriceList() {
-  const container = document.getElementById('dynamicPriceList');
-  if (!siteConfig || !siteConfig.products) {
-    container.innerHTML = '<p style="color:var(--text-light);padding:20px">No products configured.</p>';
-    return;
-  }
+    function renderPriceList() {
+      const container = document.getElementById('dynamicPriceList');
+      if (!siteConfig || !siteConfig.products) {
+        container.innerHTML = '<p style="color:var(--text-light);padding:20px">No products configured.</p>';
+        return;
+      }
 
-  const activeProducts = siteConfig.products.filter(p => p.active !== false);
-  if (!activeProducts.length) {
-    container.innerHTML = '<p style="color:var(--text-light);padding:20px">No products available.</p>';
-    return;
-  }
+      const activeProducts = siteConfig.products.filter(p => p.active !== false);
+      if (!activeProducts.length) {
+        container.innerHTML = '<p style="color:var(--text-light);padding:20px">No products available.</p>';
+        return;
+      }
 
-  let html = '';
-  const sections = (siteConfig.sections && siteConfig.sections.length)
-    ? siteConfig.sections
-    : [];
+      let html = '';
+      const sections = (siteConfig.sections && siteConfig.sections.length)
+        ? siteConfig.sections
+        : [];
 
-  if (sections.length > 0) {
-    // Normal path: render products grouped by section
-    sections.forEach(sec => {
-      const prods = activeProducts.filter(p => p.section === sec.id);
-      if (!prods.length) return;
-      html += `<div><span class="price-section-label en">${sec.labelEn}</span><span class="price-section-label ar">${sec.labelAr}</span></div>`;
-      prods.forEach(p => { html += buildProductRow(p); });
-    });
+      if (sections.length > 0) {
+        // Normal path: render products grouped by section
+        sections.forEach(sec => {
+          const prods = activeProducts.filter(p => p.section === sec.id);
+          if (!prods.length) return;
+          html += `<div><span class="price-section-label en">${sec.labelEn}</span><span class="price-section-label ar">${sec.labelAr}</span></div>`;
+          prods.forEach(p => { html += buildProductRow(p); });
+        });
 
-    // Any products whose section ID isn't in the list
-    const knownIds = sections.map(s => s.id);
-    const others   = activeProducts.filter(p => !knownIds.includes(p.section));
-    if (others.length) {
-      html += `<div><span class="price-section-label en">📦 Other</span><span class="price-section-label ar">📦 أخرى</span></div>`;
-      others.forEach(p => { html += buildProductRow(p); });
+        // Any products whose section ID isn't in the list
+        const knownIds = sections.map(s => s.id);
+        const others   = activeProducts.filter(p => !knownIds.includes(p.section));
+        if (others.length) {
+          html += `<div><span class="price-section-label en">📦 Other</span><span class="price-section-label ar">📦 أخرى</span></div>`;
+          others.forEach(p => { html += buildProductRow(p); });
+        }
+
+      } else {
+        // ── FALLBACK: sections array is empty — group by unique section field ──
+        const sectionIds = [...new Set(activeProducts.map(p => p.section).filter(Boolean))];
+
+        // Built-in section labels (matches the sheet data)
+        const sectionLabels = {
+          whole_poultry: { en: '🐔 Whole Poultry',   ar: '🐔 دواجن كاملة' },
+          cuts:          { en: '🍗 Cuts',              ar: '🍗 قطعيات' },
+          processed:     { en: '⚡ Processed',          ar: '⚡ مصنعات' },
+          offal:         { en: '🫀 Offal',              ar: '🫀 كبدة' }
+        };
+
+        sectionIds.forEach(secId => {
+          const lbl  = sectionLabels[secId] || { en: secId, ar: secId };
+          const prods = activeProducts.filter(p => p.section === secId);
+          html += `<div><span class="price-section-label en">${lbl.en}</span><span class="price-section-label ar">${lbl.ar}</span></div>`;
+          prods.forEach(p => { html += buildProductRow(p); });
+        });
+
+        // Products with no section at all
+        const noSection = activeProducts.filter(p => !p.section);
+        if (noSection.length) {
+          html += `<div><span class="price-section-label en">📦 Products</span><span class="price-section-label ar">📦 المنتجات</span></div>`;
+          noSection.forEach(p => { html += buildProductRow(p); });
+        }
+      }
+
+      container.innerHTML = html || '<p style="color:var(--text-light);padding:20px">No products available.</p>';
+      updateTotal();
     }
-
-  } else {
-    // ── FALLBACK: sections array is empty — group by unique section field ──
-    const sectionIds = [...new Set(activeProducts.map(p => p.section).filter(Boolean))];
-
-    // Built-in section labels (matches the sheet data)
-    const sectionLabels = {
-      whole_poultry: { en: '🐔 Whole Poultry',   ar: '🐔 دواجن كاملة' },
-      cuts:          { en: '🍗 Cuts',              ar: '🍗 قطعيات' },
-      processed:     { en: '⚡ Processed',          ar: '⚡ مصنعات' },
-      offal:         { en: '🫀 Offal',              ar: '🫀 كبدة' }
-    };
-
-    sectionIds.forEach(secId => {
-      const lbl  = sectionLabels[secId] || { en: secId, ar: secId };
-      const prods = activeProducts.filter(p => p.section === secId);
-      html += `<div><span class="price-section-label en">${lbl.en}</span><span class="price-section-label ar">${lbl.ar}</span></div>`;
-      prods.forEach(p => { html += buildProductRow(p); });
-    });
-
-    // Products with no section at all
-    const noSection = activeProducts.filter(p => !p.section);
-    if (noSection.length) {
-      html += `<div><span class="price-section-label en">📦 Products</span><span class="price-section-label ar">📦 المنتجات</span></div>`;
-      noSection.forEach(p => { html += buildProductRow(p); });
-    }
-  }
-
-  container.innerHTML = html || '<p style="color:var(--text-light);padding:20px">No products available.</p>';
-  updateTotal();
-}
 
 
     // ── BUILD PRODUCT ROW ─────────────────────────────────────────
@@ -2506,3 +2549,4 @@ function renderPriceList() {
 </body>
 
 </html>
+```
