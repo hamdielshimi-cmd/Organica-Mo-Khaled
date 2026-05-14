@@ -2436,11 +2436,11 @@
         orderDetails, bundleDetails, totalAmount: total
       });
 
-      const img = new Image();
-      img.src = SCRIPT_URL + '?action=recordOrder&' + params.toString();
-
-      // After recording the order, redirect to WhatsApp
-      img.onload = () => {
+      // Submit to Apps Script using fetch with no-cors mode to avoid CORS issues
+      fetch(SCRIPT_URL + '?action=recordOrder&' + params.toString(), {
+        mode: 'no-cors'
+      }).then(() => {
+        // Since we use no-cors, we won't get a proper response body, but the request is sent
         btn.disabled = false;
         btn.innerHTML = '<i class="fas fa-paper-plane"></i><span class="en" style="display:inline">Submit Order</span><span class="ar" style="display:inline">إرسال الطلب</span>>';
         document.getElementById('orderForm').reset();
@@ -2476,13 +2476,12 @@
         successEl.classList.add('show');
         successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         setTimeout(() => successEl.classList.remove('show'), 8000);
-      };
-
-      img.onerror = () => {
+      }).catch(err => {
+        console.error('Submission error:', err);
         btn.disabled = false;
         btn.innerHTML = '<i class="fas fa-paper-plane"></i><span class="en" style="display:inline">Submit Order</span><span class="ar" style="display:inline">إرسال الطلب</span>>';
         alert(isAr ? 'حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.' : 'An error occurred while submitting the order. Please try again.');
-      };
+      });
     });
 
     // ── UTILS ─────────────────────────────────────────────────────
