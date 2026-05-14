@@ -2439,11 +2439,10 @@
       const img = new Image();
       img.src = SCRIPT_URL + '?action=recordOrder&' + params.toString();
 
-      setTimeout(() => {
+      // After recording the order, redirect to WhatsApp
+      img.onload = () => {
         btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-paper-plane"></i><span class="en" style="display:inline">Submit Order</span><span class="ar" style="display:inline">إرسال الطلب</span>';
-        const successEl = document.getElementById('orderSuccess');
-        successEl.classList.add('show');
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i><span class="en" style="display:inline">Submit Order</span><span class="ar" style="display:inline">إرسال الطلب</span>>';
         document.getElementById('orderForm').reset();
 
         if (siteConfig) {
@@ -2457,9 +2456,33 @@
 
         updateTotal();
         renderPriceList(); // Refresh UI inputs
+
+        // Construct WhatsApp message
+        let whatsappMessage = `New Order!\n\n`;
+        whatsappMessage += `Name: ${name}\n`;
+        whatsappMessage += `Phone: ${phone}\n`;
+        whatsappMessage += `Address: ${address}\n`;
+        if (landmark) whatsappMessage += `Landmark: ${landmark}\n`;
+        if (notes) whatsappMessage += `Notes: ${notes}\n\n`;
+        whatsappMessage += `Order Details:\n${orderDetails.replace(/, $/,'')}\n\n`;
+        if (bundleDetails) whatsappMessage += `Bundle Details: ${bundleDetails}\n\n`;
+        whatsappMessage += `Total Amount: ${total}\n\n`;
+        whatsappMessage += `Please confirm this order.`;
+
+        const whatsappUrl = `https://wa.me/${siteConfig.meta.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
+        window.open(whatsappUrl, '_blank');
+
+        const successEl = document.getElementById('orderSuccess');
+        successEl.classList.add('show');
         successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         setTimeout(() => successEl.classList.remove('show'), 8000);
-      }, 2000);
+      };
+
+      img.onerror = () => {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i><span class="en" style="display:inline">Submit Order</span><span class="ar" style="display:inline">إرسال الطلب</span>>';
+        alert(isAr ? 'حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.' : 'An error occurred while submitting the order. Please try again.');
+      };
     });
 
     // ── UTILS ─────────────────────────────────────────────────────
@@ -2547,4 +2570,3 @@
 </body>
 
 </html>
-```
